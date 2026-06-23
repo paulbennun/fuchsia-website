@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<!--
+  ============================================================================
+  LANDING PAGE — Fuchsia Studio  (optional Apple "Marketing URL")
+  Drafted from repo docs (north-star.md, product-brief.md, ADR-0006, ADR-0002).
+  VERIFY BEFORE PUBLISHING:
+   1. App Store link — the "Download" button points to "#". Add the real Mac App
+      Store URL, and ideally swap the styled button for Apple's official badge.
+   2. Tagline / feature copy — accurate to the repo's intent; tighten to taste.
+   3. Screenshots — placeholders included; drop in real app screenshots.
+   4. Version / availability — confirm shipping version and whether it's live,
+      in TestFlight, or "coming soon".
+  ============================================================================
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Fuchsia Studio — Find your own voice in your own tape</title>
+<meta name="description" content="Fuchsia Studio makes your archive of recorded tape searchable, then helps you assemble whole shows from it. On-device and private, for documentary and podcast producers." />
+<meta property="og:title" content="Fuchsia Studio" />
+<meta property="og:description" content="Search everything you've recorded, land on the exact moment, and build the show from it. On-device and private." />
+<meta property="og:type" content="website" />
+<link rel="icon" type="image/svg+xml" href="icon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#0b0a0d;--bg-2:#131119;--ink:#f4f1f6;--muted:#a39daf;
+    --line:rgba(255,255,255,.10);--fuchsia:#e0218a;--fuchsia-soft:#ff5fb0;--max:1080px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  h1,h2,h3{font-family:'Fraunces',Georgia,serif;font-weight:500;line-height:1.1;letter-spacing:-.01em}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 28px}
+  header.nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);background:rgba(11,10,13,.72);border-bottom:1px solid var(--line)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:66px}
+  .logo{display:flex;align-items:center;gap:10px;font-family:'Fraunces',serif;font-size:20px;font-weight:600}
+  .logo-word{height:36px;width:auto;display:block}
+  .studio-hero-logo{width:min(440px,76vw);height:auto;display:block;margin:0 auto 30px;filter:drop-shadow(0 14px 44px rgba(224,33,138,.4))}
+  .fmark{width:27px;height:27px;border-radius:7px;flex:none;background:radial-gradient(125% 130% at 50% 12%,#ec5fb0,#c2107a 52%,#88004e);box-shadow:0 2px 10px rgba(224,33,138,.35),inset 0 1px 0 rgba(255,255,255,.25);display:grid;place-items:center}
+  .fmark i{font-family:'Fraunces',serif;font-style:italic;font-weight:500;color:#fff;font-size:18px;line-height:1;transform:translateY(-1px)}
+  .nav-links{display:flex;gap:26px;font-size:14.5px;color:var(--muted)}
+  .nav-links a:hover{color:var(--ink)}
+  @media(max-width:640px){.nav-links{gap:16px;font-size:13.5px}}
+  .btn{display:inline-flex;align-items:center;gap:9px;background:var(--fuchsia);color:#fff;padding:13px 24px;border-radius:999px;font-size:15px;font-weight:500;transition:transform .15s,box-shadow .15s}
+  .btn:hover{transform:translateY(-1px);box-shadow:0 8px 28px rgba(224,33,138,.4)}
+  .btn-ghost{background:transparent;border:1px solid var(--line);color:var(--ink)}
+
+  /* hero */
+  .hero{position:relative;text-align:center;padding:96px 0 80px;overflow:hidden}
+  .hero::before{content:"";position:absolute;top:-34%;left:50%;transform:translateX(-50%);width:820px;height:820px;border-radius:50%;background:radial-gradient(circle,rgba(224,33,138,.26),rgba(224,33,138,0) 62%);filter:blur(18px);z-index:0}
+  .hero .wrap{position:relative;z-index:1}
+  .appicon{width:104px;height:104px;border-radius:24px;margin:0 auto 26px;background:radial-gradient(125% 130% at 50% 12%,#ec5fb0,#c2107a 52%,#88004e);box-shadow:0 18px 50px rgba(224,33,138,.4),inset 0 1px 0 rgba(255,255,255,.3);display:grid;place-items:center}
+  .appicon i{font-family:'Fraunces',serif;font-style:italic;font-weight:500;color:#fff;font-size:68px;line-height:1;transform:translateY(-2px)}
+  .hero h1{font-size:clamp(38px,6vw,68px);max-width:15ch;margin:0 auto}
+  .hero p.lede{margin:24px auto 0;font-size:clamp(17px,2.1vw,21px);color:var(--muted);max-width:54ch}
+  .hero .cta-row{margin-top:36px;display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
+  .hero .avail{margin-top:16px;font-size:13.5px;color:var(--muted)}
+
+  /* shot */
+  .shot{margin:24px auto 0;max-width:920px;border:1px solid var(--line);border-radius:18px;aspect-ratio:16/10;background:linear-gradient(160deg,#1a1320,#0d0b11);display:grid;place-items:center;position:relative;overflow:hidden}
+  .shot::after{content:"";position:absolute;inset:0;background:radial-gradient(120% 120% at 50% 0%,rgba(224,33,138,.14),transparent 60%)}
+  .shot span{color:var(--muted);font-size:13px;letter-spacing:.04em;position:relative;z-index:1}
+
+  section{padding:84px 0}
+  .kicker{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--fuchsia-soft);margin-bottom:16px;text-align:center}
+  .sec-h2{font-size:clamp(28px,4vw,42px);text-align:center;max-width:22ch;margin:0 auto 14px}
+  .sec-sub{text-align:center;color:var(--muted);font-size:18px;max-width:60ch;margin:0 auto}
+
+  .features{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:54px}
+  .feat{background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.01));border:1px solid var(--line);border-radius:18px;padding:32px;transition:border-color .2s,transform .2s}
+  .feat:hover{border-color:rgba(224,33,138,.5);transform:translateY(-3px)}
+  .feat h3{font-size:21px;margin-bottom:10px}
+  .feat p{color:var(--muted);font-size:15.5px}
+  @media(max-width:760px){.features{grid-template-columns:1fr}}
+
+  .who{background:var(--bg-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);text-align:center}
+  .who blockquote{font-family:'Fraunces',serif;font-style:italic;font-size:clamp(22px,3.4vw,32px);line-height:1.4;max-width:24ch;margin:18px auto 0;color:var(--ink)}
+
+  .closer{text-align:center;padding:104px 0}
+  .closer h2{font-size:clamp(30px,4.6vw,48px);max-width:18ch;margin:0 auto 22px}
+
+  footer{border-top:1px solid var(--line);padding:40px 0;color:var(--muted);font-size:14px}
+  .foot-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+  .foot-links{display:flex;gap:20px}
+  .foot-links a:hover{color:var(--ink)}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="logo" href="index.html"><img class="logo-word" src="assets/fuchsia-wordmark-white.svg" alt="Fuchsia"></a>
+    <nav class="nav-links">
+      <a href="studio.html">Fuchsia Studio</a>
+      <a href="support.html">Support</a>
+      <a href="privacy.html">Privacy</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <img class="studio-hero-logo" src="assets/fuchsia-studio-gradient.png" alt="Fuchsia Studio">
+    <h1>Find your own voice in your own tape.</h1>
+    <p class="lede">Fuchsia Studio makes everything you've ever recorded searchable — then helps you build whole shows from it. On your Mac. On your terms.</p>
+    <div class="cta-row">
+      <!-- TODO: replace # with the real Mac App Store URL (and Apple's official badge) -->
+      <a class="btn" href="#">Download on the Mac App Store</a>
+      <a class="btn btn-ghost" href="support.html">Support</a>
+    </div>
+    <div class="avail">Requires macOS 26 or later · Apple silicon recommended</div>
+
+    <div class="shot"><span>[ App screenshot ]</span></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="kicker">What it does</div>
+    <h2 class="sec-h2">Your archive, finally askable.</h2>
+    <p class="sec-sub">Producers sit on hundreds of hours of recorded conversation — and the best moments are effectively lost in their own drives. Fuchsia Studio changes that.</p>
+    <div class="features">
+      <div class="feat">
+        <h3>Search everything you've recorded</h3>
+        <p>Ask your archive in plain language and land on the exact spoken moment — segment-highlighted, quote-accurate, the real voice on the right words within a heartbeat.</p>
+      </div>
+      <div class="feat">
+        <h3>On-device and private</h3>
+        <p>Recording and transcription happen entirely on your Mac with Apple's on-device speech. Your audio never leaves the machine. Intimate material stays where it belongs.</p>
+      </div>
+      <div class="feat">
+        <h3>From search to assembly</h3>
+        <p>Pull found moments into word-accurate clips, shape a structure, draft narration, record your real takes, and watch the episode come together — the app is the edit surface.</p>
+      </div>
+      <div class="feat">
+        <h3>An intention multiplier, not an author</h3>
+        <p>AI woven through the work amplifies <em>your</em> intent — it scaffolds and suggests, never imposes. Any synthetic voice is your own (Personal Voice), only ever a preview your real performance replaces. It never clones a presenter or a subject.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="who">
+  <div class="wrap">
+    <div class="kicker">Who it's for</div>
+    <h2 class="sec-h2">Built for documentary and podcast producers.</h2>
+    <p class="sec-sub">From intimate, interview-driven pieces to complex, multi-speaker, multi-episode work — where your material is your craft, and your trust in it is everything.</p>
+    <blockquote>“A helper for people to find their own voices.”</blockquote>
+  </div>
+</section>
+
+<section class="closer">
+  <div class="wrap">
+    <h2>Make your tape work as hard as you did.</h2>
+    <div class="cta-row" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
+      <a class="btn" href="#">Download on the Mac App Store</a>
+      <a class="btn btn-ghost" href="mailto:paul@fuchsiaprojects.com?subject=Fuchsia%20Studio">Get in touch</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-inner">
+    <a class="logo" href="index.html"><img class="logo-word" src="assets/fuchsia-wordmark-white.svg" alt="Fuchsia"></a>
+    <div class="foot-links">
+      <a href="support.html">Support</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="mailto:paul@fuchsiaprojects.com">Contact</a>
+    </div>
+    <span>© 2026 Fuchsia, LLC</span>
+  </div>
+</footer>
+
+</body>
+</html>

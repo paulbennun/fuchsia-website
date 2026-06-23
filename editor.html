@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Fuchsia — Content editor</title>
+<meta name="description" content="Fuchsia builds enterprise storytelling software grounded in truth — tools that amplify a creator's intention instead of replacing it, even at the scale of millions." />
+<meta property="og:title" content="Fuchsia — Storytelling software for the age of AI" />
+<meta property="og:description" content="Enterprise storytelling software grounded in truth. We amplify creators, not replace them." />
+<meta property="og:type" content="website" />
+<link rel="icon" type="image/svg+xml" href="icon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#0b0a0d;
+    --bg-2:#131119;
+    --ink:#f4f1f6;
+    --muted:#a39daf;
+    --line:rgba(255,255,255,.10);
+    --fuchsia:#e0218a;
+    --fuchsia-soft:#ff5fb0;
+    --max:1140px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter',system-ui,sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  h1,h2,h3{font-family:'Fraunces',Georgia,serif;font-weight:500;line-height:1.08;letter-spacing:-.01em}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 28px}
+  .accent{color:var(--fuchsia-soft)}
+
+  /* NAV */
+  header.nav{
+    position:sticky;top:0;z-index:50;
+    backdrop-filter:blur(14px);
+    background:rgba(11,10,13,.72);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .logo{display:flex;align-items:center;gap:11px;font-family:'Fraunces',serif;font-size:22px;font-weight:600;letter-spacing:-.02em}
+  .fmark{
+    width:30px;height:30px;border-radius:8px;flex:none;
+    background:radial-gradient(125% 130% at 50% 12%, #ec5fb0 0%, #c2107a 52%, #88004e 100%);
+    box-shadow:0 2px 10px rgba(224,33,138,.35), inset 0 1px 0 rgba(255,255,255,.25);
+    display:grid;place-items:center;
+  }
+  .fmark i{font-family:'Fraunces',serif;font-style:italic;font-weight:500;color:#fff;font-size:21px;line-height:1;transform:translateY(-1px)}
+  .nav-links{display:flex;gap:34px;align-items:center;font-size:14.5px;color:var(--muted)}
+  .nav-links a:hover{color:var(--ink)}
+  .btn{
+    display:inline-block;background:var(--fuchsia);color:#fff;
+    padding:11px 20px;border-radius:999px;font-size:14.5px;font-weight:500;
+    transition:transform .15s ease,box-shadow .15s ease;
+  }
+  .btn:hover{transform:translateY(-1px);box-shadow:0 8px 28px rgba(224,33,138,.4)}
+  .btn-ghost{background:transparent;border:1px solid var(--line);color:var(--ink)}
+  .btn-ghost:hover{border-color:var(--fuchsia-soft);box-shadow:none}
+  .nav-cta{display:flex;gap:12px;align-items:center}
+  @media(max-width:760px){.nav-links{display:none}}
+
+  /* HERO */
+  .hero{position:relative;padding:130px 0 110px;overflow:hidden}
+  .hero::before{
+    content:"";position:absolute;top:-30%;left:50%;transform:translateX(-50%);
+    width:900px;height:900px;border-radius:50%;
+    background:radial-gradient(circle, rgba(224,33,138,.28), rgba(224,33,138,0) 62%);
+    filter:blur(20px);z-index:0;pointer-events:none;
+  }
+  .hero .wrap{position:relative;z-index:1}
+  .hero .watermark{
+    position:absolute;right:-2%;top:50%;transform:translateY(-50%);
+    font-family:'Fraunces',serif;font-style:italic;font-weight:400;
+    font-size:min(46vw,640px);line-height:.7;color:rgba(255,255,255,.035);
+    z-index:0;pointer-events:none;user-select:none;
+  }
+  @media(max-width:760px){.hero .watermark{display:none}}
+  .eyebrow{
+    display:inline-block;font-size:13px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--muted);border:1px solid var(--line);padding:7px 15px;border-radius:999px;margin-bottom:30px;
+  }
+  .hero h1{font-size:clamp(40px,6.4vw,76px);max-width:16ch}
+  .hero p.lede{margin-top:28px;font-size:clamp(17px,2.1vw,21px);color:var(--muted);max-width:60ch}
+  .hero .cta-row{margin-top:40px;display:flex;gap:14px;flex-wrap:wrap}
+
+  /* logos strip */
+  .logos{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:26px 0;margin-top:96px}
+  .logos .wrap{display:flex;align-items:center;gap:14px;flex-wrap:wrap;justify-content:center}
+  .logos span{color:var(--muted);font-size:13.5px;letter-spacing:.05em}
+  .logos .sep{opacity:.4}
+  .logos b{color:var(--ink);font-weight:500}
+
+  /* SECTION */
+  section{padding:104px 0}
+  .kicker{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--fuchsia-soft);margin-bottom:18px}
+  .section-head h2{font-size:clamp(30px,4.2vw,46px);max-width:20ch}
+  .section-head p{color:var(--muted);font-size:18px;margin-top:18px;max-width:62ch}
+
+  /* PROBLEM */
+  .problem{background:var(--bg-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .problem h2{font-size:clamp(28px,4vw,44px);max-width:24ch}
+  .problem .big{color:var(--muted);font-size:clamp(20px,2.6vw,27px);line-height:1.5;max-width:30ch;font-family:'Fraunces',serif}
+  .problem .big strong{color:var(--ink);font-weight:500}
+
+  /* PILLARS */
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px}
+  .card{
+    background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.01));
+    border:1px solid var(--line);border-radius:18px;padding:32px;
+    transition:border-color .2s ease,transform .2s ease;
+  }
+  .card:hover{border-color:rgba(224,33,138,.5);transform:translateY(-3px)}
+  .card .num{font-family:'Fraunces',serif;font-size:15px;color:var(--fuchsia-soft);margin-bottom:18px}
+  .card h3{font-size:22px;margin-bottom:12px}
+  .card p{color:var(--muted);font-size:15.5px}
+  @media(max-width:860px){.grid3{grid-template-columns:1fr}}
+
+  /* BUILD / flagship */
+  .build{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+  .build .panel{
+    border:1px solid var(--line);border-radius:20px;padding:40px;
+    background:radial-gradient(120% 120% at 0% 0%, rgba(224,33,138,.16), rgba(224,33,138,0) 55%);
+    min-height:300px;display:flex;flex-direction:column;justify-content:center;
+  }
+  .build .panel .tag{font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--fuchsia-soft);margin-bottom:16px}
+  .build .panel h3{font-size:clamp(24px,3vw,32px);line-height:1.15}
+  .build .panel .partners{margin-top:26px;display:flex;gap:10px;flex-wrap:wrap}
+  .build .panel .partners em{font-style:normal;font-size:13px;color:var(--muted);border:1px solid var(--line);padding:6px 12px;border-radius:999px}
+  .build h2{font-size:clamp(28px,3.6vw,40px)}
+  .build p{color:var(--muted);font-size:17px;margin-top:18px}
+  @media(max-width:860px){.build{grid-template-columns:1fr;gap:32px}}
+
+  /* PROOF stats */
+  .proof{background:var(--bg-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:54px}
+  .stat .n{font-family:'Fraunces',serif;font-size:clamp(34px,4.5vw,52px);color:var(--ink)}
+  .stat .l{color:var(--muted);font-size:14.5px;margin-top:8px}
+  @media(max-width:760px){.stats{grid-template-columns:repeat(2,1fr);gap:36px 24px}}
+
+  /* FOUNDER */
+  .founder{display:grid;grid-template-columns:300px 1fr;gap:56px;align-items:start}
+  .portrait{
+    aspect-ratio:4/5;border-radius:20px;border:1px solid var(--line);
+    background:linear-gradient(160deg,#2a1b29,#0f0d13);
+    display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;
+  }
+  .portrait .mono{font-family:'Fraunces',serif;font-size:74px;color:rgba(255,255,255,.12)}
+  .portrait .ph{position:absolute;bottom:14px;left:0;right:0;text-align:center;font-size:11.5px;color:var(--muted);letter-spacing:.04em}
+  .founder h3{font-size:30px}
+  .founder .role{color:var(--fuchsia-soft);font-size:14px;letter-spacing:.06em;text-transform:uppercase;margin:8px 0 22px}
+  .founder p{color:var(--muted);font-size:16.5px;margin-bottom:16px}
+  .founder p strong{color:var(--ink);font-weight:500}
+  @media(max-width:760px){.founder{grid-template-columns:1fr;gap:32px}.portrait{max-width:260px}}
+
+  /* CTA */
+  .closer{text-align:center;padding:120px 0}
+  .closer h2{font-size:clamp(32px,5vw,56px);max-width:18ch;margin:0 auto}
+  .closer p{color:var(--muted);font-size:19px;margin:24px auto 38px;max-width:46ch}
+
+  /* FOOTER */
+  footer{border-top:1px solid var(--line);padding:46px 0;color:var(--muted);font-size:14px}
+  .foot-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:18px}
+  .foot-inner a:hover{color:var(--ink)}
+
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.in{opacity:1;transform:none}
+</style>
+<style id="editorcss">
+  /* ===== content editor chrome (removed on export) ===== */
+  #editorbar{
+    position:fixed;left:50%;bottom:22px;transform:translateX(-50%);z-index:99999;
+    display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:center;
+    background:rgba(20,18,26,.94);backdrop-filter:blur(16px);
+    border:1px solid rgba(255,255,255,.14);border-radius:18px;padding:10px 12px;
+    font-family:'Inter',system-ui,sans-serif;box-shadow:0 16px 50px rgba(0,0,0,.55);max-width:94vw;
+  }
+  #editorbar .eb-brand .fmark{width:22px;height:22px;border-radius:6px}
+  #editorbar .eb-brand .fmark i{font-size:15px}
+  #editorbar .eb-hint{color:#a39daf;font-size:12.5px;padding:0 6px}
+  #editorbar button{font:inherit;font-size:13.5px;font-weight:500;border:0;cursor:pointer;border-radius:999px;padding:9px 16px;transition:transform .12s,filter .12s}
+  #editorbar button:hover{transform:translateY(-1px)}
+  #editorbar .eb-primary{background:#e0218a;color:#fff}
+  #editorbar .eb-ghost{background:rgba(255,255,255,.09);color:#f4f1f6}
+  #editorbar .eb-saved{color:#73f0a6;font-size:12.5px;opacity:0;transition:opacity .25s;min-width:54px}
+  #editorbar .eb-saved.show{opacity:1}
+  body.editor-active .is-editable{outline:1px dashed transparent;outline-offset:3px;border-radius:4px;transition:outline-color .15s,background .15s}
+  body.editor-active .is-editable:hover{outline-color:rgba(255,95,176,.55);cursor:text}
+  body.editor-active .is-editable:focus{outline:2px solid #e0218a;background:rgba(224,33,138,.08)}
+  body.editor-active .reveal{opacity:1 !important;transform:none !important}
+  @media print{#editorbar{display:none}}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="logo" href="#top"><span class="fmark"><i>f</i></span>Fuchsia</a>
+    <nav class="nav-links">
+      <a href="#thesis">Thesis</a>
+      <a href="#approach">Approach</a>
+      <a href="#build">What we build</a>
+      <a href="#founder">Founder</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn" href="#contact">Start a conversation</a>
+    </div>
+  </div>
+</header>
+
+<a id="top"></a>
+<section class="hero">
+  <span class="watermark" aria-hidden="true">f</span>
+  <div class="wrap">
+    <span class="eyebrow">Storytelling software · Enterprise-grade · Built for the AI era</span>
+    <h1>AI should amplify storytellers, not replace them.</h1>
+    <p class="lede">Fuchsia builds enterprise storytelling software grounded in truth — tools that carry a creator's intention intact, even when their story meets the agency of a massive audience.</p>
+    <div class="cta-row">
+      <a class="btn" href="#contact">Start a conversation</a>
+      <a class="btn btn-ghost" href="#thesis">Read the thesis</a>
+    </div>
+  </div>
+</section>
+
+<div class="logos">
+  <div class="wrap">
+    <span>Two decades building interactive story for</span>
+    <span class="sep">·</span><b>BBC</b>
+    <span class="sep">·</span><b>Sony</b>
+    <span class="sep">·</span><b>Disney</b>
+    <span class="sep">·</span><b>NBCUniversal</b>
+    <span class="sep">·</span><b>Epic Games</b>
+    <span class="sep">·</span><b>Dolby</b>
+    <span class="sep">·</span><b>Meta</b>
+  </div>
+</div>
+
+<!-- THESIS / PROBLEM -->
+<section class="problem reveal" id="thesis">
+  <div class="wrap" style="display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center">
+    <div>
+      <div class="kicker">The thesis</div>
+      <h2>The default promise of AI is replacement. We think that's the wrong bet.</h2>
+    </div>
+    <p class="big">Cheaper content, fewer people, infinite output — and stories severed from their authors, their truth, and their intent. <strong>That's not the future creators, or the companies that depend on them, actually want.</strong></p>
+  </div>
+</section>
+
+<!-- APPROACH -->
+<section id="approach">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="kicker">The approach</div>
+      <h2>Software built on three commitments.</h2>
+      <p>Fuchsia exists to make the AI era better for storytelling, not poorer. Every product we build is held to the same standard.</p>
+    </div>
+    <div class="grid3">
+      <div class="card reveal">
+        <div class="num">01</div>
+        <h3>Grounded in truth</h3>
+        <p>Tools that respect the facts of a story and the world it depicts. Provenance and accuracy are features, not afterthoughts — so what audiences receive can be trusted.</p>
+      </div>
+      <div class="card reveal">
+        <div class="num">02</div>
+        <h3>Amplifies intention</h3>
+        <p>We extend a creator's vision instead of overwriting it. The author stays the author — at every scale, on every platform, no matter how large the audience grows.</p>
+      </div>
+      <div class="card reveal">
+        <div class="num">03</div>
+        <h3>Enterprise by design</h3>
+        <p>Backed by science, engineered for the world's biggest content companies, with UX worthy of the people who use it every day. Built to ship and to last.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT WE BUILD -->
+<section id="build" style="background:var(--bg-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap build reveal">
+    <div>
+      <div class="kicker">What we're building</div>
+      <h2>The Universal Character Model</h2>
+      <p>An industry initiative to make story and character portable across platforms while retaining their creator's intent — even when they meet the agency of massive audiences. Developed in partnership with the offices of the CTOs at the studios shaping what comes next.</p>
+      <p style="margin-top:10px">It's the first of the things we're building. More is in development.</p>
+    </div>
+    <div class="panel">
+      <div class="tag">In development · with</div>
+      <h3>Story and character that keep their meaning, everywhere they go.</h3>
+      <div class="partners">
+        <em>Disney</em><em>NBCUniversal</em><em>Dolby</em><em>Epic Games</em>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROOF -->
+<section class="proof" id="proof">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="kicker">The track record</div>
+      <h2>Built by someone who has spent two decades at the frontier of interactive story.</h2>
+      <p>Fuchsia is grounded in real, award-winning work made for the world's biggest broadcasters, studios and brands — not slideware.</p>
+    </div>
+    <div class="stats">
+      <div class="stat reveal"><div class="n">Multiple</div><div class="l">BAFTA wins &amp; nominations</div></div>
+      <div class="stat reveal"><div class="n">96%</div><div class="l">Metacritic, audio-only VR</div></div>
+      <div class="stat reveal"><div class="n">20+ yrs</div><div class="l">leading interactive storytelling</div></div>
+      <div class="stat reveal"><div class="n">Sean Bean<br>B. Cumberbatch</div><div class="l">talent led on landmark titles</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOUNDER -->
+<section id="founder">
+  <div class="wrap founder reveal">
+    <div class="portrait">
+      <div class="mono">PB</div>
+      <div class="ph">[ Photo of Paul to be added ]</div>
+    </div>
+    <div>
+      <div class="kicker">Founder</div>
+      <h3>Paul Bennun</h3>
+      <div class="role">Founder, Fuchsia</div>
+      <p>Paul is a British-American creative executive working where storytelling, technology, content and business coincide. He built <strong>Somethin' Else</strong>, a leading UK content studio that — on acquisition by Sony — was the largest supplier of interactive content to the BBC.</p>
+      <p>He has been a C-level executive at Los Angeles' <strong>KCRW</strong> and at British immersive studio <strong>Factory 42</strong>, making work for Meta, Disney and others. He is currently with <strong>USC's Entertainment Technology Center</strong>, building the future of storytelling for the Hollywood studios, and is an assessor for the UK government's innovation agency.</p>
+      <p>His work has won multiple BAFTAs and Cannes Lions, reached 96% on Metacritic, and featured talent including Sean Bean and Benedict Cumberbatch.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSER / CONTACT -->
+<section class="closer" id="contact">
+  <div class="wrap">
+    <h2>Building something that depends on storytelling at scale?</h2>
+    <p>If you're a studio, broadcaster or brand thinking seriously about the AI era, we should talk.</p>
+    <a class="btn" href="mailto:paul@fuchsiaprojects.com?subject=Fuchsia">paul@fuchsiaprojects.com</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-inner">
+    <a class="logo" href="#top"><span class="fmark"><i>f</i></span>Fuchsia</a>
+    <span>© 2026 Fuchsia. Storytelling software, grounded in truth.</span>
+    <a href="mailto:paul@fuchsiaprojects.com">paul@fuchsiaprojects.com</a>
+  </div>
+</footer>
+
+<script>
+  const io=new IntersectionObserver((es)=>{
+    es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}});
+  },{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+
+<div id="editorbar">
+  <span class="eb-brand"><span class="fmark"><i>f</i></span></span>
+  <span class="eb-hint">Click any text to edit — autosaves</span>
+  <button class="eb-ghost" id="eb-toggle">Editing: on</button>
+  <button class="eb-primary" id="eb-download">Download site</button>
+  <button class="eb-ghost" id="eb-reset">Reset</button>
+  <span class="eb-saved" id="eb-saved">Saved</span>
+</div>
+
+<script id="editorjs">
+(function(){
+  var STORE='fuchsia_site_content_v1';
+  var SEL=[
+    '.eyebrow','.hero h1','.hero p.lede','.cta-row .btn',
+    '.logos .wrap span:not(.sep)','.logos b',
+    '.kicker','.section-head h2','.section-head p',
+    '.problem h2','.problem .big',
+    '.card h3','.card p',
+    '.build h2','.build p','.panel .tag','.panel h3','.partners em',
+    '.stat .n','.stat .l',
+    '.founder h3','.role','.founder p','.portrait .ph',
+    '.closer h2','.closer p','.closer .btn',
+    '.foot-inner span'
+  ].join(',');
+  var editables=[].slice.call(document.querySelectorAll(SEL));
+  editables.forEach(function(el,i){el.setAttribute('data-ek',i);});
+  var editing=true, st, dt;
+
+  function flashSaved(){var s=document.getElementById('eb-saved');s.classList.add('show');clearTimeout(st);st=setTimeout(function(){s.classList.remove('show');},1100);}
+  function save(){var d={};editables.forEach(function(el){d[el.getAttribute('data-ek')]=el.innerHTML;});try{localStorage.setItem(STORE,JSON.stringify(d));}catch(e){}flashSaved();}
+  function restore(){try{var raw=localStorage.getItem(STORE);if(!raw)return;var d=JSON.parse(raw);editables.forEach(function(el){var k=el.getAttribute('data-ek');if(d[k]!==undefined)el.innerHTML=d[k];});}catch(e){}}
+  function setEdit(on){editing=on;editables.forEach(function(el){el.contentEditable=on?'true':'false';el.classList.toggle('is-editable',on);});document.body.classList.toggle('editor-active',on);document.getElementById('eb-toggle').textContent='Editing: '+(on?'on':'off');}
+
+  function exportHTML(){
+    save();
+    var clone=document.documentElement.cloneNode(true);
+    clone.querySelectorAll('#editorbar,#editorcss,#editorjs').forEach(function(n){n.remove();});
+    clone.querySelectorAll('[contenteditable]').forEach(function(n){n.removeAttribute('contenteditable');});
+    clone.querySelectorAll('[data-ek]').forEach(function(n){n.removeAttribute('data-ek');});
+    clone.querySelectorAll('.is-editable').forEach(function(n){n.classList.remove('is-editable');});
+    clone.querySelectorAll('.reveal.in').forEach(function(n){n.classList.remove('in');});
+    var b=clone.querySelector('body');if(b)b.classList.remove('editor-active');
+    var html='<!DOCTYPE html>\n'+clone.outerHTML;
+    var blob=new Blob([html],{type:'text/html'});
+    var url=URL.createObjectURL(blob);
+    var a=document.createElement('a');a.href=url;a.download='index.html';document.body.appendChild(a);a.click();a.remove();
+    setTimeout(function(){URL.revokeObjectURL(url);},2000);
+  }
+
+  restore();
+  setEdit(true);
+
+  document.addEventListener('input',function(e){if(e.target&&e.target.closest&&e.target.closest('[data-ek]')){clearTimeout(dt);dt=setTimeout(save,400);}});
+  document.addEventListener('click',function(e){if(editing){var a=e.target.closest&&e.target.closest('a');if(a&&!a.closest('#editorbar'))e.preventDefault();}},true);
+  document.getElementById('eb-toggle').onclick=function(){setEdit(!editing);};
+  document.getElementById('eb-download').onclick=exportHTML;
+  document.getElementById('eb-reset').onclick=function(){if(confirm('Reset all text back to the original? This clears your saved edits.')){try{localStorage.removeItem(STORE);}catch(e){}location.reload();}};
+})();
+</script>
+
+</body>
+</html>

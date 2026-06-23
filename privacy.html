@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<!--
+  ============================================================================
+  PRIVACY POLICY — Fuchsia Studio
+  Drafted from the repo (paulbennun/fuchsia-studio, engine "Showstore").
+  VERIFY BEFORE PUBLISHING — assumptions to confirm:
+   1. Legal entity name (used "Fuchsia, LLC" / "paulbennun"). Set the real one.
+   2. AI features: confirm the SHIPPING default model host. The repo shows a
+      pluggable provider (AIProviderKit) with a self-hosted default (Qwen on your
+      own network) and "hosting deferred". The policy says transcript TEXT (never
+      audio) may go to the AI provider you configure. If the shipped build sends
+      text to a THIRD-PARTY API by default (e.g. Anthropic/OpenAI), name it here.
+   3. Confirm there is NO analytics/crash SDK bundled (none found in repo). If you
+      add one (e.g. TestFlight/App Store metrics, Sentry), disclose it.
+   4. Confirm no account/sign-in. (None found.)
+   5. Effective date below.
+   6. Platform: macOS 26+ (Mac App Store). If an iOS build ships too, add it.
+  ============================================================================
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Privacy Policy — Fuchsia Studio</title>
+<meta name="description" content="Privacy policy for Fuchsia Studio. Your audio never leaves your Mac. Privacy by design for documentary and podcast producers." />
+<meta name="robots" content="all" />
+<link rel="icon" type="image/svg+xml" href="icon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#0b0a0d;--bg-2:#131119;--ink:#f4f1f6;--muted:#a39daf;
+    --line:rgba(255,255,255,.10);--fuchsia:#e0218a;--fuchsia-soft:#ff5fb0;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased}
+  a{color:var(--fuchsia-soft);text-decoration:none}
+  a:hover{text-decoration:underline}
+  h1,h2,h3{font-family:'Fraunces',Georgia,serif;font-weight:500;line-height:1.15;letter-spacing:-.01em}
+  /* header */
+  header.nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);background:rgba(11,10,13,.72);border-bottom:1px solid var(--line)}
+  .nav-inner{max-width:980px;margin:0 auto;padding:0 28px;height:64px;display:flex;align-items:center;justify-content:space-between}
+  .logo{display:flex;align-items:center;gap:10px;font-family:'Fraunces',serif;font-size:20px;font-weight:600;color:var(--ink)}
+  .logo:hover{text-decoration:none}
+  .logo-word{height:36px;width:auto;display:block}
+  .doc-logo{height:42px;width:auto;display:block;margin-bottom:18px}
+  .fmark{width:27px;height:27px;border-radius:7px;flex:none;background:radial-gradient(125% 130% at 50% 12%,#ec5fb0,#c2107a 52%,#88004e);box-shadow:0 2px 10px rgba(224,33,138,.35),inset 0 1px 0 rgba(255,255,255,.25);display:grid;place-items:center}
+  .fmark i{font-family:'Fraunces',serif;font-style:italic;font-weight:500;color:#fff;font-size:18px;line-height:1;transform:translateY(-1px)}
+  .nav-links{display:flex;gap:24px;font-size:14.5px}
+  .nav-links a{color:var(--muted)}
+  .nav-links a:hover{color:var(--ink);text-decoration:none}
+  @media(max-width:640px){.nav-links{gap:16px;font-size:13.5px}}
+  /* content */
+  main{max-width:780px;margin:0 auto;padding:72px 28px 40px}
+  .doc-kicker{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--fuchsia-soft);margin-bottom:14px}
+  h1{font-size:clamp(34px,6vw,52px);margin-bottom:14px}
+  .updated{color:var(--muted);font-size:14.5px;margin-bottom:40px}
+  .summary{background:linear-gradient(180deg,rgba(224,33,138,.10),rgba(224,33,138,.02));border:1px solid rgba(224,33,138,.28);border-radius:16px;padding:26px 28px;margin-bottom:44px}
+  .summary h2{font-size:20px;margin-bottom:10px}
+  .summary p{color:#e8e2ee}
+  h2{font-size:26px;margin:44px 0 14px}
+  h3{font-size:18px;margin:26px 0 8px;color:var(--ink)}
+  p{color:#cfc8d6;margin-bottom:14px}
+  ul{color:#cfc8d6;margin:0 0 14px 0;padding-left:22px}
+  li{margin-bottom:9px}
+  strong{color:var(--ink);font-weight:600}
+  .lead{font-size:18px;color:#ded7e4}
+  hr{border:0;border-top:1px solid var(--line);margin:48px 0}
+  footer{border-top:1px solid var(--line);margin-top:60px}
+  .foot-inner{max-width:780px;margin:0 auto;padding:34px 28px;display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;align-items:center;color:var(--muted);font-size:14px}
+  .foot-inner a{color:var(--muted)}
+  .foot-links{display:flex;gap:20px}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a class="logo" href="index.html"><img class="logo-word" src="assets/fuchsia-wordmark-white.svg" alt="Fuchsia"></a>
+    <nav class="nav-links">
+      <a href="studio.html">Fuchsia Studio</a>
+      <a href="support.html">Support</a>
+      <a href="privacy.html">Privacy</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <img class="doc-logo" src="assets/fuchsia-studio-gradient.png" alt="Fuchsia Studio">
+  <h1>Privacy Policy</h1>
+  <p class="updated">Last updated: 23 June 2026</p>
+
+  <div class="summary">
+    <h2>The short version</h2>
+    <p>Fuchsia Studio is built privacy-first. <strong>Your audio never leaves your Mac.</strong> Recording and transcription happen entirely on your device. There is no account to create, and we do not run servers that collect your recordings, transcripts, or personal information. The only data that ever leaves your Mac is transcript <em>text</em> — and only when you use the optional AI assistance, sent to the model provider you have configured.</p>
+  </div>
+
+  <p class="lead">This policy explains how Fuchsia Studio ("the app", "we", "us") handles your information. Fuchsia Studio is a macOS application for documentary and podcast producers, published by Fuchsia, LLC.</p>
+
+  <h2>1. Our approach: privacy by design</h2>
+  <p>Fuchsia Studio works with intimate material — people's interviews, memories, and voices. We treat that material as something to be protected, not harvested. Wherever a feature can run on your device, it does. The app's privacy boundaries are enforced by how it is built, not just promised in this document.</p>
+
+  <h2>2. Information the app accesses</h2>
+  <p>Fuchsia Studio works with files and recordings that <strong>you</strong> choose and that stay under your control. Specifically:</p>
+
+  <h3>Your audio, recordings, and media</h3>
+  <p>You grant the app access to a folder (your archive) that you select. Your source audio and any takes you record stay on your Mac, inside the locations you choose. <strong>Audio is never uploaded to us or to any third party.</strong></p>
+
+  <h3>Transcripts and derived data</h3>
+  <p>The app transcribes your audio <strong>on-device</strong> using Apple's built-in Speech framework, and builds a private, searchable index (transcripts, timecodes, speaker labels, and search embeddings) so you can find moments in your own material. This derived data is stored locally alongside your project.</p>
+
+  <h3>Microphone</h3>
+  <p>With your permission, the app uses your microphone to record narration and takes in your own voice. These recordings are saved to your project on your device.</p>
+
+  <h3>Optional AI assistance</h3>
+  <p>Some features (such as suggesting structure, drafting narration, or answering questions about your material) use an AI model. When you use these features, <strong>only transcript text is sent to the AI model provider you have configured — never your audio.</strong> You control whether and how AI assistance is enabled, and which provider it uses. If you do not use these features, no data leaves your Mac.</p>
+
+  <h3>No account, no tracking</h3>
+  <p>Fuchsia Studio does not require you to create an account. We do not use advertising, and we do not include third-party analytics or tracking SDKs. We do not build profiles of you or sell data — we don't have it to sell.</p>
+
+  <h2>3. How information is used</h2>
+  <p>Information is used only to provide the app's features to you: transcribing your audio, making it searchable, helping you assemble shows, and — if you choose — providing AI assistance. We do not use your content to train models, and we do not use it for advertising.</p>
+
+  <h2>4. Where your data is stored</h2>
+  <p>Your recordings, transcripts, and project data are stored <strong>locally on your Mac</strong>, in the folders you choose. They are protected by your device's own security (such as FileVault and your macOS user account). Backups are under your control — for example, Time Machine or any backup service you use. Because your data lives on your device, deleting it is entirely in your hands.</p>
+
+  <h2>5. Sharing and disclosure</h2>
+  <p>We do not sell, rent, or trade your information. We do not share your content with third parties for their own purposes. The only outbound transmission the app makes is transcript text to the AI model provider you configure, for the AI features you choose to use.</p>
+
+  <h2>6. Third-party services</h2>
+  <p>Fuchsia Studio relies on Apple's on-device frameworks (Speech, Natural Language, and — for voice scaffolds — Personal Voice), which process your data on your Mac. If you enable AI assistance, transcript text is processed by the model provider you configure; that provider's handling of that text is governed by its own terms and privacy policy. Choose a provider you trust.</p>
+
+  <h2>7. Voice synthesis</h2>
+  <p>Any synthetic voice in Fuchsia Studio uses <strong>your own voice only</strong>, via Apple's Personal Voice (created and stored on your device, with Apple's built-in consent). It exists only as a temporary preview to help you hear a show's shape, and is meant to be replaced by your own recorded narration. The app does not clone the voice of any presenter, interviewee, or other person.</p>
+
+  <h2>8. Your rights and choices</h2>
+  <ul>
+    <li><strong>Permissions:</strong> You can grant or revoke microphone, speech recognition, and file access at any time in macOS <em>System Settings → Privacy &amp; Security</em>.</li>
+    <li><strong>Access and deletion:</strong> Because your data is stored locally in folders you control, you can view, export, or delete it directly. Deleting your project files, and the app, removes your data from your device.</li>
+    <li><strong>AI features:</strong> You can choose not to use AI assistance, keeping all processing on-device.</li>
+    <li><strong>Regional rights:</strong> Depending on where you live (for example, under GDPR or the CCPA), you may have rights to access, correct, or delete personal data. Because we do not collect or hold your personal data on our servers, these rights are largely exercised directly on your device; contact us if you have questions.</li>
+  </ul>
+
+  <h2>9. Children's privacy</h2>
+  <p>Fuchsia Studio is a professional tool intended for adults and is not directed to children. We do not knowingly collect personal information from children.</p>
+
+  <h2>10. Changes to this policy</h2>
+  <p>We may update this policy as the app evolves. When we do, we will revise the "Last updated" date above and, for material changes, provide a more prominent notice.</p>
+
+  <h2>11. Contact us</h2>
+  <p>If you have any questions about this policy or your privacy, email us at <a href="mailto:paul@fuchsiaprojects.com?subject=Fuchsia%20Studio%20privacy">paul@fuchsiaprojects.com</a>.</p>
+
+  <hr />
+  <p style="color:var(--muted);font-size:13.5px">Fuchsia Studio is published by Fuchsia, LLC. © 2026 Fuchsia, LLC. All rights reserved.</p>
+</main>
+
+<footer>
+  <div class="foot-inner">
+    <a class="logo" href="index.html"><img class="logo-word" src="assets/fuchsia-wordmark-white.svg" alt="Fuchsia"></a>
+    <div class="foot-links">
+      <a href="studio.html">Fuchsia Studio</a>
+      <a href="support.html">Support</a>
+      <a href="mailto:paul@fuchsiaprojects.com">Contact</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
