@@ -2,3 +2,6 @@
 SITE-PLAN.md
 assets/_*.png
 *.tmp
+
+# internal tools — never publish
+editor.html
