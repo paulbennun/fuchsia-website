@@ -5,3 +5,4 @@ assets/_*.png
 
 # internal tools — never publish
 editor.html
+SECURITY-AUDIT.md
