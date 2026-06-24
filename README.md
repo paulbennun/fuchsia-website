@@ -31,20 +31,28 @@ This repo is deployed with GitHub Pages from the `main` branch (root). The `.noj
 file tells Pages to serve all files as-is. A custom domain is configured via the
 repository's **Settings → Pages** and a `CNAME` file (added when the domain is wired up).
 
-## Publishing homepage edits
+## Editing the homepage
 
-The homepage can be edited visually in `editor.html` (a local-only tool, not published).
-To push those edits live in one step:
+Edits are made visually, then saved **straight into this folder** by a tiny local
+server (`edit.py`) — no downloads, nothing trapped in the browser.
 
-1. Open `editor.html`, make changes, click **Download site** (saves `index.html` to `~/Downloads`).
-2. From this folder, run:
+1. Start the editor server:
+   ```bash
+   python3 edit.py
+   ```
+2. Open **http://localhost:8765/editor.html** and click any text to edit it.
+3. Click **Save to site** — this writes `index.html` directly into this repo (on disk).
+4. Publish it:
    ```bash
    ./publish.sh "what you changed"
    ```
+   `publish.sh` commits, pushes, and confirms the GitHub Pages build.
 
-`publish.sh` grabs the freshly downloaded `index.html`, drops it into the repo, commits,
-and pushes — GitHub Pages rebuilds automatically (once Pages is enabled). It refuses to
-publish the editor file by mistake. You can also point it at a specific file:
-`./publish.sh ~/Downloads/index.html "message"`.
+Notes:
+- `editor.html` is a local-only tool (gitignored, never published). Opening it as a
+  plain `file://` page without the server running still works, but **Save to site**
+  falls back to a download in that case — run `edit.py` for the reliable path.
+- `publish.sh` refuses to publish the editor file by mistake, and you can still point
+  it at a specific file: `./publish.sh ~/Downloads/index.html "message"`.
 
 © 2026 Fuchsia, LLC. All rights reserved.
