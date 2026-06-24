@@ -3,18 +3,13 @@
   ============================================================================
   PRIVACY POLICY — Fuchsia Studio
   Drafted from the repo (paulbennun/fuchsia-studio, engine "Showstore").
-  VERIFY BEFORE PUBLISHING — assumptions to confirm:
-   1. Legal entity name (used "Fuchsia, LLC" / "paulbennun"). Set the real one.
-   2. AI features: confirm the SHIPPING default model host. The repo shows a
-      pluggable provider (AIProviderKit) with a self-hosted default (Qwen on your
-      own network) and "hosting deferred". The policy says transcript TEXT (never
-      audio) may go to the AI provider you configure. If the shipped build sends
-      text to a THIRD-PARTY API by default (e.g. Anthropic/OpenAI), name it here.
-   3. Confirm there is NO analytics/crash SDK bundled (none found in repo). If you
-      add one (e.g. TestFlight/App Store metrics, Sentry), disclose it.
-   4. Confirm no account/sign-in. (None found.)
-   5. Effective date below.
-   6. Platform: macOS 26+ (Mac App Store). If an iOS build ships too, add it.
+  STATUS: pre-launch. Confirmed: macOS-only, v1.0, on-device by DEFAULT (no AI service
+  contacted unless the user explicitly enables/configures one), no account, no
+  analytics/crash SDK. Entity: Fuchsia, LLC. Contact: support@fuchsiaprojects.com.
+  STILL TO DO before launch:
+   1. Set the real effective date below (currently 23 June 2026).
+   2. Create the support@fuchsiaprojects.com alias in Google Workspace.
+   3. If you ever add analytics or a default third-party AI provider, disclose it here.
   ============================================================================
 -->
 <html lang="en">
@@ -115,7 +110,7 @@
   <p>With your permission, the app uses your microphone to record narration and takes in your own voice. These recordings are saved to your project on your device.</p>
 
   <h3>Optional AI assistance</h3>
-  <p>Some features (such as suggesting structure, drafting narration, or answering questions about your material) use an AI model. When you use these features, <strong>only transcript text is sent to the AI model provider you have configured — never your audio.</strong> You control whether and how AI assistance is enabled, and which provider it uses. If you do not use these features, no data leaves your Mac.</p>
+  <p><strong>By default, Fuchsia Studio runs entirely on your device</strong> — no AI service is contacted unless you explicitly enable and configure one. If you turn on AI assistance (for example, to suggest structure, draft narration, or answer questions about your material), <strong>only transcript text is sent to the provider you choose — never your audio.</strong> With AI assistance off, nothing leaves your Mac.</p>
 
   <h3>No account, no tracking</h3>
   <p>Fuchsia Studio does not require you to create an account. We do not use advertising, and we do not include third-party analytics or tracking SDKs. We do not build profiles of you or sell data — we don't have it to sell.</p>
@@ -150,7 +145,7 @@
   <p>We may update this policy as the app evolves. When we do, we will revise the "Last updated" date above and, for material changes, provide a more prominent notice.</p>
 
   <h2>11. Contact us</h2>
-  <p>If you have any questions about this policy or your privacy, email us at <a href="mailto:paul@fuchsiaprojects.com?subject=Fuchsia%20Studio%20privacy">paul@fuchsiaprojects.com</a>.</p>
+  <p>If you have any questions about this policy or your privacy, email us at <a href="mailto:support@fuchsiaprojects.com?subject=Fuchsia%20Studio%20privacy">support@fuchsiaprojects.com</a>.</p>
 
   <hr />
   <p style="color:var(--muted);font-size:13.5px">Fuchsia Studio is published by Fuchsia, LLC. © 2026 Fuchsia, LLC. All rights reserved.</p>
@@ -162,7 +157,7 @@
     <div class="foot-links">
       <a href="studio.html">Fuchsia Studio</a>
       <a href="support.html">Support</a>
-      <a href="mailto:paul@fuchsiaprojects.com">Contact</a>
+      <a href="mailto:support@fuchsiaprojects.com">Contact</a>
     </div>
   </div>
 </footer>

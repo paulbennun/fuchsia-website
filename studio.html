@@ -3,13 +3,15 @@
   ============================================================================
   LANDING PAGE — Fuchsia Studio  (optional Apple "Marketing URL")
   Drafted from repo docs (north-star.md, product-brief.md, ADR-0006, ADR-0002).
-  VERIFY BEFORE PUBLISHING:
-   1. App Store link — the "Download" button points to "#". Add the real Mac App
-      Store URL, and ideally swap the styled button for Apple's official badge.
-   2. Tagline / feature copy — accurate to the repo's intent; tighten to taste.
-   3. Screenshots — placeholders included; drop in real app screenshots.
-   4. Version / availability — confirm shipping version and whether it's live,
-      in TestFlight, or "coming soon".
+  STATUS: pre-launch. Shipping v1.0, macOS-only, on-device by default, no account,
+  no analytics. Price $49 with a free trial (ship free-to-download + a $49
+  non-consumable "unlock" IAP — Apple's free-trial-for-non-subscription flow).
+  STILL TO DO before launch:
+   1. Real Mac App Store URL — the CTA is a "Coming soon" placeholder; swap in the
+      live link (and Apple's official badge) at launch.
+   2. Demo video — add it in the #demo section (file or embed; both shown, commented).
+   3. A poster image for the video frame.
+   4. Create support@fuchsiaprojects.com in Google Workspace (used across these pages).
   ============================================================================
 -->
 <html lang="en">
@@ -61,10 +63,19 @@
   .hero .cta-row{margin-top:36px;display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
   .hero .avail{margin-top:16px;font-size:13.5px;color:var(--muted)}
 
-  /* shot */
-  .shot{margin:24px auto 0;max-width:920px;border:1px solid var(--line);border-radius:18px;aspect-ratio:16/10;background:linear-gradient(160deg,#1a1320,#0d0b11);display:grid;place-items:center;position:relative;overflow:hidden}
-  .shot::after{content:"";position:absolute;inset:0;background:radial-gradient(120% 120% at 50% 0%,rgba(224,33,138,.14),transparent 60%)}
-  .shot span{color:var(--muted);font-size:13px;letter-spacing:.04em;position:relative;z-index:1}
+  .btn-soon{background:rgba(255,255,255,.07);color:var(--muted);border:1px solid var(--line);cursor:default}
+  .btn-soon:hover{transform:none;box-shadow:none}
+  .price{margin-top:18px;font-size:14.5px;color:var(--muted)}
+  .price b{color:var(--ink);font-weight:600}
+
+  /* demo video */
+  #demo{padding-top:8px}
+  .videoframe{position:relative;max-width:940px;margin:0 auto;aspect-ratio:16/9;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:linear-gradient(160deg,#1a1320,#0d0b11);box-shadow:0 30px 80px rgba(0,0,0,.5)}
+  .videoframe::after{content:"";position:absolute;inset:0;background:radial-gradient(120% 120% at 50% 0%,rgba(224,33,138,.16),transparent 60%);pointer-events:none}
+  .videoframe video,.videoframe iframe{display:block;width:100%;height:100%;border:0;position:relative;z-index:1}
+  .videoph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;z-index:2}
+  .videoph .play{width:74px;height:74px;border-radius:50%;background:var(--fuchsia);color:#fff;display:grid;place-items:center;font-size:24px;padding-left:5px;box-shadow:0 12px 34px rgba(224,33,138,.5)}
+  .videoph .vlabel{color:var(--muted);font-size:13px;letter-spacing:.04em}
 
   section{padding:84px 0}
   .kicker{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--fuchsia-soft);margin-bottom:16px;text-align:center}
@@ -109,13 +120,33 @@
     <h1>Find your own voice in your own tape.</h1>
     <p class="lede">Fuchsia Studio makes everything you've ever recorded searchable — then helps you build whole shows from it. On your Mac. On your terms.</p>
     <div class="cta-row">
-      <!-- TODO: replace # with the real Mac App Store URL (and Apple's official badge) -->
-      <a class="btn" href="#">Download on the Mac App Store</a>
-      <a class="btn btn-ghost" href="support.html">Support</a>
+      <!-- At launch: replace this span with <a class="btn" href="APP_STORE_URL"> or Apple's badge -->
+      <span class="btn btn-soon">Coming soon to the Mac App Store</span>
+      <a class="btn btn-ghost" href="mailto:support@fuchsiaprojects.com?subject=Notify%20me%20about%20Fuchsia%20Studio">Get launch updates</a>
     </div>
-    <div class="avail">Requires macOS 26 or later · Apple silicon recommended</div>
+    <div class="price"><b>$49</b> at launch, with a <b>free trial</b> · Requires macOS 26+ (Apple silicon)</div>
+  </div>
+</section>
 
-    <div class="shot"><span>[ App screenshot ]</span></div>
+<section id="demo">
+  <div class="wrap">
+    <div class="kicker">See it in action</div>
+    <div class="videoframe">
+      <!-- ===== ADD THE VIDEO HERE — pick ONE option, then delete the .videoph block =====
+      OPTION A · self-hosted (drop assets/fuchsia-studio-demo.mp4 + a poster image):
+        <video controls playsinline preload="metadata" poster="assets/demo-poster.jpg">
+          <source src="assets/fuchsia-studio-demo.mp4" type="video/mp4" />
+        </video>
+      OPTION B · YouTube / Vimeo embed (replace VIDEO_ID):
+        <iframe src="https://www.youtube.com/embed/VIDEO_ID" title="Fuchsia Studio demo"
+          allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen></iframe>
+      ============================================================================ -->
+      <div class="videoph">
+        <span class="play">&#9658;</span>
+        <span class="vlabel">Product video — coming at launch</span>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -158,9 +189,10 @@
   <div class="wrap">
     <h2>Make your tape work as hard as you did.</h2>
     <div class="cta-row" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
-      <a class="btn" href="#">Download on the Mac App Store</a>
-      <a class="btn btn-ghost" href="mailto:paul@fuchsiaprojects.com?subject=Fuchsia%20Studio">Get in touch</a>
+      <span class="btn btn-soon">Coming soon to the Mac App Store</span>
+      <a class="btn btn-ghost" href="mailto:support@fuchsiaprojects.com?subject=Fuchsia%20Studio">Get in touch</a>
     </div>
+    <div class="price"><b>$49</b> at launch · <b>free trial</b> · macOS 26+</div>
   </div>
 </section>
 
@@ -170,7 +202,7 @@
     <div class="foot-links">
       <a href="support.html">Support</a>
       <a href="privacy.html">Privacy</a>
-      <a href="mailto:paul@fuchsiaprojects.com">Contact</a>
+      <a href="mailto:support@fuchsiaprojects.com">Contact</a>
     </div>
     <span>© 2026 Fuchsia, LLC</span>
   </div>

@@ -3,15 +3,11 @@
   ============================================================================
   SUPPORT PAGE — Fuchsia Studio  (Apple App Store "Support URL")
   Apple Guideline 1.5 requires a support URL with current contact info.
-  VERIFY BEFORE PUBLISHING:
-   1. Support email — using paul@fuchsiaprojects.com. A support@ alias reads more
-      professionally if you want one.
-   2. Version number — Info.plist says 1.0; the Xcode project says MARKETING_VERSION
-      0.1.0. Set the real shipping version below.
-   3. System requirements — repo targets macOS 26.0+. Confirm Apple-silicon
-      requirement (Personal Voice / on-device models typically need Apple silicon).
-   4. Pricing / subscription — none found in repo; FAQ entry left neutral. Edit.
-   5. If an iOS companion ships, add it to requirements + FAQ.
+  STATUS: pre-launch. Confirmed: v1.0, macOS-only, on-device by default, no account,
+  no analytics, $49 with a free trial. Contact uses support@fuchsiaprojects.com.
+  STILL TO DO before launch:
+   1. Create the support@fuchsiaprojects.com alias/group in Google Workspace.
+   2. Confirm the Apple-silicon requirement wording (Personal Voice / on-device models).
   ============================================================================
 -->
 <html lang="en">
@@ -101,7 +97,7 @@
 
   <div class="contact">
     <div class="t"><strong>Get in touch</strong>We read every message and aim to reply within two business days.</div>
-    <a class="btn" href="mailto:paul@fuchsiaprojects.com?subject=Fuchsia%20Studio%20support">Email support</a>
+    <a class="btn" href="mailto:support@fuchsiaprojects.com?subject=Fuchsia%20Studio%20support">Email support</a>
   </div>
 
   <h2>About Fuchsia Studio</h2>
@@ -125,6 +121,11 @@
   </ol>
 
   <h2>Frequently asked questions</h2>
+
+  <details>
+    <summary>How much does it cost, and is there a trial?</summary>
+    <p>Fuchsia Studio is <strong>$49</strong> — a one-time purchase, not a subscription. You can try it first with a <strong>free trial</strong>: download the app for free, use it for the trial period, and unlock it permanently with a single in-app purchase when you're ready.</p>
+  </details>
 
   <details>
     <summary>Does my audio ever leave my Mac?</summary>
@@ -168,7 +169,7 @@
 
   <details>
     <summary>How do I report a bug or request a feature?</summary>
-    <p>Email <a href="mailto:paul@fuchsiaprojects.com?subject=Fuchsia%20Studio%20feedback">paul@fuchsiaprojects.com</a>. Bug reports are most useful with your macOS version, the app version (below), and steps to reproduce. Feature requests are genuinely welcome — the roadmap is shaped by working producers.</p>
+    <p>Email <a href="mailto:support@fuchsiaprojects.com?subject=Fuchsia%20Studio%20feedback">support@fuchsiaprojects.com</a>. Bug reports are most useful with your macOS version, the app version (below), and steps to reproduce. Feature requests are genuinely welcome — the roadmap is shaped by working producers.</p>
   </details>
 
   <details>
@@ -189,7 +190,7 @@
     <div class="foot-links">
       <a href="studio.html">Fuchsia Studio</a>
       <a href="privacy.html">Privacy</a>
-      <a href="mailto:paul@fuchsiaprojects.com">Contact</a>
+      <a href="mailto:support@fuchsiaprojects.com">Contact</a>
     </div>
   </div>
 </footer>
