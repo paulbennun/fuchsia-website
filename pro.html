@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<!--
+  ============================================================================
+  STUDIO PRO PAGE — Fuchsia Studio (direct-purchase, NOT the Mac App Store)
+  Drafted from the verified copy pass (fable-copy-narrative-pass-2026-07-12.md §3).
+  STATUS: pre-launch draft.
+   - Buy CTA is a "Coming soon" placeholder — the direct storefront isn't built yet.
+   - Pro pricing is UNRATIFIED: shown as a provisional "Pricing to be announced"
+     line. Do NOT print a $/mo or $/yr number until Paul rules.
+   - Confirmed headless capability = master render (#386). No headless-transcribe
+     claim is made anywhere on this page (Q7 open).
+  ============================================================================
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Studio Pro — Fuchsia Studio</title>
+<meta name="description" content="Fuchsia Studio Pro is a studio you can program: drive the same studio from your own AI provider's app or the command line, batch your workflow, and render a broadcast-ready master headless. On your Mac." />
+<meta property="og:title" content="Fuchsia Studio Pro" />
+<meta property="og:description" content="Everything in Fuchsia Studio, plus a control surface for professionals — your own AI, the command line, and headless master render. Every automated change is attributed." />
+<meta property="og:type" content="website" />
+<link rel="icon" type="image/svg+xml" href="icon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#0b0a0d;--bg-2:#131119;--ink:#f4f1f6;--muted:#a39daf;
+    --line:rgba(255,255,255,.10);--fuchsia:#e0218a;--fuchsia-soft:#ff5fb0;--max:1080px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  h1,h2,h3{font-family:'Fraunces',Georgia,serif;font-weight:500;line-height:1.1;letter-spacing:-.01em}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 28px}
+  header.nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);background:rgba(11,10,13,.72);border-bottom:1px solid var(--line)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:66px}
+  .logo{display:flex;align-items:center;gap:10px;font-family:'Fraunces',serif;font-size:20px;font-weight:600}
+  .logo-word{height:36px;width:auto;display:block}
+  .studio-hero-logo{width:min(440px,76vw);height:auto;display:block;margin:0 auto 30px;filter:drop-shadow(0 14px 44px rgba(224,33,138,.4))}
+  .fmark{width:27px;height:27px;border-radius:7px;flex:none;background:radial-gradient(125% 130% at 50% 12%,#ec5fb0,#c2107a 52%,#88004e);box-shadow:0 2px 10px rgba(224,33,138,.35),inset 0 1px 0 rgba(255,255,255,.25);display:grid;place-items:center}
+  .fmark i{font-family:'Fraunces',serif;font-style:italic;font-weight:500;color:#fff;font-size:18px;line-height:1;transform:translateY(-1px)}
+  .nav-links{display:flex;gap:26px;font-size:14.5px;color:var(--muted)}
+  .nav-links a:hover{color:var(--ink)}
+  @media(max-width:640px){.nav-links{gap:16px;font-size:13.5px}}
+  .btn{display:inline-flex;align-items:center;gap:9px;background:var(--fuchsia);color:#fff;padding:13px 24px;border-radius:999px;font-size:15px;font-weight:500;transition:transform .15s,box-shadow .15s}
+  .btn:hover{transform:translateY(-1px);box-shadow:0 8px 28px rgba(224,33,138,.4)}
+  .btn-ghost{background:transparent;border:1px solid var(--line);color:var(--ink)}
+
+  /* hero */
+  .hero{position:relative;text-align:center;padding:96px 0 80px;overflow:hidden}
+  .hero::before{content:"";position:absolute;top:-34%;left:50%;transform:translateX(-50%);width:820px;height:820px;border-radius:50%;background:radial-gradient(circle,rgba(224,33,138,.26),rgba(224,33,138,0) 62%);filter:blur(18px);z-index:0}
+  .hero .wrap{position:relative;z-index:1}
+  .appicon{width:104px;height:104px;border-radius:24px;margin:0 auto 26px;background:radial-gradient(125% 130% at 50% 12%,#ec5fb0,#c2107a 52%,#88004e);box-shadow:0 18px 50px rgba(224,33,138,.4),inset 0 1px 0 rgba(255,255,255,.3);display:grid;place-items:center}
+  .appicon i{font-family:'Fraunces',serif;font-style:italic;font-weight:500;color:#fff;font-size:68px;line-height:1;transform:translateY(-2px)}
+  .hero h1{font-size:clamp(38px,6vw,68px);max-width:15ch;margin:0 auto}
+  .hero p.lede{margin:24px auto 0;font-size:clamp(17px,2.1vw,21px);color:var(--muted);max-width:54ch}
+  .hero .cta-row{margin-top:36px;display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
+  .hero .avail{margin-top:16px;font-size:13.5px;color:var(--muted)}
+
+  .btn-soon{background:rgba(255,255,255,.07);color:var(--muted);border:1px solid var(--line);cursor:default}
+  .btn-soon:hover{transform:none;box-shadow:none}
+  .price{margin-top:18px;font-size:14.5px;color:var(--muted)}
+  .price b{color:var(--ink);font-weight:600}
+
+  /* demo video */
+  #demo{padding-top:8px}
+  .videoframe{position:relative;max-width:940px;margin:0 auto;aspect-ratio:16/9;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:linear-gradient(160deg,#1a1320,#0d0b11);box-shadow:0 30px 80px rgba(0,0,0,.5)}
+  .videoframe::after{content:"";position:absolute;inset:0;background:radial-gradient(120% 120% at 50% 0%,rgba(224,33,138,.16),transparent 60%);pointer-events:none}
+  .videoframe video,.videoframe iframe{display:block;width:100%;height:100%;border:0;position:relative;z-index:1}
+  .videoph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;z-index:2}
+  .videoph .play{width:74px;height:74px;border-radius:50%;background:var(--fuchsia);color:#fff;display:grid;place-items:center;font-size:24px;padding-left:5px;box-shadow:0 12px 34px rgba(224,33,138,.5)}
+  .videoph .vlabel{color:var(--muted);font-size:13px;letter-spacing:.04em}
+
+  section{padding:84px 0}
+  .kicker{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--fuchsia-soft);margin-bottom:16px;text-align:center}
+  .sec-h2{font-size:clamp(28px,4vw,42px);text-align:center;max-width:22ch;margin:0 auto 14px}
+  .sec-sub{text-align:center;color:var(--muted);font-size:18px;max-width:60ch;margin:0 auto}
+
+  .features{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:54px}
+  .feat{background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.01));border:1px solid var(--line);border-radius:18px;padding:32px;transition:border-color .2s,transform .2s}
+  .feat:hover{border-color:rgba(224,33,138,.5);transform:translateY(-3px)}
+  .feat h3{font-size:21px;margin-bottom:10px}
+  .feat p{color:var(--muted);font-size:15.5px}
+  @media(max-width:760px){.features{grid-template-columns:1fr}}
+
+  .who{background:var(--bg-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);text-align:center}
+  .who blockquote{font-family:'Fraunces',serif;font-style:italic;font-size:clamp(22px,3.4vw,32px);line-height:1.4;max-width:24ch;margin:18px auto 0;color:var(--ink)}
+
+  .closer{text-align:center;padding:104px 0}
+  .closer h2{font-size:clamp(30px,4.6vw,48px);max-width:18ch;margin:0 auto 22px}
+
+  footer{border-top:1px solid var(--line);padding:40px 0;color:var(--muted);font-size:14px}
+  .foot-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+  .foot-links{display:flex;gap:20px}
+  .foot-links a:hover{color:var(--ink)}
+</style>
+<!-- Page-specific patterns for Studio Pro — uses the shared CSS variables only. -->
+<style>
+  .three-cols{grid-template-columns:repeat(3,1fr)}
+  @media(max-width:900px){.three-cols{grid-template-columns:1fr}}
+  .feat .lead{display:block;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--fuchsia-soft);margin-bottom:12px}
+  .unlocks{max-width:780px;margin:52px auto 0;display:grid;gap:14px;text-align:left}
+  .unlock{background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.01));border:1px solid var(--line);border-radius:16px;padding:24px 28px;transition:border-color .2s}
+  .unlock:hover{border-color:rgba(224,33,138,.5)}
+  .unlock h3{font-size:18px;margin-bottom:6px}
+  .unlock p{color:var(--muted);font-size:15.5px}
+  @media(max-width:640px){.unlock{padding:20px 22px}}
+  .pro-band{background:var(--bg-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);text-align:center}
+  .enterprise{text-align:center}
+  .enterprise .cta-row{margin-top:30px;display:flex;justify-content:center}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="logo" href="index.html"><img class="logo-word" src="assets/fuchsia-wordmark-white.svg" alt="Fuchsia"></a>
+    <nav class="nav-links">
+      <a href="studio.html">Fuchsia Studio</a>
+      <a href="help.html">How it works</a>
+      <a href="pro.html">Pro</a>
+      <a href="support.html">Support</a>
+      <a href="privacy.html">Privacy</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="kicker">Fuchsia Studio Pro</div>
+    <h1>A studio you can program.</h1>
+    <p class="lede">Everything in Fuchsia Studio, plus two more ways to drive it. Connect the studio to the AI app you already use, or work it from the command line — script it, batch it, wire it into your pipeline. Same studio, same rules, three ways in.</p>
+    <div class="cta-row">
+      <span class="btn btn-soon">Coming soon</span>
+      <a class="btn btn-ghost" href="mailto:support@fuchsiaprojects.com?subject=Notify%20me%20about%20Fuchsia%20Studio%20Pro">Get launch updates</a>
+    </div>
+    <div class="price">Pricing to be announced</div>
+    <div class="avail">Direct from Fuchsia — no App Store required · Requires macOS 26</div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="kicker">Three ways in, one studio</div>
+    <h2 class="sec-h2">The app. Your AI. Your terminal.</h2>
+    <p class="sec-sub">Fuchsia Studio Pro opens the same studio to three ways of working — and underneath all three sits one project: the same tape, the same clips, the same running order, whichever way you come in. Assemble by hand in the morning, ask your assistant to find something in the afternoon, let a script run overnight — it's one piece of work you keep coming back to, not three copies that drift apart.</p>
+    <div class="features three-cols">
+      <div class="feat">
+        <span class="lead">In the app</span>
+        <h3>The full studio</h3>
+        <p>The complete Fuchsia Studio, exactly as it ships. Pro holds nothing back from the base app: it adds ways in, it doesn't take features out.</p>
+      </div>
+      <div class="feat">
+        <span class="lead">From your own AI · MCP</span>
+        <h3>Put your assistant to work</h3>
+        <p>Connect Studio to the AI assistant app you already use — whichever provider you prefer — and put it to work on your tape: find the moments, propose the cuts, answer “what's actually on this recording?” The grounding holds no matter who's asking — what's said about your tape is quoted verbatim from it, or refused.</p>
+      </div>
+      <div class="feat">
+        <span class="lead">From the command line · CLI</span>
+        <h3>Script it and batch it</h3>
+        <p>Script the parts of the work that repeat, and batch them to run unattended. Finish the same way: export a finished, loudness-targeted master — 24-bit WAV or AAC — with no app window open. Headless, repeatable, CI-friendly. If your tape came in at mixed sample rates, it masters transparently anyway.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="kicker">What that unlocks</div>
+    <h2 class="sec-h2">Stop doing by hand what a machine should do.</h2>
+    <p class="sec-sub">The point of a control surface isn't novelty — it's giving the repeatable work back to the machine so your hands are free for the story.</p>
+    <div class="unlocks">
+      <div class="unlock">
+        <h3>Batch the repetitive parts</h3>
+        <p>Queue the work that repeats — overnight or on a schedule — and let it run unattended while you're away from the desk.</p>
+      </div>
+      <div class="unlock">
+        <h3>Finish headless</h3>
+        <p>Render a finished, loudness-targeted master — 24-bit WAV or AAC — from a script or a CI job, no window open. Off-rate and mixed-rate tape masters transparently on the way out.</p>
+      </div>
+      <div class="unlock">
+        <h3>Build repeatable pipelines</h3>
+        <p>The same steps, every episode, every reporter, every time — scripted once, run forever.</p>
+      </div>
+      <div class="unlock">
+        <h3>Bring your own AI workflow</h3>
+        <p>You already live in your AI assistant; now your studio is something it can actually operate — on your key, under your rules, grounded in your tape.</p>
+      </div>
+      <div class="unlock">
+        <h3>Scale across the desk</h3>
+        <p>Per-seat licensing for the whole team.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="who pro-band">
+  <div class="wrap">
+    <div class="kicker">Still honest. Still yours.</div>
+    <h2 class="sec-h2">Automation doesn't mean handing over the wheel.</h2>
+    <p class="sec-sub">Everything that makes Studio trustworthy holds in Pro, whichever surface is doing the work. When the AI works, it works on your own key and your own account, sending only text — never your raw audio, and protected material never leaves your Mac at all. The grounding travels with the tape, not the interface: what's said about your recordings is quoted verbatim or refused, whether the question comes from the app, your assistant, or a script. And Pro adds a guarantee of its own — every automated change is attributed, so when a script or an assistant touches your program, the change carries its origin and you always know which hands did what.</p>
+    <blockquote>“You're still the author. You just have more hands now — and every one of them signs its work.”</blockquote>
+  </div>
+</section>
+
+<section class="enterprise">
+  <div class="wrap">
+    <div class="kicker">Enterprise</div>
+    <h2 class="sec-h2">Running a newsroom or a production shop?</h2>
+    <p class="sec-sub">Volume seats, invoicing, and a direct conversation about what your most sensitive tape needs — including where any model runs. Enterprise is handled personally.</p>
+    <div class="cta-row">
+      <a class="btn btn-ghost" href="mailto:support@fuchsiaprojects.com?subject=Fuchsia%20Studio%20Pro%20—%20Enterprise">Talk to us →</a>
+    </div>
+  </div>
+</section>
+
+<section class="closer">
+  <div class="wrap">
+    <h2>Give your studio an API.</h2>
+    <p class="sec-sub">The same craft, three ways in — and every guarantee intact.</p>
+    <div class="cta-row" style="margin-top:30px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
+      <span class="btn btn-soon">Coming soon</span>
+      <a class="btn btn-ghost" href="mailto:support@fuchsiaprojects.com?subject=Notify%20me%20about%20Fuchsia%20Studio%20Pro">Get launch updates</a>
+    </div>
+    <div class="price">Pricing to be announced · Sold directly by Fuchsia, not through the Mac App Store · Requires macOS 26</div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-inner">
+    <a class="logo" href="index.html"><img class="logo-word" src="assets/fuchsia-wordmark-white.svg" alt="Fuchsia"></a>
+    <div class="foot-links">
+      <a href="support.html">Support</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="mailto:support@fuchsiaprojects.com">Contact</a>
+    </div>
+    <span>© 2026 Fuchsia, LLC</span>
+  </div>
+</footer>
+
+</body>
+</html>

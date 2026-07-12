@@ -1,27 +1,25 @@
 <!DOCTYPE html>
 <!--
   ============================================================================
-  LANDING PAGE — Fuchsia Studio  (optional Apple "Marketing URL")
-  Drafted from repo docs (north-star.md, product-brief.md, ADR-0006, ADR-0002).
-  STATUS: pre-launch. Shipping v1.0, macOS-only, on-device by default, no account,
-  no analytics. Price $49 with a free trial (ship free-to-download + a $49
-  non-consumable "unlock" IAP — Apple's free-trial-for-non-subscription flow).
+  LANDING PAGE — Fuchsia Studio  (rebuild 2026-07-12)
+  Copy source: .showstore/fable-copy-narrative-pass-2026-07-12.md §1 (verified draft).
+  Honesty overrides applied: $129 one-time (no trial), honest sample-rate framing
+  (no settable master-rate claim), no AI-provider brand names, conditional egress
+  ("Nothing leaves your Mac until you connect an AI provider"), no voice synthesis.
   STILL TO DO before launch:
-   1. Real Mac App Store URL — the CTA is a "Coming soon" placeholder; swap in the
-      live link (and Apple's official badge) at launch.
-   2. Demo video — add it in the #demo section (file or embed; both shown, commented).
-   3. A poster image for the video frame.
-   4. Create support@fuchsiaprojects.com in Google Workspace (used across these pages).
+   1. Real Mac App Store URL — CTA is a "Coming soon" placeholder; swap in the live link.
+   2. Demo video — add it in #demo (options commented inline); add a poster image.
+   3. Section 10 USC/founder credit deliberately OMITTED pending Paul's phrasing.
   ============================================================================
 -->
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Fuchsia Studio — Find your own voice in your own tape</title>
-<meta name="description" content="Fuchsia Studio makes your archive of recorded tape searchable, then helps you assemble whole shows from it. On-device and private, for documentary and podcast producers." />
+<title>Fuchsia Studio — Edit the story, not the waveform</title>
+<meta name="description" content="Fuchsia Studio is a professional macOS studio for narrative audio. Build documentary and journalism from the transcript of your tape — read, search, and select the words that matter, on your Mac." />
 <meta property="og:title" content="Fuchsia Studio" />
-<meta property="og:description" content="Search everything you've recorded, land on the exact moment, and build the show from it. On-device and private." />
+<meta property="og:description" content="Edit the story, not the waveform. Professional narrative-audio production for documentary and journalism — build the piece from the transcript of your tape, on your Mac." />
 <meta property="og:type" content="website" />
 <link rel="icon" type="image/svg+xml" href="icon.svg" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -100,6 +98,12 @@
   .foot-links{display:flex;gap:20px}
   .foot-links a:hover{color:var(--ink)}
 </style>
+<style>
+  /* small additions — existing variables only */
+  .lede strong{color:var(--ink);font-weight:600}
+  .prose-2{text-align:center;color:var(--muted);font-size:18px;max-width:60ch;margin:18px auto 0}
+  .sec-cta{margin-top:32px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+</style>
 </head>
 <body>
 
@@ -108,6 +112,8 @@
     <a class="logo" href="index.html"><img class="logo-word" src="assets/fuchsia-wordmark-white.svg" alt="Fuchsia"></a>
     <nav class="nav-links">
       <a href="studio.html">Fuchsia Studio</a>
+      <a href="help.html">How it works</a>
+      <a href="pro.html">Pro</a>
       <a href="support.html">Support</a>
       <a href="privacy.html">Privacy</a>
     </nav>
@@ -117,14 +123,15 @@
 <section class="hero">
   <div class="wrap">
     <img class="studio-hero-logo" src="assets/fuchsia-studio-gradient.png" alt="Fuchsia Studio">
-    <h1>Find your own voice in your own tape.</h1>
-    <p class="lede">Fuchsia Studio makes everything you've ever recorded searchable — then helps you build whole shows from it. On your Mac. On your terms.</p>
+    <h1>Edit the story, not the waveform.</h1>
+    <p class="lede"><strong>Professional narrative-audio production for documentary and journalism.</strong> Fuchsia Studio lets you build the piece from the transcript of your tape — reading, searching, and selecting the words that matter — and shape them into a story. On your Mac.</p>
     <div class="cta-row">
       <!-- At launch: replace this span with <a class="btn" href="APP_STORE_URL"> or Apple's badge -->
       <span class="btn btn-soon">Coming soon to the Mac App Store</span>
-      <a class="btn btn-ghost" href="mailto:support@fuchsiaprojects.com?subject=Notify%20me%20about%20Fuchsia%20Studio">Get launch updates</a>
+      <a class="btn btn-ghost" href="#demo">See how it works &#8595;</a>
     </div>
-    <div class="price"><b>$49</b> at launch, with a <b>free trial</b> · Requires macOS 26+ (Apple silicon)</div>
+    <div class="avail"><em>A real Mac app — native windows, native feel — built for macOS 26.</em></div>
+    <div class="price"><b>$129</b>, one-time · Requires macOS 26 (Apple silicon)</div>
   </div>
 </section>
 
@@ -152,47 +159,86 @@
 
 <section>
   <div class="wrap">
-    <div class="kicker">What it does</div>
-    <h2 class="sec-h2">Your archive, finally askable.</h2>
-    <p class="sec-sub">Producers sit on hundreds of hours of recorded conversation — and the best moments are effectively lost in their own drives. Fuchsia Studio changes that.</p>
+    <div class="kicker">Work from the transcript</div>
+    <h2 class="sec-h2">Your story is in what people actually said.</h2>
+    <p class="sec-sub">Bring in hours of interview and field tape and Studio transcribes it and separates the speakers automatically, all on your Mac. Read the transcript, select the words that matter, and your selection becomes a clip. No more scrubbing a waveform hunting for the line you half-remember.</p>
+    <p class="prose-2">Turn on the optional AI reads and Studio will propose who's speaking — the way a careful producer would. It proposes a name only when someone actually says it on tape, plays you that verbatim moment, and waits for you to confirm. Names you've typed yourself are never overwritten.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="kicker">Find the moment, then find its echoes</div>
+    <h2 class="sec-h2">The line you remember — and the ones you don't.</h2>
+    <p class="sec-sub">Keyword search carries you across hours of tape in a keystroke. And when you've found a moment that matters, Studio goes further: select it, and the passages that echo it surface — even when they're said in entirely different words. Your subject circles back to the same regret twenty minutes later, in a different vocabulary; now you can see it. All of this happens on your Mac — no key, no account, no network call.</p>
+    <p class="prose-2">And when you want the themes named and the threads drawn out, that's the optional AI reads — run on your own key, with every claim they make quoting the real tape.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="kicker">The craft, end to end</div>
+    <h2 class="sec-h2">From raw tape to a broadcast-ready master.</h2>
+    <p class="sec-sub">Everything between reading the transcript and handing off the final file — on your Mac.</p>
     <div class="features">
       <div class="feat">
-        <h3>Search everything you've recorded</h3>
-        <p>Ask your archive in plain language and land on the exact spoken moment — segment-highlighted, quote-accurate, the real voice on the right words within a heartbeat.</p>
+        <h3>Shape it into a story</h3>
+        <p>Assemble your clips into a single running order and sculpt it, scene by scene. Studio keeps your whole piece in one clear shape, so you're always working on the story — not managing tracks. When a cut lands mid-word, it snaps clean, so you never lose a syllable.</p>
       </div>
       <div class="feat">
-        <h3>On-device and private</h3>
-        <p>Recording and transcription happen entirely on your Mac with Apple's on-device speech. Your audio never leaves the machine. Intimate material stays where it belongs.</p>
+        <h3>Read it every way you need</h3>
+        <p>One piece, three ways to read it. <em>Script view</em> reads the whole episode as one authored document. <em>Tape view</em> lays the source out as a typographic page — every voice and take, with the speakers named, and verbatim find with &#8984;F. <em>Reading view</em> is where the optional AI reads land, every claim one click from its audio.</p>
       </div>
       <div class="feat">
-        <h3>From search to assembly</h3>
-        <p>Pull found moments into word-accurate clips, shape a structure, draft narration, record your real takes, and watch the episode come together — the app is the edit surface.</p>
+        <h3>Repair without invention</h3>
+        <p>Some tape arrives wounded. <em>De-hum</em> notches out mains hum and its harmonics — 50 or 60 Hz — and <em>Declip</em> rebuilds clipped peaks. Both are deterministic: they subtract what shouldn't be there, and never invent audio that was never recorded.</p>
       </div>
       <div class="feat">
-        <h3>An intention multiplier, not an author</h3>
-        <p>AI woven through the work amplifies <em>your</em> intent — it scaffolds and suggests, never imposes. Any synthetic voice is your own (Personal Voice), only ever a preview your real performance replaces. It never clones a presenter or a subject.</p>
+        <h3>Finish it, then hand it off</h3>
+        <p>Bring your piece to broadcast loudness with a finishing stage built for the spoken word, then export one loudness-targeted master — 24-bit WAV or AAC — that drops straight into Logic, Ableton, Audition, or wherever you finish. Bring it all in at any sample rate. A source already at the master rate passes through untouched — byte for byte; anything else is converted with mastering-grade resampling. Studio masters to the broadcast-standard 48 kHz.</p>
       </div>
     </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="kicker">An honest collaborator</div>
+    <h2 class="sec-h2">AI that never puts words in anyone's mouth.</h2>
+    <p class="sec-sub">Meet the Dramaturg — a grounded collaborator that finds moments, proposes cuts, and answers "what is this section really about?" It works only from what's actually on your tape: it quotes verbatim, or it refuses. It never invents a line, never misattributes a speaker, and never changes your story without your say-so. It's opt-in, and it runs on your own AI provider and your own account.</p>
+    <p class="prose-2">If you've watched other tools automate the judgement out of the work, this one is built the other way up: the Dramaturg proposes, and you approve — or you don't. You stay the author. The AI is the reach, never the authority.</p>
   </div>
 </section>
 
 <section class="who">
   <div class="wrap">
-    <div class="kicker">Who it's for</div>
-    <h2 class="sec-h2">Built for documentary and podcast producers.</h2>
-    <p class="sec-sub">From intimate, interview-driven pieces to complex, multi-speaker, multi-episode work — where your material is your craft, and your trust in it is everything.</p>
-    <blockquote>“A helper for people to find their own voices.”</blockquote>
+    <div class="kicker">Your sources stay yours</div>
+    <h2 class="sec-h2">Source protection, by default.</h2>
+    <p class="sec-sub">Nothing leaves your Mac until you connect an AI provider. Importing, transcribing, separating speakers, searching, editing, assembling, finishing — the whole craft runs on your machine, no account required. Even the index behind search is built on your Mac; your tape never visits a cloud to become findable.</p>
+    <p class="prose-2">When you do connect the optional AI — from any of the providers supported at launch — it runs through <em>your own</em> key on <em>your own</em> account, and Studio sends only text, never your raw audio. Connecting doesn't sweep up the archive you already have: it's the new tape you add — your own or licensed — that's read automatically, so the answers stay grounded. You can skip any import, or pause a whole library. And material that isn't yours to send — protected or inherited tape — is blocked from ever leaving the device.</p>
+    <blockquote>For sensitive material, that's not a feature. It's the whole point.</blockquote>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="kicker">Studio Pro</div>
+    <h2 class="sec-h2">A studio you can program.</h2>
+    <p class="sec-sub">Everything in Studio, plus a control surface for professionals: drive the same studio from your own AI app, or straight from the command line — scriptable, batchable, headless. Render a finished, loudness-targeted master without an app window open. And every automated change is attributed, so you always know which hands did what.</p>
+    <div class="sec-cta">
+      <a class="btn btn-ghost" href="pro.html">Learn about Studio Pro &#8594;</a>
+    </div>
   </div>
 </section>
 
 <section class="closer">
   <div class="wrap">
-    <h2>Make your tape work as hard as you did.</h2>
-    <div class="cta-row" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
+    <h2>Craft transcripts into stories.</h2>
+    <div class="sec-cta">
       <span class="btn btn-soon">Coming soon to the Mac App Store</span>
-      <a class="btn btn-ghost" href="mailto:support@fuchsiaprojects.com?subject=Fuchsia%20Studio">Get in touch</a>
+      <a class="btn btn-ghost" href="pro.html">Studio Pro &#8594;</a>
     </div>
-    <div class="price"><b>$49</b> at launch · <b>free trial</b> · macOS 26+</div>
+    <div class="price"><b>$129</b>, one-time · Requires macOS 26 (Apple silicon)</div>
   </div>
 </section>
 

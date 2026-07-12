@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>How Fuchsia Studio works — the walkthrough &amp; FAQ</title>
+<meta name="description" content="How Fuchsia Studio works, step by step — from a folder of raw interviews to one broadcast-ready master — plus honest answers on search, privacy, the AI reads, and finishing. On-device and private, for documentary and podcast producers." />
+<meta property="og:title" content="How Fuchsia Studio works" />
+<meta property="og:description" content="The whole path, from a folder of tape to one master — and plain answers on search, privacy, the AI reads, Studio Pro, and export." />
+<meta property="og:type" content="website" />
+<link rel="icon" type="image/svg+xml" href="icon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#0b0a0d;--bg-2:#131119;--ink:#f4f1f6;--muted:#a39daf;
+    --line:rgba(255,255,255,.10);--fuchsia:#e0218a;--fuchsia-soft:#ff5fb0;--max:1080px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  h1,h2,h3{font-family:'Fraunces',Georgia,serif;font-weight:500;line-height:1.1;letter-spacing:-.01em}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 28px}
+  header.nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);background:rgba(11,10,13,.72);border-bottom:1px solid var(--line)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:66px}
+  .logo{display:flex;align-items:center;gap:10px;font-family:'Fraunces',serif;font-size:20px;font-weight:600}
+  .logo-word{height:36px;width:auto;display:block}
+  .studio-hero-logo{width:min(440px,76vw);height:auto;display:block;margin:0 auto 30px;filter:drop-shadow(0 14px 44px rgba(224,33,138,.4))}
+  .fmark{width:27px;height:27px;border-radius:7px;flex:none;background:radial-gradient(125% 130% at 50% 12%,#ec5fb0,#c2107a 52%,#88004e);box-shadow:0 2px 10px rgba(224,33,138,.35),inset 0 1px 0 rgba(255,255,255,.25);display:grid;place-items:center}
+  .fmark i{font-family:'Fraunces',serif;font-style:italic;font-weight:500;color:#fff;font-size:18px;line-height:1;transform:translateY(-1px)}
+  .nav-links{display:flex;gap:26px;font-size:14.5px;color:var(--muted)}
+  .nav-links a:hover{color:var(--ink)}
+  @media(max-width:640px){.nav-links{gap:16px;font-size:13.5px}}
+  .btn{display:inline-flex;align-items:center;gap:9px;background:var(--fuchsia);color:#fff;padding:13px 24px;border-radius:999px;font-size:15px;font-weight:500;transition:transform .15s,box-shadow .15s}
+  .btn:hover{transform:translateY(-1px);box-shadow:0 8px 28px rgba(224,33,138,.4)}
+  .btn-ghost{background:transparent;border:1px solid var(--line);color:var(--ink)}
+
+  /* hero */
+  .hero{position:relative;text-align:center;padding:96px 0 80px;overflow:hidden}
+  .hero::before{content:"";position:absolute;top:-34%;left:50%;transform:translateX(-50%);width:820px;height:820px;border-radius:50%;background:radial-gradient(circle,rgba(224,33,138,.26),rgba(224,33,138,0) 62%);filter:blur(18px);z-index:0}
+  .hero .wrap{position:relative;z-index:1}
+  .appicon{width:104px;height:104px;border-radius:24px;margin:0 auto 26px;background:radial-gradient(125% 130% at 50% 12%,#ec5fb0,#c2107a 52%,#88004e);box-shadow:0 18px 50px rgba(224,33,138,.4),inset 0 1px 0 rgba(255,255,255,.3);display:grid;place-items:center}
+  .appicon i{font-family:'Fraunces',serif;font-style:italic;font-weight:500;color:#fff;font-size:68px;line-height:1;transform:translateY(-2px)}
+  .hero h1{font-size:clamp(38px,6vw,68px);max-width:15ch;margin:0 auto}
+  .hero p.lede{margin:24px auto 0;font-size:clamp(17px,2.1vw,21px);color:var(--muted);max-width:54ch}
+  .hero .cta-row{margin-top:36px;display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
+  .hero .avail{margin-top:16px;font-size:13.5px;color:var(--muted)}
+
+  .btn-soon{background:rgba(255,255,255,.07);color:var(--muted);border:1px solid var(--line);cursor:default}
+  .btn-soon:hover{transform:none;box-shadow:none}
+  .price{margin-top:18px;font-size:14.5px;color:var(--muted)}
+  .price b{color:var(--ink);font-weight:600}
+
+  /* demo video */
+  #demo{padding-top:8px}
+  .videoframe{position:relative;max-width:940px;margin:0 auto;aspect-ratio:16/9;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:linear-gradient(160deg,#1a1320,#0d0b11);box-shadow:0 30px 80px rgba(0,0,0,.5)}
+  .videoframe::after{content:"";position:absolute;inset:0;background:radial-gradient(120% 120% at 50% 0%,rgba(224,33,138,.16),transparent 60%);pointer-events:none}
+  .videoframe video,.videoframe iframe{display:block;width:100%;height:100%;border:0;position:relative;z-index:1}
+  .videoph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;z-index:2}
+  .videoph .play{width:74px;height:74px;border-radius:50%;background:var(--fuchsia);color:#fff;display:grid;place-items:center;font-size:24px;padding-left:5px;box-shadow:0 12px 34px rgba(224,33,138,.5)}
+  .videoph .vlabel{color:var(--muted);font-size:13px;letter-spacing:.04em}
+
+  section{padding:84px 0}
+  .kicker{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--fuchsia-soft);margin-bottom:16px;text-align:center}
+  .sec-h2{font-size:clamp(28px,4vw,42px);text-align:center;max-width:22ch;margin:0 auto 14px}
+  .sec-sub{text-align:center;color:var(--muted);font-size:18px;max-width:60ch;margin:0 auto}
+
+  .features{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:54px}
+  .feat{background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.01));border:1px solid var(--line);border-radius:18px;padding:32px;transition:border-color .2s,transform .2s}
+  .feat:hover{border-color:rgba(224,33,138,.5);transform:translateY(-3px)}
+  .feat h3{font-size:21px;margin-bottom:10px}
+  .feat p{color:var(--muted);font-size:15.5px}
+  @media(max-width:760px){.features{grid-template-columns:1fr}}
+
+  .who{background:var(--bg-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);text-align:center}
+  .who blockquote{font-family:'Fraunces',serif;font-style:italic;font-size:clamp(22px,3.4vw,32px);line-height:1.4;max-width:24ch;margin:18px auto 0;color:var(--ink)}
+
+  .closer{text-align:center;padding:104px 0}
+  .closer h2{font-size:clamp(30px,4.6vw,48px);max-width:18ch;margin:0 auto 22px}
+
+  footer{border-top:1px solid var(--line);padding:40px 0;color:var(--muted);font-size:14px}
+  .foot-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+  .foot-links{display:flex;gap:20px}
+  .foot-links a:hover{color:var(--ink)}
+</style>
+<style>
+  /* how-it-works page — numbered steps + FAQ accordion (uses existing palette vars) */
+  .steps{max-width:780px;margin:56px auto 0;display:flex;flex-direction:column;gap:14px}
+  .step{display:flex;gap:22px;align-items:flex-start;background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.01));border:1px solid var(--line);border-radius:18px;padding:26px 28px;transition:border-color .2s}
+  .step:hover{border-color:rgba(224,33,138,.4)}
+  .step-num{flex:none;width:42px;height:42px;border-radius:12px;display:grid;place-items:center;font-family:'Fraunces',serif;font-weight:600;font-size:19px;color:#fff;background:radial-gradient(125% 130% at 50% 12%,#ec5fb0,#c2107a 52%,#88004e);box-shadow:0 4px 14px rgba(224,33,138,.35)}
+  .step-body h3{font-size:19px;margin-bottom:8px}
+  .step-body p{color:var(--muted);font-size:15.5px}
+  .step-body p + p{margin-top:12px}
+  .steps-outro{max-width:660px;margin:38px auto 0;text-align:center;color:var(--muted);font-size:16px;line-height:1.65}
+  @media(max-width:560px){.step{padding:22px;gap:16px}.step-num{width:38px;height:38px;font-size:17px}}
+
+  /* FAQ */
+  .faq-cat{max-width:780px;margin:0 auto}
+  .faq-cat + .faq-cat{margin-top:66px}
+  .cat-h{font-size:clamp(23px,3vw,30px);text-align:center;margin:0 auto 12px;max-width:26ch}
+  .cat-sub{text-align:center;color:var(--muted);font-size:16px;max-width:62ch;margin:0 auto 26px;line-height:1.6}
+  .faq-list{border-top:1px solid var(--line)}
+  details.faq{border-bottom:1px solid var(--line)}
+  details.faq summary{list-style:none;cursor:pointer;padding:22px 46px 22px 4px;position:relative;font-family:'Fraunces',serif;font-size:19px;font-weight:500;color:var(--ink);line-height:1.35}
+  details.faq summary::-webkit-details-marker{display:none}
+  details.faq summary::after{content:"+";position:absolute;right:8px;top:19px;font-family:'Inter',sans-serif;font-size:24px;font-weight:400;line-height:1;color:var(--fuchsia-soft);transition:opacity .2s}
+  details.faq[open] summary::after{content:"\2013"}
+  details.faq summary:hover{color:var(--fuchsia-soft)}
+  .faq-a{padding:0 46px 26px 4px;color:var(--muted);font-size:15.5px;line-height:1.7}
+  .faq-a p + p{margin-top:13px}
+  .pro-more{max-width:780px;margin:30px auto 0;text-align:center}
+  @media(max-width:560px){details.faq summary{font-size:17.5px;padding-right:38px}.faq-a{padding-right:8px}}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="logo" href="index.html"><img class="logo-word" src="assets/fuchsia-wordmark-white.svg" alt="Fuchsia"></a>
+    <nav class="nav-links">
+      <a href="studio.html">Fuchsia Studio</a>
+      <a href="help.html">How it works</a>
+      <a href="pro.html">Pro</a>
+      <a href="support.html">Support</a>
+      <a href="privacy.html">Privacy</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="kicker">How it works</div>
+    <h1>How Fuchsia Studio works.</h1>
+    <p class="lede">Here&rsquo;s the whole path, from a folder of raw interviews to a broadcast-ready master. It&rsquo;s shorter than you&rsquo;d think, and almost all of it happens in the transcript — you work from what people actually said.</p>
+    <div class="cta-row">
+      <span class="btn btn-soon">Coming soon to the Mac App Store</span>
+      <a class="btn btn-ghost" href="#faq">Jump to the FAQ</a>
+    </div>
+  </div>
+</section>
+
+<section id="walkthrough">
+  <div class="wrap">
+    <div class="kicker">The walkthrough</div>
+    <h2 class="sec-h2">From a folder of tape to one master.</h2>
+    <p class="sec-sub">Ten steps for the craft, plus one optional step for people who script their work. Almost all of it lives in the transcript.</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h3>Install and open — no account</h3>
+          <p>Download Fuchsia Studio from the Mac App Store and open it. That&rsquo;s the whole setup: no sign-up, no login, no cloud project to create. You land in a native Mac document window and open an episode — or start one. Studio is $129, one time; it runs on macOS 26 on an Apple silicon Mac.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h3>Add your tape — at any sample rate</h3>
+          <p>Drag in your interviews and field recordings — hours of them, at whatever sample rates your sessions produced. Studio transcribes everything and separates the speakers, and both jobs run entirely on your Mac: transcription uses Apple&rsquo;s on-device speech engine, and speaker separation happens locally too. Your audio doesn&rsquo;t go anywhere to be understood.</p>
+          <p>Speakers arrive as unnamed voices — Speaker 1, Speaker 2 — and you can rename them as you recognize who&rsquo;s who. (If you later opt in to the AI features, Studio can propose names — but only when someone actually says the name on tape. More on that in step 8.)</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h3>Read the tape, then search it</h3>
+          <p>Open Tape view (&#8984;3) and your source lays out as a readable page — the interview as text, verbatim, with every word still anchored to its moment in the audio. Press &#8984;F and type a keyword to land on a half-remembered line across hours of material.</p>
+          <p>And when a moment strikes you, select it: Studio surfaces the passages elsewhere in your tape that echo it, even when they&rsquo;re worded differently. Both ways of finding things — the keyword search and the related moments — run on your Mac, with no key, no account, and no network call. To be precise about what each does: the search box finds the words people said; the echoes start from a moment you select, not from a typed theme.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <h3>Select the words — that&rsquo;s a clip</h3>
+          <p>This is the gesture the whole app is built around. Drag across the words that matter in the transcript, and your selection lifts into a clip. You build the piece from what people said, instead of scrubbing a waveform hunting for a line you half-remember.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-body">
+          <h3>Shape a running order</h3>
+          <p>Switch to Assemble (&#8984;1) and put your clips in order. This is your piece as structure — one running order you sculpt scene by scene, not a multitrack timeline. When a cut lands mid-word, it snaps clean, so you never lose a syllable. Whenever you want to check a clip against its source, Show in Tape (&#8984;J) jumps straight to its place in the original interview. And to read the whole episode as one continuous document, there&rsquo;s Script view (&#8984;2).</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">6</div>
+        <div class="step-body">
+          <h3>Work a clip like tape</h3>
+          <p>Open any clip to refine it. Scrub under the loupe with varispeed tape-rock — it behaves like rocking reels on a deck. Trim to the word. Cuts snap to the natural silences in the speech, and you can override the snap whenever your ear disagrees.</p>
+          <p>Where a join needs a breath, add authored air: a beat of quiet that belongs to the story. Air is a stored, visible value on the seam — you can always see it, adjust it, or clear it. It&rsquo;s never a hidden default.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">7</div>
+        <div class="step-body">
+          <h3>Record narration where it plays</h3>
+          <p>Write your narration at the exact point in the piece where it will play, and record takes right there. Every take becomes tape — transcribed like the rest of your material, so your own voice is as searchable and cuttable as your interviews.</p>
+          <p>One thing Studio deliberately does not do: make a voice. There&rsquo;s no synthesis, no cloning, no machine narration. Narration is always your own recorded performance, through your own microphone.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">8</div>
+        <div class="step-body">
+          <h3>Optional: connect an AI provider</h3>
+          <p>Everything above runs with no AI at all. If you want it, connect your own AI provider — your key, your account — and Studio adds the reads: the Dramaturg, a grounded collaborator that finds moments, proposes cuts, and answers &ldquo;what is this section really about?&rdquo;; interpretations of your material that land in Reading view (&#8984;4); and those speaker-name proposals — a name is suggested only when someone says it on tape, the moment plays for you, and you confirm. Names you&rsquo;ve typed yourself are never overwritten.</p>
+          <p>The honest shape of this: it&rsquo;s opt-in, it runs on your own provider account rather than on your Mac, and Studio sends only text — never your raw audio. Connecting doesn&rsquo;t sweep your existing archive; it&rsquo;s the new tape you add — your own or licensed — that gets read automatically, and you can skip any single import or pause a whole library. Material marked protected or inherited is blocked from ever leaving your machine. And in every case the AI proposes while you approve: it quotes the tape verbatim or it refuses — it never invents a line, never misattributes a speaker, and never drafts your narration.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">9</div>
+        <div class="step-body">
+          <h3>Repair wounded tape</h3>
+          <p>Real-world tape gets hurt, so Studio ships two repairs, both deterministic. De-hum notches out mains hum and its harmonics (50 or 60 Hz). Declip rebuilds peaks that were clipped at recording. Each one subtracts what shouldn&rsquo;t be there — neither ever invents audio that wasn&rsquo;t recorded. Like the rest of the craft, they run on your Mac.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">10</div>
+        <div class="step-body">
+          <h3>Finish and export one master</h3>
+          <p>When the piece is cut, bring it to broadcast loudness with a finishing stage built for the spoken word, then export a single loudness-targeted master — 24-bit WAV or AAC — that drops cleanly into Logic, Ableton, Audition, or wherever your delivery lives. Sample rate takes care of itself: bring it all in at any rate, and a source already at the master rate passes through untouched — byte for byte; anything else is converted with mastering-grade resampling. Studio masters to the broadcast-standard 48&nbsp;kHz.</p>
+          <p>To be straight about scope: v1.0 exports that one mastered file. Stems, session export, and AAF/OMF interchange are on the roadmap, not in the app today.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">11</div>
+        <div class="step-body">
+          <h3>Optional: drive it headless with Studio Pro</h3>
+          <p>If your work is pipelines, Studio Pro adds a command line and an MCP connection, so you can drive the same studio from your own AI assistant: batch a week of tape overnight, then render a finished, loudness-targeted master with no app window open. Every automated change is attributed, so you can always see exactly what a script or an assistant did to your program.</p>
+          <p>Pro is a separate subscription, bought direct from Fuchsia rather than the App Store — and nothing in the base app is locked behind it. Pro adds automation; the whole craft above is yours for the one-time price.</p>
+        </div>
+      </div>
+    </div>
+
+    <p class="steps-outro">That&rsquo;s the path: tape in, read it, select the words, shape the order, give the seams air, speak your narration, finish to loudness, and hand one master to the world. The core craft — import to master — happens on your own machine, and you stay the author of every cut.</p>
+  </div>
+</section>
+
+<section id="faq" class="who">
+  <div class="wrap">
+    <div class="kicker">Frequently asked questions</div>
+    <h2 class="sec-h2">Answers, plainly.</h2>
+    <p class="sec-sub">Present tense means it ships today. Anything on the roadmap, we say so.</p>
+  </div>
+
+  <div class="wrap" style="margin-top:56px">
+
+    <!-- B -->
+    <div class="faq-cat">
+      <h2 class="cat-h">What Studio can and can&rsquo;t do</h2>
+      <p class="cat-sub">Plain answers about the edges — what&rsquo;s in the app today, and what isn&rsquo;t.</p>
+      <div class="faq-list">
+        <details class="faq">
+          <summary>How does search work in Studio?</summary>
+          <div class="faq-a">
+            <p>Studio gives you two ways to find things, and it&rsquo;s worth being exact about what each one does. The search box is keyword search: press &#8984;F, type a word or phrase, and Studio finds where it was actually said — verbatim, across hours of tape. Related moments is the second path: select a passage that matters and Studio surfaces the places in your tape that echo it, even when the words are different. Both run entirely on your Mac — no key, no account, no network connection.</p>
+            <p>What Studio doesn&rsquo;t have is a box where you type a theme — &ldquo;grief&rdquo;, &ldquo;leaving home&rdquo; — and get back the concept. Finding by idea starts from a moment you select, not from free text. And naming the themes and through-lines in your tape is the job of the optional AI reads, which run on your own provider account once you choose to connect one.</p>
+          </div>
+        </details>
+        <details class="faq">
+          <summary>Does it identify who&rsquo;s speaking?</summary>
+          <div class="faq-a">
+            <p>It separates them; it doesn&rsquo;t recognize them. When you add tape, Studio automatically tells the voices apart — that happens on your Mac, no account — and each speaker arrives unnamed: Speaker 1, Speaker 2, and so on. You can name a voice yourself at any point, and a name you type is never overwritten.</p>
+            <p>If you&rsquo;ve connected an AI provider (optional, on your own key), Studio can also propose a name — but only when someone actually says it on tape. The proposal arrives with the moment attached: you play it, hear the evidence, and confirm. No confirmation, no name.</p>
+          </div>
+        </details>
+        <details class="faq">
+          <summary>Can it create or clone a voice?</summary>
+          <div class="faq-a">
+            <p>No. There&rsquo;s no voice synthesis in Studio — nothing that generates, imitates, or clones a voice. Narration is your own performance: you write it at the point in the piece where it plays, record takes right there through your microphone, and every take becomes tape, transcribed like the rest of your material. What your listeners hear is what you recorded.</p>
+          </div>
+        </details>
+        <details class="faq">
+          <summary>Does the AI write or decide for me?</summary>
+          <div class="faq-a">
+            <p>No. It proposes; you decide. And it&rsquo;s off until you turn it on — the AI features are opt-in, connected through your own provider account, and Studio sends them text only, never your audio.</p>
+            <p>Once connected, the Dramaturg behaves like a well-prepared collaborator: it finds moments, proposes cuts, and answers questions like &ldquo;what is this section really about?&rdquo; When it speaks about your tape, it quotes it verbatim — or it refuses. It doesn&rsquo;t draft your narration, invent a line, or put words in the wrong mouth. And nothing it proposes changes your story until you approve it. You stay the author.</p>
+          </div>
+        </details>
+        <details class="faq">
+          <summary>Can I export a session, stems, or an AAF?</summary>
+          <div class="faq-a">
+            <p>Not in v1.0. Studio exports one finished master — a loudness-targeted, 24-bit WAV or AAC — from a finishing stage built for the spoken word. That file drops cleanly into Logic, Ableton, Audition, or wherever your work goes next, and mixed-rate sessions master transparently.</p>
+            <p>Session interchange — stems, AAF/OMF, the parts rather than the whole — is on the roadmap. If your workflow depends on handing a session to a mix engineer, Studio isn&rsquo;t there yet: today it hands over the finished piece.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <!-- D -->
+    <div class="faq-cat">
+      <h2 class="cat-h">Search &amp; finding moments</h2>
+      <p class="cat-sub">Two ways to find things — and both run on your Mac, with the network off.</p>
+      <div class="faq-list">
+        <details class="faq">
+          <summary>Does search need an AI key, an account, or a network connection?</summary>
+          <div class="faq-a">
+            <p>No — none of the three. Both the keyword search box and the related-moments feature run on an index built on your Mac, and neither makes a network call. Search works with the network off.</p>
+          </div>
+        </details>
+        <details class="faq">
+          <summary>Can Studio name the themes and through-lines in my tape?</summary>
+          <div class="faq-a">
+            <p>Not from search itself. Search finds words (keyword) and echoes a moment you select (related moments); it doesn&rsquo;t hand you a named theme. Naming the themes and through-lines is interpretive work, and that&rsquo;s the job of the optional AI reads — which run on your own provider account, only once you choose to connect one.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <!-- C -->
+    <div class="faq-cat">
+      <h2 class="cat-h">Your tape &amp; your privacy</h2>
+      <p class="cat-sub">The category we expect you to read most closely, so the answers are scoped precisely. The short version: the craft runs on your Mac, your audio never leaves it, and the AI is something you turn on — on your own account — not something that happens to you.</p>
+      <div class="faq-list">
+        <details class="faq">
+          <summary>Does my audio ever leave my Mac?</summary>
+          <div class="faq-a">
+            <p>No. Your audio stays on your Mac — through transcription, speaker separation, search, editing, assembly, and finishing. That holds even if you later connect an AI provider: the Dramaturg and the reads work from text, and Studio sends text only, never your recordings.</p>
+          </div>
+        </details>
+        <details class="faq">
+          <summary>Exactly what runs on my machine, and what doesn&rsquo;t?</summary>
+          <div class="faq-a">
+            <p>On your Mac, with no account and no network connection: import at any sample rate, transcription (Apple&rsquo;s on-device speech engine), speaker separation, both search paths and the index behind them, clip editing and assembly, narration recording, the two tape repairs (de-hum and declip), and finishing to a loudness-targeted master.</p>
+            <p>Not on your Mac: the optional AI reads — the Dramaturg, the interpretations that land in Reading view (&#8984;4), and speaker-name proposals. Those run on a hosted AI provider you connect yourself, on your own key and account, and they receive text only. If you never connect a provider, that whole layer simply stays off.</p>
+          </div>
+        </details>
+        <details class="faq">
+          <summary>Do I have to upload my tape to a cloud to transcribe, search, or edit it?</summary>
+          <div class="faq-a">
+            <p>No. There is no upload, no cloud project, and no account. Studio transcribes, separates speakers, indexes, and edits entirely on your Mac — you can do the whole craft with the network off.</p>
+          </div>
+        </details>
+        <details class="faq">
+          <summary>When I connect an AI provider, what actually gets sent — my audio, or just text?</summary>
+          <div class="faq-a">
+            <p>Just text. Everything in the AI layer — the Dramaturg, the interpretations in Reading view, the speaker-name proposals — works from text drawn from your tape, so what leaves your Mac is text, sent to the provider you connected under your own account. Your audio files are never sent.</p>
+          </div>
+        </details>
+        <details class="faq">
+          <summary>Whose AI account and API key are used — mine or Fuchsia&rsquo;s?</summary>
+          <div class="faq-a">
+            <p>Yours. AI is opt-in, and turning it on means connecting your own provider account with your own key. There is no Fuchsia account behind it — your agreement is with the provider you chose, and any AI usage costs are between you and them.</p>
+          </div>
+        </details>
+        <details class="faq">
+          <summary>If I turn on AI, does Studio upload my entire existing archive?</summary>
+          <div class="faq-a">
+            <p>No. Connecting a provider doesn&rsquo;t sweep the tape you already have — nothing from your existing archive is sent on its own. What gets read automatically is new tape you add from then on — your own or licensed material — and even there you stay in charge: you can skip the read for any individual import, and pause reading for an entire library.</p>
+            <p>One thing to know precisely: if you later ask the Dramaturg about older material, or open a read on it, the text needed to answer is sent at that moment — because you asked, not because Studio swept. Protected and inherited tape stays blocked either way.</p>
+          </div>
+        </details>
+        <details class="faq">
+          <summary>Can I keep specific recordings from ever being sent to the AI?</summary>
+          <div class="faq-a">
+            <p>Yes. If you never connect a provider, nothing is sent at all. If you do connect one, the automatic read is yours to control: skip it for any individual import, or pause it for a whole library. Beyond the automatic read, text is sent only when you yourself ask the Dramaturg or open a read on material — those requests happen when you make them, not on a schedule. And for the tape that needs the hardest guarantee, protected and inherited material is blocked from ever leaving the device, whatever is connected.</p>
+          </div>
+        </details>
+        <details class="faq">
+          <summary>What happens to material I don&rsquo;t have the right to share — inherited or protected tape?</summary>
+          <div class="faq-a">
+            <p>It never leaves your Mac. Protected and inherited material is blocked from egress: even with an AI provider connected and auto-read on — and even if you ask the Dramaturg about it — Studio will not send it.</p>
+          </div>
+        </details>
+        <details class="faq">
+          <summary>Is the search index built on my machine or in a cloud?</summary>
+          <div class="faq-a">
+            <p>On your machine. Both retrieval paths — keyword search across your tape, and the related moments that echo a passage you select — run against an index built on your Mac. No key, no account, no network call, for the index or the searches.</p>
+          </div>
+        </details>
+        <details class="faq">
+          <summary>I do investigative work with confidential sources — is this safe for that?</summary>
+          <div class="faq-a">
+            <p>We designed the boundary to be exact so you can make that judgment with full knowledge. Out of the box, Studio makes no network calls for the craft and asks for no account: your tape, transcripts, search index, and edits live on your Mac, and your audio never leaves in any configuration.</p>
+            <p>If you choose to connect an AI provider, the AI layer works by sending text — never audio — to that provider, on your key, under your agreement with them. That text moves on two paths, and you should know both. First, new tape you add (your own or licensed) is read automatically, and you can skip any import or pause a whole library. Second, when you yourself ask the Dramaturg a question or open a read — including on tape that was in your archive before you connected — the text needed to answer is sent at that moment. On every path, protected or inherited material is blocked from leaving at all.</p>
+            <p>Whether a given provider is appropriate for a given source is your call, as it should be. Studio&rsquo;s job is to make sure you always know exactly what would leave, and to keep everything else on your machine.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <!-- E -->
+    <div class="faq-cat">
+      <h2 class="cat-h">The AI reads &amp; the Dramaturg</h2>
+      <p class="cat-sub">Optional, opt-in, and grounded in your tape — here&rsquo;s exactly how the reads behave.</p>
+      <div class="faq-list">
+        <details class="faq">
+          <summary>What are the AI reads, and what is the Dramaturg?</summary>
+          <div class="faq-a">
+            <p>They&rsquo;re Studio&rsquo;s optional layer of interpretation. Connect your own AI provider and Studio can read new tape as you add it, landing its interpretations in Reading view (&#8984;4) as material you can draw on — and it gives you the Dramaturg, a collaborator you can ask to find moments in your source, propose cuts, and answer &ldquo;what is this section really about?&rdquo; The role is deliberately bounded: the AI reads and proposes. It never writes your story, and it never changes anything without you.</p>
+          </div>
+        </details>
+        <details class="faq">
+          <summary>Do I need them to use Studio?</summary>
+          <div class="faq-a">
+            <p>No. Studio is a complete tool without them. Importing, transcription, speaker separation, search, editing, assembly, and finishing all run on your Mac with no account, no key, and no network. If you never connect an AI provider, you&rsquo;re not using a lesser version of the app — you&rsquo;re using the whole craft.</p>
+          </div>
+        </details>
+        <details class="faq">
+          <summary>What can the Dramaturg actually do?</summary>
+          <div class="faq-a">
+            <p>Three things: find moments in your tape, propose cuts, and answer questions about what your material is saying. It works from your transcripts, and it holds to one working rule — when it refers to your material, it quotes the tape verbatim, or it refuses. It proposes; it never decides. Nothing it suggests touches your program until you approve it.</p>
+          </div>
+        </details>
+        <details class="faq">
+          <summary>Does the AI make edits on its own, or do I approve every change?</summary>
+          <div class="faq-a">
+            <p>You approve every change. Anything the Dramaturg proposes — a cut, a placement — arrives as a proposal showing you plainly what it refers to, and nothing moves until you say yes. You stay the author; the AI is a reader in the room.</p>
+          </div>
+        </details>
+        <details class="faq">
+          <summary>Will the AI ever put words in my subject&rsquo;s mouth, invent a quote, or misattribute a speaker?</summary>
+          <div class="faq-a">
+            <p>No. This is the Dramaturg&rsquo;s working rule, not a best effort: it quotes the tape verbatim or it refuses. It never invents a line, never drafts words for anyone, and never attributes speech to the wrong voice. In documentary work a misattributed quote is a serious failure, and Studio is built as if that&rsquo;s true.</p>
+          </div>
+        </details>
+        <details class="faq">
+          <summary>How are the AI&rsquo;s answers about my tape grounded — can I trust them?</summary>
+          <div class="faq-a">
+            <p>Every answer and every proposal is tied back to the actual material it cites, so you check it against the tape itself — not against the AI&rsquo;s say-so. And honestly: it can still point at the wrong moment. That&rsquo;s exactly why nothing it proposes takes effect until you&rsquo;ve seen what it resolved to and approved it. Trust here comes from the method, not from a promise that the model is infallible.</p>
+          </div>
+        </details>
+        <details class="faq">
+          <summary>Does the AI write or draft my narration for me?</summary>
+          <div class="faq-a">
+            <p>No. The Dramaturg finds, proposes, and answers questions — it doesn&rsquo;t draft. Narration in Studio is your own work: you write it at the point in the piece where it plays and record it in your own voice, and every take becomes tape like the rest of your material.</p>
+          </div>
+        </details>
+        <details class="faq">
+          <summary>How does the speaker-name proposal work, and can it get a name wrong?</summary>
+          <div class="faq-a">
+            <p>Speakers arrive unnamed — Speaker 1, Speaker 2 — and stay that way unless you name them or opt in to the reads. With AI connected, Studio proposes a name only when someone actually says it on tape: the moment plays, and you confirm before the name is applied. Could a proposal be wrong? Yes — tape is messy, and that&rsquo;s exactly why the moment plays and you decide. A name you&rsquo;ve typed yourself is never overwritten.</p>
+          </div>
+        </details>
+        <details class="faq">
+          <summary>Is the AI on by default, or do I have to turn it on?</summary>
+          <div class="faq-a">
+            <p>It&rsquo;s off. Out of the box Studio has no AI connected and sends nothing anywhere — there&rsquo;s nothing to opt out of. The reads switch on only when you connect your own provider account. From then on, new tape you add — your own or licensed material — is read automatically so the interpretations are ready when you are; you can skip the read for any individual import, and pause a whole library at any time. Connecting doesn&rsquo;t reach back and sweep the archive you already have.</p>
+          </div>
+        </details>
+        <details class="faq">
+          <summary>Which AI providers can I connect?</summary>
+          <div class="faq-a">
+            <p>Studio supports multiple AI providers at launch, so you connect your own account with the provider you already use, on your own API key — the reads and the Dramaturg run on that provider&rsquo;s models, under your account, and they only ever receive text. There&rsquo;s no local-model or self-hosted path in v1.0: the reads are a cloud workload by design, which is part of why they&rsquo;re strictly opt-in.</p>
+          </div>
+        </details>
+        <details class="faq">
+          <summary>What does the AI cost, and how do the keys work?</summary>
+          <div class="faq-a">
+            <p>Studio itself is a one-time $129 purchase. The reads run on your own provider account, under your own API key, so your provider bills you directly at their rates — what the reads cost depends on how much tape you have them read, and that&rsquo;s between you and your provider. If you never connect a provider, the whole craft still works, and there&rsquo;s no usage to be billed for.</p>
+          </div>
+        </details>
+        <details class="faq">
+          <summary>Can the AI reads run offline?</summary>
+          <div class="faq-a">
+            <p>No. The reads and the Dramaturg are a cloud workload: they run on your provider&rsquo;s models, over the network, on your own key — there&rsquo;s no local-model mode. Everything else in Studio works with no connection at all: import, transcription, speaker separation, search, editing, assembly, and finishing are all on-device.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <!-- F -->
+    <div class="faq-cat">
+      <h2 class="cat-h">Studio Pro</h2>
+      <p class="cat-sub">The base app is the whole craft. Pro just adds ways to drive it.</p>
+      <div class="faq-list">
+        <details class="faq">
+          <summary>What does Studio Pro add on top of the base app?</summary>
+          <div class="faq-a">
+            <p>Two things: a command line, and an MCP server you can connect to your own AI assistant. That&rsquo;s the entire difference — Pro is the same studio with more ways to drive it. It&rsquo;s for people who want to script and batch their work, or run Studio from their own AI assistant: batch a week of tape overnight, build a pipeline you can run every episode, render a finished master without opening a window.</p>
+          </div>
+        </details>
+        <details class="faq">
+          <summary>Can I drive Studio from my own AI assistant?</summary>
+          <div class="faq-a">
+            <p>Yes, really. Studio Pro includes an MCP server — MCP is the open standard AI assistants use to work with tools outside the chat window. Connect it and your own assistant can work in your Studio projects: find moments in the tape, propose cuts, answer questions about the material, and render a finished master. When it&rsquo;s done, open the piece in Studio and carry on by hand — every change the assistant made is attributed, so you can see exactly what it did.</p>
+          </div>
+        </details>
+        <details class="faq">
+          <summary>Is anything in the base app locked behind Pro?</summary>
+          <div class="faq-a">
+            <p>No — nothing. The base app is the whole craft: import, transcription, speaker separation, search, clips, assembly, narration, tape repair, finishing and export all ship in Studio itself, complete. Pro doesn&rsquo;t unlock features; it adds ways to drive the ones that are already there.</p>
+          </div>
+        </details>
+        <details class="faq">
+          <summary>Where do I buy Pro, and is it a subscription?</summary>
+          <div class="faq-a">
+            <p>Studio Pro is sold directly by Fuchsia at fuchsiaprojects.com, not through the Mac App Store, and it&rsquo;s a subscription. The base app is separate and stays a one-time $129 purchase on the Mac App Store — nothing in it ever needs Pro.</p>
+          </div>
+        </details>
+      </div>
+      <div class="pro-more">
+        <a class="btn btn-ghost" href="pro.html">More on Studio Pro</a>
+      </div>
+    </div>
+
+    <!-- G -->
+    <div class="faq-cat">
+      <h2 class="cat-h">Finishing &amp; export</h2>
+      <p class="cat-sub">One programme, one master — here&rsquo;s exactly what comes out of Studio.</p>
+      <div class="faq-list">
+        <details class="faq">
+          <summary>How do I finish to broadcast loudness?</summary>
+          <div class="faq-a">
+            <p>When the piece is ready, Studio masters it on your Mac — no account, no upload. The render measures loudness to the broadcast standard (ITU-R BS.1770), brings the whole piece to your chosen target, holds the peaks with a true-peak limiter, and dithers the file on the way out. It&rsquo;s a finishing stage built for the spoken word, and it treats your piece as one programme: a single measured landing for the whole thing, not a clip-by-clip re-balance. After the bake, Studio shows you the measured loudness — before and after, as plain fact — and offers an A/B against your rough cut, so you hear exactly what finishing did before you deliver.</p>
+          </div>
+        </details>
+        <details class="faq">
+          <summary>What can I export from Studio?</summary>
+          <div class="faq-a">
+            <p>One finished master: a single loudness-targeted audio file of your whole piece. Export works like a print dialog — File &#9656; Export&hellip; (&#8984;E) — where you choose the format and the loudness target, confirm, and Studio bakes the file. Before it renders, a readiness check names anything that isn&rsquo;t ready — an offline clip, for instance — so you never discover a hole after delivery.</p>
+          </div>
+        </details>
+        <details class="faq">
+          <summary>What file formats and loudness targets does export support?</summary>
+          <div class="faq-a">
+            <p>Two formats: 24-bit WAV, the lossless file for handing to an editor or a DAW, and AAC (.m4a), the compressed file podcast hosts ingest directly. The loudness target is chosen per export, right in the sheet; the default is the common podcast standard, &minus;16&nbsp;LUFS. There&rsquo;s no MP3 export in v1.0 — macOS has no built-in MP3 encoder and Studio doesn&rsquo;t bundle one — but between WAV and AAC, both the handoff and the publish are covered.</p>
+          </div>
+        </details>
+        <details class="faq">
+          <summary>Will my finished master drop cleanly into Logic, Ableton, or Audition?</summary>
+          <div class="faq-a">
+            <p>Yes. The master is a standard audio file with nothing proprietary about it — the 24-bit WAV drops straight into Logic, Ableton, Audition, or wherever you finish. If Studio&rsquo;s master is your final deliverable, ship it; if the piece goes on to a final mix elsewhere, hand the WAV to that session.</p>
+          </div>
+        </details>
+        <details class="faq">
+          <summary>Can I export stems, a session, or an AAF/OMF to keep working in my DAW?</summary>
+          <div class="faq-a">
+            <p>Not in v1.0. Studio exports one mastered file — no stems, no session export, no AAF/OMF. Session and stem interchange is on the roadmap. The handoff that works today is the 24-bit WAV master: it carries the whole finished piece into any DAW.</p>
+          </div>
+        </details>
+        <details class="faq">
+          <summary>What happens with mixed-rate tape when I export?</summary>
+          <div class="faq-a">
+            <p>Sample-rate worries are a thing of the past. Cut a 44.1&nbsp;kHz archive clip against 48&nbsp;kHz field tape and never think about it — just bring it all in. Studio masters to the broadcast-standard 48&nbsp;kHz: a source already at that rate passes through untouched, byte for byte, and anything at a different rate is converted with mastering-grade resampling. The export report names what changed — say, 44.1 &rarr; 48&nbsp;kHz — so you always know exactly what happened.</p>
+          </div>
+        </details>
+        <details class="faq">
+          <summary>Can I round-trip a project back into Studio from another tool?</summary>
+          <div class="faq-a">
+            <p>No — export is one-way: a finished master out. But your project never leaves Studio in the first place. The episode stays fully editable on your Mac, so when the piece changes you re-export a fresh master rather than round-tripping. Project interchange with other tools is on the roadmap, alongside session and stem export.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="closer">
+  <div class="wrap">
+    <h2>Make your tape work as hard as you did.</h2>
+    <div class="cta-row" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
+      <span class="btn btn-soon">Coming soon to the Mac App Store</span>
+      <a class="btn btn-ghost" href="mailto:support@fuchsiaprojects.com?subject=Fuchsia%20Studio">Get in touch</a>
+    </div>
+    <div class="price"><b>$129</b>, one-time on the Mac App Store · macOS 26+ (Apple silicon)</div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-inner">
+    <a class="logo" href="index.html"><img class="logo-word" src="assets/fuchsia-wordmark-white.svg" alt="Fuchsia"></a>
+    <div class="foot-links">
+      <a href="support.html">Support</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="mailto:support@fuchsiaprojects.com">Contact</a>
+    </div>
+    <span>© 2026 Fuchsia, LLC</span>
+  </div>
+</footer>
+
+</body>
+</html>
