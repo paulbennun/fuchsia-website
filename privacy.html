@@ -3,13 +3,17 @@
   ============================================================================
   PRIVACY POLICY — Fuchsia Studio
   Drafted from the repo (paulbennun/fuchsia-studio, engine "Showstore").
-  STATUS: pre-launch. Confirmed: macOS-only, v1.0, on-device by DEFAULT (no AI service
-  contacted unless the user explicitly enables/configures one), no account, no
-  analytics/crash SDK. Entity: Fuchsia, LLC. Contact: support@fuchsiaprojects.com.
-  STILL TO DO before launch:
-   1. Set the real effective date below (currently 12 July 2026).
-   2. Create the support@fuchsiaprojects.com alias in Google Workspace.
-   3. If you ever add analytics or a default third-party AI provider, disclose it here.
+  STATUS: pre-launch. Confirmed (2026-07-16/17): macOS-only; on-device by DEFAULT (no AI
+  service contacted unless the user explicitly turns one on); AI = Anthropic Claude only,
+  via the user's own key/account; no account for the app itself; no analytics/crash SDK.
+  Entity: Fuchsia, LLC. Contact: support@fuchsiaprojects.com.
+  Source of record: .showstore/privacy-policy.md (2026-07-16 revision).
+  STILL TO DECIDE (flagged to Paul, 2026-07-17):
+   1. Effective date — set to 17 July 2026 (= this revision). Confirm.
+   2. Physical entity address — OMITTED (email-only). Add one if required.
+   3. Pro purchases — this policy covers Mac App Store purchases only; add the Pro
+      payment-processor clause once Pro launches and Paddle/Lemon Squeezy is chosen.
+   4. Model-attribution — points to in-app About > Acknowledgements only (no URL yet).
   ============================================================================
 -->
 <html lang="en">
@@ -87,11 +91,11 @@
 <main>
   <img class="doc-logo" src="assets/fuchsia-studio-gradient.png" alt="Fuchsia Studio">
   <h1>Privacy Policy</h1>
-  <p class="updated">Last updated: 12 July 2026</p>
+  <p class="updated">Last updated: 17 July 2026</p>
 
   <div class="summary">
     <h2>The short version</h2>
-    <p>Fuchsia Studio is built privacy-first. <strong>Your audio never leaves your Mac.</strong> Recording and transcription happen entirely on your device. There is no account to create, and we do not run servers that collect your recordings, transcripts, or personal information. The only data that ever leaves your Mac is transcript <em>text</em> — and only when you use the optional AI assistance, sent to the model provider you have configured.</p>
+    <p>Fuchsia Studio is built privacy-first. <strong>Your audio never leaves your Mac.</strong> Recording and transcription happen entirely on your device. There is no account to create, and we do not run servers that collect your recordings, transcripts, or personal information. The only data that ever leaves your Mac is transcript <em>text</em> — and only when you turn on the optional AI features, sent to Anthropic's Claude using your own Anthropic account.</p>
   </div>
 
   <p class="lead">This policy explains how Fuchsia Studio ("the app", "we", "us") handles your information. Fuchsia Studio is a macOS application for documentary and podcast producers, published by Fuchsia, LLC.</p>
@@ -106,13 +110,13 @@
   <p>You grant the app access to a folder (your archive) that you select. Your source audio and any takes you record stay on your Mac, inside the locations you choose. <strong>Audio is never uploaded to us or to any third party.</strong></p>
 
   <h3>Transcripts and derived data</h3>
-  <p>The app transcribes your audio <strong>on-device</strong> using Apple's built-in Speech framework, and builds a private, searchable index (transcripts, timecodes, speaker labels, and search embeddings) so you can find moments in your own material. This derived data is stored locally alongside your project.</p>
+  <p>The app transcribes your audio <strong>on-device</strong> using Apple's built-in Speech framework, and builds a private, searchable index (transcripts, timecodes, and speaker labels) so you can find moments in your own material. This derived data is stored locally alongside your project.</p>
 
   <h3>Microphone</h3>
   <p>With your permission, the app uses your microphone to record narration and takes in your own voice. These recordings are saved to your project on your device.</p>
 
-  <h3>Optional AI assistance</h3>
-  <p><strong>By default, Fuchsia Studio runs entirely on your device</strong> — no AI service is contacted unless you explicitly enable and configure one. If you turn on AI assistance (for example, to suggest structure, draft narration, or answer questions about your material), <strong>only transcript text is sent to the provider you choose — never your audio.</strong> With AI assistance off, nothing leaves your Mac.</p>
+  <h3>Optional AI features</h3>
+  <p><strong>By default, Fuchsia Studio runs entirely on your device</strong> — no AI service is contacted unless you explicitly turn one on. Studio's optional AI features — the tape "reads" and the Dramaturg assistant — run through <strong>Anthropic's Claude models, using your own Anthropic API key and your own Anthropic account.</strong> When you use them, <strong>only text derived from your tape (for example, transcript excerpts) is sent to Anthropic — never your raw audio</strong>, and the request goes directly from your Mac to Anthropic under your own agreement with them. Fuchsia does not receive, process, store, or have access to that text or your API key. Material you have marked as <strong>inherited</strong> (recordings that aren't your own) is blocked from being sent off your device at all. With the AI features off, nothing leaves your Mac.</p>
 
   <h3>No account, no tracking</h3>
   <p>Fuchsia Studio does not require you to create an account. We do not use advertising, and we do not include third-party analytics or tracking SDKs. We do not build profiles of you or sell data — we don't have it to sell.</p>
@@ -124,12 +128,21 @@
   <p>Your recordings, transcripts, and project data are stored <strong>locally on your Mac</strong>, in the folders you choose. They are protected by your device's own security (such as FileVault and your macOS user account). Backups are under your control — for example, Time Machine or any backup service you use. Because your data lives on your device, deleting it is entirely in your hands.</p>
 
   <h2>5. Sharing and disclosure</h2>
-  <p>We do not sell, rent, or trade your information. We do not share your content with third parties for their own purposes. The only outbound transmission the app makes is transcript text to the AI model provider you configure, for the AI features you choose to use.</p>
+  <p>We do not sell, rent, or trade your information. We do not share your content with third parties for their own purposes. The only outbound transmission the app makes is transcript text to Anthropic's Claude models, and only for the optional AI features you choose to use.</p>
 
   <h2>6. Third-party services</h2>
-  <p>Fuchsia Studio relies on Apple's on-device frameworks (such as Speech and Natural Language), which process your data on your Mac. If you enable AI assistance, transcript text is processed by the model provider you configure; that provider's handling of that text is governed by its own terms and privacy policy. Choose a provider you trust.</p>
+  <p>Fuchsia Studio relies on Apple's on-device frameworks (such as Speech and Natural Language), which process your data on your Mac. If you enable the optional AI features, transcript text is processed by <strong>Anthropic</strong> under your own Anthropic account; Anthropic's handling of that text is governed by <a href="https://www.anthropic.com/legal/privacy">Anthropic's privacy policy</a> and terms, not ours.</p>
 
-  <h2>7. Your rights and choices</h2>
+  <h2>7. Purchases</h2>
+  <p>If you bought Fuchsia Studio from the <strong>Mac App Store</strong>, your purchase is handled by Apple under Apple's privacy policy. We receive only the anonymized, aggregate sales information Apple provides; we do not receive your name or payment details.</p>
+
+  <h2>8. On-device models and open-source components</h2>
+  <p>Fuchsia Studio includes on-device machine-learning models and open-source components, used for tasks such as speech processing and speaker separation. These run locally on your Mac and send nothing off your device. Their licenses and attributions are listed in the app under <em>About ▸ Acknowledgements</em>.</p>
+
+  <h2>9. Diagnostics and support</h2>
+  <p>Fuchsia Studio does not send us automatic diagnostics or crash reports. If you choose to email us a bug report or contact support, we receive whatever you include in that message; any files you attach are sent only because you chose to attach them.</p>
+
+  <h2>10. Your rights and choices</h2>
   <ul>
     <li><strong>Permissions:</strong> You can grant or revoke microphone, speech recognition, and file access at any time in macOS <em>System Settings → Privacy &amp; Security</em>.</li>
     <li><strong>Access and deletion:</strong> Because your data is stored locally in folders you control, you can view, export, or delete it directly. Deleting your project files, and the app, removes your data from your device.</li>
@@ -137,14 +150,14 @@
     <li><strong>Regional rights:</strong> Depending on where you live (for example, under GDPR or the CCPA), you may have rights to access, correct, or delete personal data. Because we do not collect or hold your personal data on our servers, these rights are largely exercised directly on your device; contact us if you have questions.</li>
   </ul>
 
-  <h2>8. Children's privacy</h2>
+  <h2>11. Children's privacy</h2>
   <p>Fuchsia Studio is a professional tool intended for adults and is not directed to children. We do not knowingly collect personal information from children.</p>
 
-  <h2>9. Changes to this policy</h2>
+  <h2>12. Changes to this policy</h2>
   <p>We may update this policy as the app evolves. When we do, we will revise the "Last updated" date above and, for material changes, provide a more prominent notice.</p>
 
-  <h2>10. Contact us</h2>
-  <p>If you have any questions about this policy or your privacy, email us at <a href="mailto:support@fuchsiaprojects.com?subject=Fuchsia%20Studio%20privacy">support@fuchsiaprojects.com</a>.</p>
+  <h2>13. Contact us</h2>
+  <p>If you have any questions about this policy or your privacy, email us at <a href="mailto:support@fuchsiaprojects.com?subject=Fuchsia%20Studio%20privacy">support@fuchsiaprojects.com</a>. Fuchsia Studio is published by Fuchsia, LLC.</p>
 
   <hr />
   <p style="color:var(--muted);font-size:13.5px">Fuchsia Studio is published by Fuchsia, LLC. © 2026 Fuchsia, LLC. All rights reserved.</p>
