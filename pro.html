@@ -3,10 +3,15 @@
   ============================================================================
   STUDIO PRO PAGE — Fuchsia Studio (direct-purchase, NOT the Mac App Store)
   Drafted from the verified copy pass (fable-copy-narrative-pass-2026-07-12.md §3).
-  STATUS: pre-launch draft.
-   - Buy CTA is a "Coming soon" placeholder — the direct storefront isn't built yet.
-   - Pro pricing is UNRATIFIED: shown as a provisional "Pricing to be announced"
-     line. Do NOT print a $/mo or $/yr number until Paul rules.
+  STATUS: pre-launch draft. Publishes with the release batch (fuchsia-website#2).
+   - Pricing RULED 2026-07-20 (product strategy D1): Pro $249 ONE-TIME, base $129
+     one-time. Pro is NOT a subscription — do not reintroduce that word.
+   - Pro is sold DIRECT, BY EMAIL, handled personally. There is no storefront and
+     no checkout, and at this stage that is deliberate — not a placeholder.
+   - Do NOT imply an instant download: no delivery timeline, no claim that a build
+     is waiting behind the link, nothing about updates or a licence system.
+   - The base app now has ONE Pro-gated capability inside it: choosing where your
+     library lives (fuchsia-studio#977). Do not restore "nothing is locked" copy.
    - Confirmed headless capability = master render (#386). No headless-transcribe
      claim is made anywhere on this page (Q7 open).
   ============================================================================
@@ -135,11 +140,11 @@
     <h1>A studio you can program.</h1>
     <p class="lede">Everything in Fuchsia Studio, plus two more ways to drive it. Connect the studio to the AI app you already use, or work it from the command line — script it, batch it, wire it into your pipeline. Same studio, same rules, three ways in.</p>
     <div class="cta-row">
-      <span class="btn btn-soon">Coming soon</span>
-      <a class="btn btn-ghost" href="mailto:support@fuchsiaprojects.com?subject=Notify%20me%20about%20Fuchsia%20Studio%20Pro">Get launch updates</a>
+      <a class="btn" href="mailto:support@fuchsiaprojects.com?subject=Fuchsia%20Studio%20Pro">Email us to buy Pro</a>
+      <a class="btn btn-ghost" href="#buying">How buying works</a>
     </div>
-    <div class="price">Pricing to be announced</div>
-    <div class="avail">Direct from Fuchsia — no App Store required · Requires macOS 26</div>
+    <div class="price"><b>$249</b>, one-time — not a subscription · Fuchsia Studio itself is <b>$129</b> on the Mac App Store</div>
+    <div class="avail">Sold direct by Fuchsia, not through the Mac App Store · Requires macOS 26</div>
   </div>
 </section>
 
@@ -152,7 +157,7 @@
       <div class="feat">
         <span class="lead">In the app</span>
         <h3>The full studio</h3>
-        <p>The complete Fuchsia Studio, exactly as it ships. Pro holds nothing back from the base app: it adds ways in, it doesn't take features out.</p>
+        <p>The complete Fuchsia Studio, exactly as it ships — the whole craft, from a folder of tape to the finished audio. Pro adds one thing inside the app itself: your libraries go where you want them, on the drives you choose, as many as you keep.</p>
       </div>
       <div class="feat">
         <span class="lead">From your own AI · MCP</span>
@@ -192,7 +197,7 @@
       </div>
       <div class="unlock">
         <h3>Scale across the desk</h3>
-        <p>Per-seat licensing for the whole team.</p>
+        <p>More than one producer? Seats for a team are arranged the way everything else about Pro is — directly, in conversation with us.</p>
       </div>
     </div>
   </div>
@@ -204,6 +209,28 @@
     <h2 class="sec-h2">Automation doesn't mean handing over the wheel.</h2>
     <p class="sec-sub">Everything that makes Studio trustworthy holds in Pro, whichever surface is doing the work. When the AI works, it works on your own key and your own account, sending only text — never your raw audio. The grounding travels with the tape, not the interface: what's said about your recordings is quoted verbatim or refused, whether the question comes from the app, your assistant, or a script. And Pro adds a guarantee of its own — every automated change is attributed, so when a script or an assistant touches your program, the change carries its origin and you always know which hands did what.</p>
     <blockquote>“You're still the author. You just have more hands now — and every one of them signs its work.”</blockquote>
+  </div>
+</section>
+
+<section id="buying">
+  <div class="wrap">
+    <div class="kicker">Buying Pro</div>
+    <h2 class="sec-h2">You buy Pro by writing to us.</h2>
+    <p class="sec-sub">Pro is $249, one time — not a subscription, and nothing to renew. It isn't sold through the Mac App Store, and it can't be. So there's no checkout: you email, and we take it from there.</p>
+    <div class="unlocks">
+      <div class="unlock">
+        <h3>Why it isn't on the App Store</h3>
+        <p>What you're buying is two headless surfaces: a command line, and an MCP server your own AI assistant connects to. A tool bundled inside a Mac App Store app has to run inside that app's sandbox — which means it can't be run from a terminal at all. Pro sits outside the store by construction, not by preference.</p>
+      </div>
+      <div class="unlock">
+        <h3>What happens when you write</h3>
+        <p>No storefront, no licence portal, no account to make. You write, we talk about what you're wiring Studio into, and we get you set up. Paul answers — there's nobody else to be routed to.</p>
+      </div>
+      <div class="unlock">
+        <h3>Why we sell it this way</h3>
+        <p>Pro is for people putting a studio inside a pipeline, and those setups differ enough that a conversation is worth more than a shopping cart. We'd rather know what you're building — and if Pro is the wrong tool for it, we'll tell you.</p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -223,10 +250,10 @@
     <h2>Give your studio an API.</h2>
     <p class="sec-sub">The same craft, three ways in — and every guarantee intact.</p>
     <div class="cta-row" style="margin-top:30px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
-      <span class="btn btn-soon">Coming soon</span>
-      <a class="btn btn-ghost" href="mailto:support@fuchsiaprojects.com?subject=Notify%20me%20about%20Fuchsia%20Studio%20Pro">Get launch updates</a>
+      <a class="btn" href="mailto:support@fuchsiaprojects.com?subject=Fuchsia%20Studio%20Pro">Email us to buy Pro</a>
+      <a class="btn btn-ghost" href="studio.html">See Fuchsia Studio &#8594;</a>
     </div>
-    <div class="price">Pricing to be announced · Sold directly by Fuchsia, not through the Mac App Store · Requires macOS 26</div>
+    <div class="price"><b>$249</b>, one-time · Sold directly by Fuchsia, not through the Mac App Store · Requires macOS 26</div>
   </div>
 </section>
 
