@@ -1,0 +1,4 @@
+# Tester-phase (fuchsia-studio#591): the site describes the unreleased v1.1 build.
+# REVERSE AT PUBLIC LAUNCH.
+User-agent: *
+Disallow: /
