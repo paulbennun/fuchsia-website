@@ -8,51 +8,32 @@
   site is noindex,nofollow and index.html links to none of them, so this page is reachable
   only by someone who knows the URL or browses the repo.
 
-  WHAT THIS REVISION CHANGED, and why. The previous text said "The only data that ever
-  leaves your Mac is transcript text", and section 5 said "The only outbound transmission
-  the app makes is transcript text to Anthropic's Claude models". Both are exhaustive
-  claims, and the app makes further network requests. None of them carries a producer's
-  recordings, transcripts or project data, but the sentences as written did not allow for
-  them. Derived from source at origin/main, 2026-08-20:
-   - Apple's speech model — packages/ShowstoreCore/Sources/ShowstoreCore/SpeechAsset.swift
-     (AssetInventory.assetInstallationRequest -> downloadAndInstall), started shortly after
-     launch from apps/FuchsiaStudio/Sources/FuchsiaStudio/FuchsiaStudioApp.swift:579. A
-     download, never a send.
-   - Commerce — apps/FuchsiaStudio/Sources/FuchsiaStudio/Commerce/TrialStore.swift
-     (StoreKit). Entitlement resolution starts at launch (FuchsiaStudioApp.swift:593);
-     TrialStore.swift:475 reaches Apple in the two readings that would otherwise lock the
-     app, which includes a first launch. AppStore.sync() (:192) is Restore Purchases only.
-   - The key check — packages/AIProviderKit/Sources/AIProviderKit/CredentialOnboarding.swift
-     posts one minimal request to Anthropic when a producer pastes a key. Carries the key,
-     no tape-derived text.
-  Section 3 is new and names all of them.
+  SCOPE OF THIS REVISION. Section 3, "When the app uses the network", is new: it sets out
+  each occasion the app makes a request and what that request carries. The summary and
+  section 6 describe that set rather than naming one item, and both say that it is what we
+  can name and not a promise that there is nothing else — the same posture the shipping Help
+  book takes at {#h31}, so the two surfaces tell one story. Section 3 is derived from the
+  app source, not from any earlier summary of it, and is deliberately not asserted as
+  complete.
 
-  THE ENUMERATION IN SECTION 3 IS DELIBERATELY NOT ASSERTED AS COMPLETE, and the wording
-  says so. The app's own OfflineClaimGuardTests states the reason: "A network API absent
-  from this list is a network API this suite does not see." The shipping Help book takes
-  the same posture at {#h31} — "the routes we can name and that you can act on, not a
-  promise that there are no others" — and this page now matches it. Two surfaces, one story.
-
-  CONFIRMED AND STILL TRUE (re-derived from source 2026-08-20): macOS-only; audio never
-  leaves the Mac in any configuration; transcription and speaker separation are on-device;
-  AI = Anthropic Claude only, via the producer's own key/account; no account for the app
-  itself; NO analytics, crash-reporting or telemetry SDK of any kind.
+  CONFIRMED (re-derived from source, 2026-08-20): macOS-only; audio never leaves the Mac in
+  any configuration; transcription and speaker separation are on-device; AI = Anthropic
+  Claude only, via the producer's own key and account; no account for the app itself; NO
+  analytics, crash-reporting or telemetry software of any kind.
   Entity: Fuchsia, LLC. Contact: support@fuchsiaprojects.com.
-  Source of record: .showstore/privacy-policy.md (2026-07-16 revision) — now behind this page.
 
-  STILL TO DECIDE — for the legal review, not for a lane to settle:
+  FOR THE LEGAL REVIEW — open questions, not for a lane to settle:
    1. Effective date vs "Last updated" — bumped to 20 August 2026 with this revision, on the
-      reasoning that a policy whose date predates its content is itself inaccurate. If the
+      reasoning that a policy dated earlier than its own content is itself inaccurate. If the
       date should instead mark the day the page goes live, change it at sign-off.
    2. Physical entity address — still OMITTED (email-only). Add one if required.
    3. Pro purchases — this policy covers Mac App Store transactions only; add the Pro
       payment-processor clause once Pro launches and a processor is chosen.
    4. Model-attribution — points to in-app About > Acknowledgements only (no URL yet).
-   5. NEW: these pages load Google Fonts from fonts.googleapis.com / fonts.gstatic.com, so
-      reading the privacy policy sends the reader's IP address to Google. Section 13 now
-      discloses it. Whether disclosure is sufficient, or the fonts should be self-hosted, is
-      a legal call and is flagged in the PR.
-   6. NEW: section 13 ("This website") is new. It states only what is structurally true of a
+   5. These pages load Google Fonts from fonts.googleapis.com / fonts.gstatic.com, so
+      displaying this page sends the reader's IP address to Google. Section 13 discloses it.
+      Whether disclosure is sufficient, or the fonts should be self-hosted, is a legal call.
+   6. Section 13 ("This website") is new. It states only what is structurally true of a
       static site; what our host actually logs and retains has NOT been verified.
   ============================================================================
 -->
