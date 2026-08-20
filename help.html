@@ -335,20 +335,21 @@
         <details class="faq">
           <summary>Exactly what runs on my machine, and what doesn&rsquo;t?</summary>
           <div class="faq-a">
-            <p>On your Mac, with no account and no network connection: import at any sample rate, transcription (Apple&rsquo;s on-device speech engine), speaker separation, both search paths and the index behind them, clip editing and assembly, narration recording, the two tape repairs (de-hum and de-clip), and finishing to a loudness-targeted file.</p>
+            <p>On your Mac, with no account: import at any sample rate, transcription (Apple&rsquo;s on-device speech engine), speaker separation, both search paths and the index behind them, clip editing and assembly, narration recording, the two tape repairs (de-hum and de-clip), and finishing to a loudness-targeted file. Once your Mac has what transcription needs, all of that runs with the network off.</p>
+            <p>That one condition, in full: <strong>the speech model is supplied by macOS, not shipped by us</strong>, so if this Mac doesn&rsquo;t already have it, macOS downloads it — once. Studio asks for it in the background the moment you open the app, so it isn&rsquo;t something you wait on to start working; a tape you import before it arrives simply has no words until it does. It is a download, not a send: nothing of yours goes out with it. If your Mac already has the model, nothing is requested at all.</p>
             <p>Not on your Mac: the optional AI reads — the Dramaturg, the interpretations that land in Reading view (&#8984;1), and speaker-name proposals. Those run on a hosted AI provider you connect yourself, on your own key and account, and they receive text only. If you never connect a provider, that whole layer simply stays off.</p>
           </div>
         </details>
         <details class="faq">
           <summary>Do I have to upload my tape to a cloud to transcribe, search, or edit it?</summary>
           <div class="faq-a">
-            <p>No. There is no upload, no cloud project, and no account. Studio transcribes, separates speakers, indexes, and edits entirely on your Mac — you can do the whole craft with the network off.</p>
+            <p>No. There is no upload, no cloud project, and no account. Studio transcribes, separates speakers, indexes, and edits entirely on your Mac — and once your Mac has the speech model macOS transcribes with, you can do the whole craft with the network off.</p>
           </div>
         </details>
         <details class="faq">
           <summary>When I connect an AI provider, what actually gets sent — my audio, or just text?</summary>
           <div class="faq-a">
-            <p>Just text. Everything in the AI layer — the Dramaturg, the interpretations in Reading view, the speaker-name proposals — works from text drawn from your tape, so what leaves your Mac is text, sent to the provider you connected under your own account. Your audio files are never sent.</p>
+            <p>Just text. Everything in the AI layer — the Dramaturg, the interpretations in Reading view, the speaker-name proposals — works from text drawn from your tape, so what that layer takes off your Mac is text, sent to the provider you connected under your own account. Your audio files are never sent. That layer is also the only thing that carries your material off this Mac at all: the app&rsquo;s other uses of the network — macOS fetching its speech model, and asking the App Store what you&rsquo;ve bought — send nothing of yours.</p>
           </div>
         </details>
         <details class="faq">
@@ -385,7 +386,8 @@
         <details class="faq">
           <summary>I do investigative work with confidential sources — is this safe for that?</summary>
           <div class="faq-a">
-            <p>We designed the boundary to be exact so you can make that judgment with full knowledge. Out of the box, Studio makes no network calls for the craft and asks for no account: your tape, transcripts, search index, and edits live on your Mac, and your audio never leaves in any configuration.</p>
+            <p>We designed the boundary to be exact so you can make that judgment with full knowledge. Out of the box, Studio asks for no account, and <strong>your audio never leaves your Mac in any configuration</strong>: your tape, transcripts, search index, and edits all live there, and nothing derived from them goes anywhere.</p>
+            <p>Two things do reach the network while carrying none of your material, and we would rather name them than leave you with an assurance there are none. If this Mac doesn&rsquo;t already have the speech model macOS transcribes with, macOS downloads it — one time, inbound; if it already has it, nothing is requested. And the app asks the App Store what you&rsquo;ve bought. Neither one sends your tape, your transcripts, or anything drawn from them. These are the routes we can name and that you can act on — not a promise that there is nothing else: macOS itself does things on any Mac that aren&rsquo;t ours to describe, such as checking that an app is properly signed.</p>
             <p>If you choose to connect an AI provider, the AI layer works by sending text — never audio — to that provider, on your key, under your agreement with them. That text moves on two paths, and you should know both. First, new tape you add is read automatically, and you can skip any import or pause a whole library. Second, when you yourself ask the Dramaturg a question or open a read — including on tape that was in your library before you connected — the text needed to answer is sent at that moment.</p>
             <p>Whether a given provider is appropriate for a given source is your call, as it should be. Studio&rsquo;s job is to make sure you always know exactly what would leave, and to keep everything else on your machine.</p>
           </div>
@@ -407,7 +409,7 @@
         <details class="faq">
           <summary>Do I need them to use Studio?</summary>
           <div class="faq-a">
-            <p>No. Studio is a complete tool without them. Importing, transcription, speaker separation, search, editing, assembly, and finishing all run on your Mac with no account, no key, and no network. If you never connect an AI provider, you&rsquo;re not using a lesser version of the app — you&rsquo;re using the whole craft.</p>
+            <p>No. Studio is a complete tool without them. Importing, transcription, speaker separation, search, editing, assembly, and finishing all run on your Mac, with no account and no key — and, once your Mac has the speech model macOS transcribes with, with the network off as well. If you never connect an AI provider, you&rsquo;re not using a lesser version of the app — you&rsquo;re using the whole craft.</p>
           </div>
         </details>
         <details class="faq">
@@ -467,7 +469,7 @@
         <details class="faq">
           <summary>Can the AI reads run offline?</summary>
           <div class="faq-a">
-            <p>No. The reads and the Dramaturg are a cloud workload: they run on your provider&rsquo;s models, over the network, on your own key — there&rsquo;s no local-model mode. Everything else in Studio works with no connection at all: import, transcription, speaker separation, search, editing, assembly, and finishing are all on-device.</p>
+            <p>No. The reads and the Dramaturg are a cloud workload: they run on your provider&rsquo;s models, over the network, on your own key — there&rsquo;s no local-model mode. Everything else in Studio is on-device: import, transcription, speaker separation, search, editing, assembly, and finishing all run on your Mac, and all of it works with no connection once your Mac has the speech model macOS transcribes with.</p>
           </div>
         </details>
       </div>
