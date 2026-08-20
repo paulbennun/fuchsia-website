@@ -3,17 +3,57 @@
   ============================================================================
   PRIVACY POLICY — Fuchsia Studio
   Drafted from the repo (paulbennun/fuchsia-studio, engine "Showstore").
-  STATUS: pre-launch. Confirmed (2026-07-16/17): macOS-only; on-device by DEFAULT (no AI
-  service contacted unless the user explicitly turns one on); AI = Anthropic Claude only,
-  via the user's own key/account; no account for the app itself; no analytics/crash SDK.
+  STATUS: DRAFT — ACCURATE, BUT NOT LEGALLY REVIEWED (2026-08-20).
+  Do NOT link this page from index.html until it has had a legal check. Every page on this
+  site is noindex,nofollow and index.html links to none of them, so this page is reachable
+  only by someone who knows the URL or browses the repo.
+
+  WHAT THIS REVISION CHANGED, and why. The previous text said "The only data that ever
+  leaves your Mac is transcript text", and section 5 said "The only outbound transmission
+  the app makes is transcript text to Anthropic's Claude models". Both are exhaustive
+  claims, and the app makes further network requests. None of them carries a producer's
+  recordings, transcripts or project data, but the sentences as written did not allow for
+  them. Derived from source at origin/main, 2026-08-20:
+   - Apple's speech model — packages/ShowstoreCore/Sources/ShowstoreCore/SpeechAsset.swift
+     (AssetInventory.assetInstallationRequest -> downloadAndInstall), started shortly after
+     launch from apps/FuchsiaStudio/Sources/FuchsiaStudio/FuchsiaStudioApp.swift:579. A
+     download, never a send.
+   - Commerce — apps/FuchsiaStudio/Sources/FuchsiaStudio/Commerce/TrialStore.swift
+     (StoreKit). Entitlement resolution starts at launch (FuchsiaStudioApp.swift:593);
+     TrialStore.swift:475 reaches Apple in the two readings that would otherwise lock the
+     app, which includes a first launch. AppStore.sync() (:192) is Restore Purchases only.
+   - The key check — packages/AIProviderKit/Sources/AIProviderKit/CredentialOnboarding.swift
+     posts one minimal request to Anthropic when a producer pastes a key. Carries the key,
+     no tape-derived text.
+  Section 3 is new and names all of them.
+
+  THE ENUMERATION IN SECTION 3 IS DELIBERATELY NOT ASSERTED AS COMPLETE, and the wording
+  says so. The app's own OfflineClaimGuardTests states the reason: "A network API absent
+  from this list is a network API this suite does not see." The shipping Help book takes
+  the same posture at {#h31} — "the routes we can name and that you can act on, not a
+  promise that there are no others" — and this page now matches it. Two surfaces, one story.
+
+  CONFIRMED AND STILL TRUE (re-derived from source 2026-08-20): macOS-only; audio never
+  leaves the Mac in any configuration; transcription and speaker separation are on-device;
+  AI = Anthropic Claude only, via the producer's own key/account; no account for the app
+  itself; NO analytics, crash-reporting or telemetry SDK of any kind.
   Entity: Fuchsia, LLC. Contact: support@fuchsiaprojects.com.
-  Source of record: .showstore/privacy-policy.md (2026-07-16 revision).
-  STILL TO DECIDE (flagged to Paul, 2026-07-17):
-   1. Effective date — set to 17 July 2026 (= this revision). Confirm.
-   2. Physical entity address — OMITTED (email-only). Add one if required.
-   3. Pro purchases — this policy covers Mac App Store purchases only; add the Pro
-      payment-processor clause once Pro launches and Paddle/Lemon Squeezy is chosen.
+  Source of record: .showstore/privacy-policy.md (2026-07-16 revision) — now behind this page.
+
+  STILL TO DECIDE — for the legal review, not for a lane to settle:
+   1. Effective date vs "Last updated" — bumped to 20 August 2026 with this revision, on the
+      reasoning that a policy whose date predates its content is itself inaccurate. If the
+      date should instead mark the day the page goes live, change it at sign-off.
+   2. Physical entity address — still OMITTED (email-only). Add one if required.
+   3. Pro purchases — this policy covers Mac App Store transactions only; add the Pro
+      payment-processor clause once Pro launches and a processor is chosen.
    4. Model-attribution — points to in-app About > Acknowledgements only (no URL yet).
+   5. NEW: these pages load Google Fonts from fonts.googleapis.com / fonts.gstatic.com, so
+      reading the privacy policy sends the reader's IP address to Google. Section 13 now
+      discloses it. Whether disclosure is sufficient, or the fonts should be self-hosted, is
+      a legal call and is flagged in the PR.
+   6. NEW: section 13 ("This website") is new. It states only what is structurally true of a
+      static site; what our host actually logs and retains has NOT been verified.
   ============================================================================
 -->
 <html lang="en">
@@ -91,11 +131,13 @@
 <main>
   <img class="doc-logo" src="assets/fuchsia-studio-gradient.png" alt="Fuchsia Studio">
   <h1>Privacy Policy</h1>
-  <p class="updated">Last updated: 17 July 2026</p>
+  <p class="updated">Last updated: 20 August 2026</p>
 
   <div class="summary">
     <h2>The short version</h2>
-    <p>Fuchsia Studio is built privacy-first. <strong>Your audio never leaves your Mac.</strong> Recording and transcription happen entirely on your device. There is no account to create, and we do not run servers that collect your recordings, transcripts, or personal information. The only data that ever leaves your Mac is transcript <em>text</em> — and only when you turn on the optional AI features, sent to Anthropic's Claude using your own Anthropic account.</p>
+    <p>Fuchsia Studio is built privacy-first. <strong>Your audio never leaves your Mac.</strong> Recording, transcription and speaker separation happen entirely on your device. There is no account to create, and <strong>we run no servers that receive your recordings, transcripts, or personal information.</strong></p>
+    <p><strong>The one thing that takes your work off this Mac is the optional AI features.</strong> When you configure your own Anthropic API key, text derived from your tape — transcripts and excerpts, never audio — goes directly from your Mac to Anthropic, under your own account with them. With no key configured, nothing derived from your tape leaves at all.</p>
+    <p>The app is not sealed off from the network, though, and we would rather name what it does than imply it does nothing. Two other things reach the network and carry none of your material: macOS fetches <strong>Apple's speech model</strong> if this Mac does not already have it, and the app asks the <strong>App Store</strong> about your trial or purchase. <a href="#network">Section 3</a> describes each one.</p>
   </div>
 
   <p class="lead">This policy explains how Fuchsia Studio ("the app", "we", "us") handles your information. Fuchsia Studio is a macOS application for documentary and podcast producers, published by Fuchsia, LLC.</p>
@@ -115,48 +157,77 @@
   <h3>Microphone</h3>
   <p>With your permission, the app uses your microphone to record narration and takes in your own voice. These recordings are saved to your project on your device.</p>
 
-  <h3>Optional AI features</h3>
-  <p><strong>By default, Fuchsia Studio runs entirely on your device</strong> — no AI service is contacted unless you explicitly turn one on. Studio's optional AI features — the tape "reads" and the Dramaturg assistant — run through <strong>Anthropic's Claude models, using your own Anthropic API key and your own Anthropic account.</strong> When you use them, <strong>only text derived from your tape (for example, transcript excerpts) is sent to Anthropic — never your raw audio</strong>, and the request goes directly from your Mac to Anthropic under your own agreement with them. Fuchsia does not receive, process, store, or have access to that text or your API key. With the AI features off, nothing leaves your Mac.</p>
+  <h3 id="ai">Optional AI features</h3>
+  <p><strong>No AI service is contacted until you configure one.</strong> Studio's optional AI features — the tape "reads", the speaker-name suggestions, and the Dramaturg assistant — run through <strong>Anthropic's Claude models, using your own Anthropic API key and your own Anthropic account.</strong> When they run, <strong>text derived from your tape is sent to Anthropic — never your audio</strong>, and the request goes directly from your Mac to Anthropic under your own agreement with them. <strong>Fuchsia does not receive, process, store, or have access to that text or your API key.</strong></p>
+  <p><strong>Once a key is saved, importing a tape starts a reading of it by default</strong>, which sends that tape's transcript to Anthropic. You can decline that for any import, in the Import Tape sheet, and the app asks you before the first time a tape's text would leave.</p>
+  <p>"Text derived from your tape" covers more than a single excerpt, and the app's built-in Help sets it out route by route under <em>What gets sent</em>. In summary: reading a tape sends its whole transcript; reading a show sends the stored readings of tapes already read, including their verbatim quotations; <em>Suggest names</em> sends the transcripts of every tape in your library in which an unnamed voice speaks; and a message to the Dramaturg can carry speaker names and short quotations from the clips in the story you have open. A reading also leaves behind a short, model-written list of themes and questions for that tape's story, which travels with later readings in the same story.</p>
+  <p><strong>The one control that guarantees nothing derived from your tape leaves this Mac is not configuring an Anthropic key.</strong> With no key, none of the above can happen. Declining the automatic read of an import is a real choice about that import; it is not a bar on everything else.</p>
 
   <h3>No account, no tracking</h3>
   <p>Fuchsia Studio does not require you to create an account. We do not use advertising, and we do not include third-party analytics or tracking SDKs. We do not build profiles of you or sell data — we don't have it to sell.</p>
 
-  <h2>3. How information is used</h2>
-  <p>Information is used only to provide the app's features to you: transcribing your audio, making it searchable, helping you assemble stories, and — if you choose — providing AI assistance. We do not use your content to train models, and we do not use it for advertising.</p>
+  <h2 id="network">3. When the app uses the network</h2>
+  <p>Almost everything Fuchsia Studio does happens on your Mac and needs no connection: importing, transcribing, separating speakers, building the index behind search, searching, editing, assembling and finishing. Below are the times the app does reach the network. We describe them as <strong>the routes we can name and that you can act on — not as a promise that there are no others.</strong></p>
 
-  <h2>4. Where your data is stored</h2>
+  <h3>The optional AI features</h3>
+  <p>This is the only one that carries material derived from your work, and it happens only when you have configured an Anthropic API key. It is set out in full under <a href="#ai">Optional AI features</a> above.</p>
+
+  <h3>Apple's speech model</h3>
+  <p>Transcription runs on your Mac using Apple's on-device speech engine — but <strong>the model it uses is supplied and installed by macOS</strong>, not shipped by us, so if your Mac does not already have it, macOS downloads it. The app asks for it shortly after launch; when it is already installed, no request is made. <strong>This is a download, not a send: no audio and no transcript goes anywhere.</strong> Until the model is present, transcription cannot run, and the app says so rather than failing quietly; importing, playing and editing work as normal meanwhile.</p>
+
+  <h3>Your trial, your purchase, and your licence</h3>
+  <p>Fuchsia Studio's free trial and its one-time unlock are both handled by Apple through the App Store, so the app asks the App Store what you are entitled to — shortly after launch, and again when you start a trial, buy, or use <em>Restore Purchases</em>. <strong>Nothing about your recordings, transcripts, or work is sent, and none of it reaches us.</strong> If the app cannot get an answer, it assumes in your favour and carries on. See <a href="#purchases">Purchases</a>.</p>
+
+  <h3>Checking an API key you have pasted</h3>
+  <p>When you paste an Anthropic API key into Settings, the app sends one minimal request to Anthropic to check that the key works, so it can tell you straight away rather than failing later. That request carries the key you just entered and <strong>nothing derived from your tape</strong>.</p>
+
+  <h3>Links the app opens for you</h3>
+  <p>Some menu items and buttons open a page in your browser — our website, or the Claude Console where you manage your key — or a pre-addressed message in your mail client. These are ordinary links: your browser or mail client makes the request, and an email is sent only when you send it.</p>
+
+  <p>Separately from all of this, macOS does things of its own on any Mac that are not ours to describe or control — verifying that an app is properly signed, for example. This policy covers what the app does.</p>
+
+  <h2>4. How information is used</h2>
+  <p>Information is used only to provide the app's features to you: transcribing your audio, making it searchable, helping you assemble stories, and — if you choose — providing AI assistance. <strong>We do not use your content to train models, and we could not: we never receive it.</strong> We do not use it for advertising.</p>
+
+  <h2>5. Where your data is stored</h2>
   <p>Your recordings, transcripts, and project data are stored <strong>locally on your Mac</strong>, in the folders you choose. They are protected by your device's own security (such as FileVault and your macOS user account). Backups are under your control — for example, Time Machine or any backup service you use. Because your data lives on your device, deleting it is entirely in your hands.</p>
 
-  <h2>5. Sharing and disclosure</h2>
-  <p>We do not sell, rent, or trade your information. We do not share your content with third parties for their own purposes. The only outbound transmission the app makes is transcript text to Anthropic's Claude models, and only for the optional AI features you choose to use.</p>
+  <h2>6. Sharing and disclosure</h2>
+  <p>We do not sell, rent, or trade your information. We do not share your content with third parties for their own purposes. <strong>We never receive your recordings, transcripts, or project data in the first place</strong> — there is no server of ours for them to go to. The one transmission that carries material derived from your work is the tape-derived text sent to Anthropic for the optional AI features you choose to use, and it goes from your Mac to Anthropic directly, under your own account. The app's other uses of the network are described in <a href="#network">section 3</a>; none of them carries your material to anyone.</p>
 
-  <h2>6. Third-party services</h2>
-  <p>Fuchsia Studio relies on Apple's on-device frameworks (such as Speech and Natural Language), which process your data on your Mac. If you enable the optional AI features, transcript text is processed by <strong>Anthropic</strong> under your own Anthropic account; Anthropic's handling of that text is governed by <a href="https://www.anthropic.com/legal/privacy">Anthropic's privacy policy</a> and terms, not ours.</p>
+  <h2>7. Third-party services</h2>
+  <p>Fuchsia Studio relies on Apple's on-device frameworks (such as Speech and Natural Language), which process your data on your Mac. It also relies on <strong>Apple</strong> for two things that do involve Apple's servers: supplying the speech model macOS transcribes with, and handling your trial and purchase through the App Store. Apple's handling of those is governed by <a href="https://www.apple.com/legal/privacy/">Apple's privacy policy</a>.</p>
+  <p>If you enable the optional AI features, tape-derived text is processed by <strong>Anthropic</strong> under your own Anthropic account; Anthropic's handling of that text is governed by <a href="https://www.anthropic.com/legal/privacy">Anthropic's privacy policy</a> and terms, not ours.</p>
+  <p>Speaker separation uses an open-source component. Its models are shipped inside the app and run on your Mac, and it is configured so that it cannot fetch a model over the network.</p>
 
-  <h2>7. Purchases</h2>
-  <p>If you bought Fuchsia Studio from the <strong>Mac App Store</strong>, your purchase is handled by Apple under Apple's privacy policy. We receive only the anonymized, aggregate sales information Apple provides; we do not receive your name or payment details.</p>
+  <h2 id="purchases">8. Purchases</h2>
+  <p>Fuchsia Studio is sold through the <strong>Mac App Store</strong>, and <strong>starting the free trial is itself an App Store transaction</strong> — of a free item — so Apple is involved whether or not you ever pay us anything. Your trial and your purchase are handled by Apple under <a href="https://www.apple.com/legal/privacy/">Apple's privacy policy</a>. <strong>We receive only the anonymized, aggregate sales information Apple provides; we do not receive your name, your Apple Account, or your payment details.</strong> <em>Restore Purchases</em> asks Apple directly for your purchase history, and Apple may ask you to sign in when you use it.</p>
 
-  <h2>8. On-device models and open-source components</h2>
-  <p>Fuchsia Studio includes on-device machine-learning models and open-source components, used for tasks such as speech processing and speaker separation. These run locally on your Mac and send nothing off your device. Their licenses and attributions are listed in the app under <em>About ▸ Acknowledgements</em>.</p>
+  <h2>9. On-device models and open-source components</h2>
+  <p>Fuchsia Studio includes on-device machine-learning models and open-source components, used for tasks such as speech processing, speaker separation and search. <strong>These are shipped inside the app, run locally on your Mac, and send nothing off your device.</strong> Apple's speech model is the exception, and it is not one of ours: macOS supplies and installs it, downloading it if this Mac does not already have it (see <a href="#network">section 3</a>). Licenses and attributions for the components we ship are listed in the app under <em>About ▸ Acknowledgements</em>.</p>
 
-  <h2>9. Diagnostics and support</h2>
-  <p>Fuchsia Studio does not send us automatic diagnostics or crash reports. If you choose to email us a bug report or contact support, we receive whatever you include in that message; any files you attach are sent only because you chose to attach them.</p>
+  <h2>10. Diagnostics and support</h2>
+  <p><strong>Fuchsia Studio contains no analytics, crash-reporting or telemetry software of any kind, and sends us no automatic diagnostics.</strong> If you choose to email us a bug report or contact support, we receive whatever you include in that message. The app's <em>Report a Problem</em> command opens a draft in your own mail client with your macOS version and the app's version filled in — you can read and edit everything before you send it, and nothing is sent unless you send it. No logs or files are attached; anything attached is attached because you chose to attach it.</p>
 
-  <h2>10. Your rights and choices</h2>
+  <h2>11. Your rights and choices</h2>
   <ul>
     <li><strong>Permissions:</strong> You can grant or revoke microphone, speech recognition, and file access at any time in macOS <em>System Settings → Privacy &amp; Security</em>.</li>
     <li><strong>Access and deletion:</strong> Because your data is stored locally in folders you control, you can view, export, or delete it directly. Deleting your project files, and the app, removes your data from your device.</li>
-    <li><strong>AI features:</strong> You can choose not to use AI assistance, keeping all processing on-device.</li>
+    <li><strong>AI features:</strong> Not configuring an Anthropic API key keeps everything derived from your tape on your Mac. If you do configure one, you can decline the automatic read of any import in the Import Tape sheet, and keeping a tape unread keeps its transcript out of the readings.</li>
     <li><strong>Regional rights:</strong> Depending on where you live (for example, under GDPR or the CCPA), you may have rights to access, correct, or delete personal data. Because we do not collect or hold your personal data on our servers, these rights are largely exercised directly on your device; contact us if you have questions.</li>
   </ul>
 
-  <h2>11. Children's privacy</h2>
+  <h2>12. Children's privacy</h2>
   <p>Fuchsia Studio is a professional tool intended for adults and is not directed to children. We do not knowingly collect personal information from children.</p>
 
-  <h2>12. Changes to this policy</h2>
+  <h2>13. This website</h2>
+  <p>This site is a set of static pages. <strong>We do not use analytics, advertising or tracking on it</strong>, and it sets no cookies of its own. As with any website, our hosting provider necessarily handles the technical information your browser sends in order to be served a page, such as your IP address.</p>
+  <p><strong>These pages load their typefaces from Google Fonts</strong> (fonts.googleapis.com and fonts.gstatic.com), which means displaying this page involves a request from your browser to Google, and Google receives your IP address as part of it. We send Google nothing else, and we receive nothing back about you.</p>
+
+  <h2>14. Changes to this policy</h2>
   <p>We may update this policy as the app evolves. When we do, we will revise the "Last updated" date above and, for material changes, provide a more prominent notice.</p>
 
-  <h2>13. Contact us</h2>
+  <h2>15. Contact us</h2>
   <p>If you have any questions about this policy or your privacy, email us at <a href="mailto:support@fuchsiaprojects.com?subject=Fuchsia%20Studio%20privacy">support@fuchsiaprojects.com</a>. Fuchsia Studio is published by Fuchsia, LLC.</p>
 
   <hr />
