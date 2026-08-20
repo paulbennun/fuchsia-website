@@ -8,9 +8,9 @@
 <meta property="og:description" content="Enterprise storytelling software grounded in truth. We amplify creators, not replace them.">
 <meta property="og:type" content="website">
 <link rel="icon" type="image/svg+xml" href="icon.svg">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link rel="preload" href="assets/fonts/newsreader.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/fonts.css">
 <style>
   :root{
     --bg:#0b0a0d;
@@ -27,12 +27,12 @@
   body{
     background:var(--bg);
     color:var(--ink);
-    font-family:'Inter',system-ui,sans-serif;
+    font-family:'Inter',system-ui,-apple-system,sans-serif;
     line-height:1.6;
     -webkit-font-smoothing:antialiased;
     overflow-x:hidden;
   }
-  h1,h2,h3{font-family:'Fraunces',Georgia,serif;font-weight:500;line-height:1.08;letter-spacing:-.01em}
+  h1,h2,h3{font-family:'Newsreader',Georgia,'Times New Roman',serif;font-weight:500;line-height:1.08;letter-spacing:-.01em}
   a{color:inherit;text-decoration:none}
   .wrap{max-width:var(--max);margin:0 auto;padding:0 28px}
   .accent{color:var(--fuchsia-soft)}
@@ -45,7 +45,7 @@
     border-bottom:1px solid var(--line);
   }
   .nav-inner{display:flex;align-items:center;justify-content:space-between;height:68px}
-  .logo{display:flex;align-items:center;gap:11px;font-family:'Fraunces',serif;font-size:22px;font-weight:600;letter-spacing:-.02em}
+  .logo{display:flex;align-items:center;gap:11px;font-family:'Newsreader',serif;font-size:22px;font-weight:600;letter-spacing:-.02em}
   .logo-word{height:36px;width:auto;display:block}
   .fmark{
     width:30px;height:30px;border-radius:8px;flex:none;
@@ -53,7 +53,7 @@
     box-shadow:0 2px 10px rgba(224,33,138,.35), inset 0 1px 0 rgba(255,255,255,.25);
     display:grid;place-items:center;
   }
-  .fmark i{font-family:'Fraunces',serif;font-style:italic;font-weight:500;color:#fff;font-size:21px;line-height:1;transform:translateY(-1px)}
+  .fmark i{font-family:'Newsreader',serif;font-style:italic;font-weight:500;color:#fff;font-size:21px;line-height:1;transform:translateY(-1px)}
   .nav-links{display:flex;gap:34px;align-items:center;font-size:14.5px;color:var(--muted)}
   .nav-links a:hover{color:var(--ink)}
   .btn{
@@ -79,7 +79,7 @@
   .hero .wrap{position:relative;z-index:1}
   .hero .watermark{
     position:absolute;right:-2%;top:50%;transform:translateY(-50%);
-    font-family:'Fraunces',serif;font-style:italic;font-weight:400;
+    font-family:'Newsreader',serif;font-style:italic;font-weight:400;
     font-size:min(46vw,640px);line-height:.7;color:rgba(255,255,255,.035);
     z-index:0;pointer-events:none;user-select:none;
   }
@@ -108,7 +108,7 @@
   /* PROBLEM */
   .problem{background:var(--bg-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
   .problem h2{font-size:clamp(28px,4vw,44px);max-width:24ch}
-  .problem .big{color:var(--muted);font-size:clamp(20px,2.6vw,27px);line-height:1.5;max-width:30ch;font-family:'Fraunces',serif}
+  .problem .big{color:var(--muted);font-size:clamp(20px,2.6vw,27px);line-height:1.5;max-width:30ch;font-family:'Newsreader',serif}
   .problem .big strong{color:var(--ink);font-weight:500}
 
   /* PILLARS */
@@ -119,7 +119,7 @@
     transition:border-color .2s ease,transform .2s ease;
   }
   .card:hover{border-color:rgba(224,33,138,.5);transform:translateY(-3px)}
-  .card .num{font-family:'Fraunces',serif;font-size:15px;color:var(--fuchsia-soft);margin-bottom:18px}
+  .card .num{font-family:'Newsreader',serif;font-size:15px;color:var(--fuchsia-soft);margin-bottom:18px}
   .card h3{font-size:22px;margin-bottom:12px}
   .card p{color:var(--muted);font-size:15.5px}
   @media(max-width:860px){.grid3{grid-template-columns:1fr}}
@@ -142,7 +142,7 @@
   /* PROOF stats */
   .proof{background:var(--bg-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
   .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:54px}
-  .stat .n{font-family:'Fraunces',serif;font-size:clamp(34px,4.5vw,52px);color:var(--ink)}
+  .stat .n{font-family:'Newsreader',serif;font-size:clamp(34px,4.5vw,52px);color:var(--ink)}
   .stat .l{color:var(--muted);font-size:14.5px;margin-top:8px}
   @media(max-width:760px){.stats{grid-template-columns:repeat(2,1fr);gap:36px 24px}}
 
