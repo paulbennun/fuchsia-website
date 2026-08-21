@@ -1,4 +1,13 @@
-# Tester-phase (fuchsia-studio#591): the site describes the unreleased v1.1 build.
-# REVERSE AT PUBLIC LAUNCH.
+# The whole site is intentionally excluded from search engines.
+# This is deliberate and still wanted. Do not reverse it on its own.
+#
+# The reversal is a launch act with a precondition, and it is recorded in the
+# fuchsia-studio repo: docs/product/ship-sequence.md, section "After the
+# archive". THAT document is the instruction, not this comment.
+# Tester-phase decision: fuchsia-studio#591. Tracked now by fuchsia-studio#1480.
+#
+# Note: this file alone does not hide the site. Every page also carries
+# <meta name="robots" content="noindex,nofollow">, which is what actually keeps
+# a page out of the index. Both come off together, or neither has.
 User-agent: *
 Disallow: /
