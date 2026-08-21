@@ -1,124 +1,273 @@
 <!DOCTYPE html>
-<!--
-  ============================================================================
-  LANDING PAGE — Fuchsia Studio  (rebuild 2026-07-12)
-  Copy source: .showstore/fable-copy-narrative-pass-2026-07-12.md §1 (verified draft).
-  Honesty overrides applied: $129 one-time (no trial), honest sample-rate framing
-  (no settable master-rate claim), no AI-provider brand names, egress scoped to the
-  producer's own material (the optional AI layer is the one route that carries it;
-  the network uses that carry none of it are named), no voice synthesis.
-  STILL TO DO before launch:
-   1. Real Mac App Store URL — CTA is a "Coming soon" placeholder; swap in the live link.
-   2. Demo video — add it in #demo (options commented inline); add a poster image.
-   3. Section 10 USC/founder credit deliberately OMITTED pending Paul's phrasing.
-  ============================================================================
--->
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Fuchsia Studio — Edit the story, not the waveform</title>
-<meta name="description" content="Fuchsia Studio is a professional macOS studio for narrative audio. Build documentary and journalism from the transcript of your tape — read, search, and select the words that matter, on your Mac." />
-<meta property="og:title" content="Fuchsia Studio" />
-<meta property="og:description" content="Edit the story, not the waveform. Professional narrative-audio production for documentary and journalism — build the piece from the transcript of your tape, on your Mac." />
-<meta property="og:type" content="website" />
-<link rel="icon" type="image/svg+xml" href="icon.svg" />
-<link rel="preload" href="assets/fonts/newsreader.woff2" as="font" type="font/woff2" crossorigin />
-<link rel="preload" href="assets/fonts/inter.woff2" as="font" type="font/woff2" crossorigin />
-<link rel="stylesheet" href="assets/fonts.css" />
+<meta name="description" content="Fuchsia Studio is a professional macOS studio for narrative audio. Build documentary and journalism from the transcript of your tape — read, search, and select the words that matter, on your Mac.">
+<meta property="og:title" content="Fuchsia Studio">
+<meta property="og:description" content="Edit the story, not the waveform. Professional narrative-audio production for documentary and journalism — build the piece from the transcript of your tape, on your Mac.">
+<meta property="og:type" content="website">
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" type="image/svg+xml" href="icon.svg">
+<link rel="preload" href="assets/fonts/newsreader.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/fonts.css">
 <style>
   :root{
     /* Conservatory */
-    --color-ground:#FFFFFF;--color-surface:#FAF8FA;--color-hairline:#E7E0E6;
-    --color-ink:#26071E;--color-ink-muted:#6B5566;--color-ink-faint:#9A8A96;
-    --color-brand-bright:#F646C4;  /* petal edge — gradient art only; never set type on it */
-    --color-brand:#C9168F;         /* orchid throat — primary */
-    --color-brand-deep:#720A5A;    /* interior — the accent that carries type */
-    --color-brand-shadow:#3D0230;  /* leaf shadow */
-    --max:1080px;
+    --color-ground:#FFFFFF;
+    --color-surface:#FAF8FA;
+    --color-surface-sunk:#F3EFF3;
+    --color-hairline:#E7E0E6;
+    --color-ink:#26071E;
+    --color-ink-muted:#6B5566;
+    --color-ink-faint:#9A8A96;
+    --color-brand-bright:#F646C4;
+    --color-brand:#C9168F;
+    --color-brand-deep:#720A5A;
+    --color-brand-shadow:#3D0230;
+
+    --font-display:'Newsreader',Georgia,'Times New Roman',serif;
+    --font-body:'Newsreader',Georgia,'Times New Roman',serif;
+    --font-ui:'Inter',system-ui,-apple-system,'Helvetica Neue',sans-serif;
+    --font-mono:ui-monospace,SFMono-Regular,'SF Mono',Menlo,Consolas,monospace;
+
+    --tracking-display:-0.025em;
+    --tracking-tight:-0.01em;
+    --tracking-caps:0.16em;
+
+    --radius-md:14px;
+    --radius-lg:22px;
+    --radius-xl:34px;
+    --radius-full:999px;
+
+    --lane:1440px;
+    --gutter:clamp(20px,5vw,72px);
   }
+
   *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
-  body{background:var(--color-ground);color:var(--color-ink);font-family:'Inter',system-ui,-apple-system,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-  h1,h2,h3{font-family:'Newsreader',Georgia,'Times New Roman',serif;font-weight:500;line-height:1.1;letter-spacing:-.01em}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{
+    background:var(--color-ground);
+    color:var(--color-ink);
+    font-family:var(--font-ui);
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    overflow-x:hidden;
+  }
   a{color:inherit;text-decoration:none}
-  .wrap{max-width:var(--max);margin:0 auto;padding:0 28px}
-  header.nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);background:rgba(255,255,255,.8);border-bottom:1px solid var(--color-hairline)}
-  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:66px}
-  .logo{display:flex;align-items:center;gap:10px;font-family:'Newsreader',serif;font-size:20px;font-weight:600}
-  .logo-word{height:34px;width:auto;display:block}
-  .studio-hero-logo{width:min(440px,76vw);height:auto;display:block;margin:0 auto 30px}
-  .fmark{width:27px;height:27px;border-radius:7px;flex:none;background:linear-gradient(180deg,var(--color-brand-deep),var(--color-brand-bright) 70%);display:grid;place-items:center}
-  .fmark i{font-family:'Newsreader',serif;font-style:italic;font-weight:500;color:#fff;font-size:18px;line-height:1;transform:translateY(-1px)}
-  .nav-links{display:flex;gap:26px;font-size:14.5px;color:var(--color-ink-muted)}
-  .nav-links a:hover{color:var(--color-ink)}
-  @media(max-width:640px){.nav-links{gap:16px;font-size:13.5px}}
-  .btn{display:inline-flex;align-items:center;gap:9px;background:var(--color-brand);color:#fff;padding:13px 24px;border-radius:999px;font-size:15px;font-weight:500;transition:transform .15s,box-shadow .15s}
-  .btn:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(201,22,143,.28)}
-  .btn-ghost{background:transparent;border:1px solid var(--color-hairline);color:var(--color-ink)}
-  .btn-ghost:hover{border-color:var(--color-brand)}
+  img,svg{max-width:100%;display:block}
+  h1,h2,h3{font-family:var(--font-display);font-weight:400;letter-spacing:var(--tracking-tight)}
+  em{font-style:italic}
+  :focus-visible{outline:2px solid var(--color-brand);outline-offset:3px;border-radius:4px}
 
-  /* hero */
-  .hero{position:relative;text-align:center;padding:96px 0 80px;overflow:hidden}
-  .hero .wrap{position:relative;z-index:1}
-  .appicon{width:104px;height:104px;border-radius:24px;margin:0 auto 26px;background:linear-gradient(180deg,var(--color-brand-deep),var(--color-brand-bright) 70%);display:grid;place-items:center}
-  .appicon i{font-family:'Newsreader',serif;font-style:italic;font-weight:500;color:#fff;font-size:68px;line-height:1;transform:translateY(-2px)}
-  .hero h1{font-size:clamp(38px,6vw,68px);max-width:15ch;margin:0 auto}
-  .hero p.lede{margin:24px auto 0;font-size:clamp(17px,2.1vw,21px);color:var(--color-ink-muted);max-width:54ch}
-  .hero .cta-row{margin-top:36px;display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
-  .hero .avail{margin-top:16px;font-size:13.5px;color:var(--color-ink-muted)}
+  .lane{width:100%;max-width:var(--lane);margin:0 auto;padding-inline:var(--gutter)}
 
-  .btn-soon{background:var(--color-surface);color:var(--color-ink-muted);border:1px solid var(--color-hairline);cursor:default}
-  .btn-soon:hover{transform:none;box-shadow:none}
-  .price{margin-top:18px;font-size:14.5px;color:var(--color-ink-muted)}
-  .price b{color:var(--color-ink);font-weight:600}
-
-  /* demo video */
-  #demo{padding-top:8px}
-  .videoframe{position:relative;max-width:940px;margin:0 auto;aspect-ratio:16/9;border:1px solid var(--color-hairline);border-radius:18px;overflow:hidden;background:var(--color-surface);box-shadow:0 18px 50px rgba(61,2,48,.07)}
-  .videoframe video,.videoframe iframe{display:block;width:100%;height:100%;border:0;position:relative;z-index:1}
-  .videoph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;z-index:2}
-  .videoph .play{width:74px;height:74px;border-radius:50%;background:var(--color-brand);color:#fff;display:grid;place-items:center;font-size:24px;padding-left:5px;box-shadow:0 10px 26px rgba(201,22,143,.26)}
-  .videoph .vlabel{color:var(--color-ink-muted);font-size:13px;letter-spacing:.04em}
-
-  section{padding:84px 0}
-  .kicker{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--color-brand-deep);margin-bottom:16px;text-align:center}
-  .sec-h2{font-size:clamp(28px,4vw,42px);text-align:center;max-width:22ch;margin:0 auto 14px}
-  .sec-sub{text-align:center;color:var(--color-ink-muted);font-size:18px;max-width:60ch;margin:0 auto}
-
-  .features{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:54px}
-  .feat{background:var(--color-surface);border:1px solid var(--color-hairline);border-radius:18px;padding:32px;transition:border-color .2s,transform .2s}
-  .feat:hover{border-color:var(--color-brand);transform:translateY(-3px)}
-  .feat h3{font-size:21px;margin-bottom:10px}
-  .feat p{color:var(--color-ink-muted);font-size:15.5px}
-  @media(max-width:760px){.features{grid-template-columns:1fr}}
-
-  .who{background:var(--color-surface);border-top:1px solid var(--color-hairline);border-bottom:1px solid var(--color-hairline);text-align:center}
-  .who blockquote{font-family:'Newsreader',Georgia,serif;font-style:italic;font-size:clamp(22px,3.4vw,32px);line-height:1.4;max-width:24ch;margin:18px auto 0;color:var(--color-ink)}
-
-  .closer{text-align:center;padding:104px 0}
-  .closer h2{font-size:clamp(30px,4.6vw,48px);max-width:18ch;margin:0 auto 22px}
-
-  footer{border-top:1px solid var(--color-hairline);padding:40px 0;color:var(--color-ink-muted);font-size:14px}
-  .foot-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
-  .foot-links{display:flex;gap:20px}
-  .foot-links a:hover{color:var(--color-ink)}
-</style>
-<style>
-  /* small additions — existing variables only */
+  /* ── labels, headings, prose ─────────────────────────────────── */
+  .kicker{
+    font-family:var(--font-ui);font-size:12px;line-height:16px;font-weight:500;
+    letter-spacing:var(--tracking-caps);text-transform:uppercase;color:var(--color-brand);
+  }
+  .kicker-on-brand{color:rgba(255,255,255,.8)}
+  .h-hero{font-size:clamp(40px,6.2vw,84px);line-height:1.04;letter-spacing:var(--tracking-display)}
+  .h-xl{font-size:clamp(31px,4.4vw,60px);line-height:1.07;letter-spacing:var(--tracking-display)}
+  .h-lg{font-size:clamp(28px,3.4vw,44px);line-height:1.18}
+  .h-md{font-size:clamp(25px,2.6vw,32px);line-height:1.19}
+  .lede{font-family:var(--font-body);font-size:clamp(18px,1.6vw,20px);line-height:1.6;color:var(--color-ink-muted)}
   .lede strong{color:var(--color-ink);font-weight:600}
-  .prose-2{text-align:center;color:var(--color-ink-muted);font-size:18px;max-width:60ch;margin:18px auto 0}
-  .sec-cta{margin-top:32px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .prose{font-family:var(--font-body);font-size:17px;line-height:28px}
+  .prose-quiet{color:var(--color-ink-muted)}
+  .measure{max-width:68ch}
+  /* the ⌘ and the ▸ are carried by Inter only — see assets/fonts/README.md */
+  kbd{font-family:var(--font-ui);font-size:.94em;font-weight:500;letter-spacing:.01em}
+
+  /* ── buttons ─────────────────────────────────────────────────── */
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;
+    font-family:var(--font-ui);font-size:16px;line-height:20px;font-weight:500;
+    padding:14px 26px;border-radius:var(--radius-full);
+    background:var(--color-brand);color:#fff;border:1px solid var(--color-brand);
+    transition:transform .15s ease,box-shadow .15s ease;
+  }
+  .btn:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(201,22,143,.28)}
+  .btn-ghost{background:transparent;color:var(--color-ink);border-color:var(--color-hairline)}
+  .btn-ghost:hover{border-color:var(--color-brand);box-shadow:none}
+  .btn-soon{background:var(--color-surface);color:var(--color-ink-muted);border-color:var(--color-hairline);cursor:default}
+  .btn-soon:hover{transform:none;box-shadow:none}
+  .cta-row{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+
+  /* ── nav ─────────────────────────────────────────────────────── */
+  .nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(255,255,255,.86);backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--color-hairline);
+  }
+  .nav-inner{
+    display:flex;align-items:center;justify-content:space-between;
+    gap:12px 40px;flex-wrap:wrap;padding-block:20px;
+  }
+  .wordmark{height:42px;width:auto}
+  .nav-links{display:flex;align-items:center;gap:10px 34px;flex-wrap:wrap}
+  .nav-links a{font-family:var(--font-ui);font-size:16px;line-height:20px;color:var(--color-ink-muted)}
+  .nav-links a[aria-current="page"]{color:var(--color-ink);font-weight:500}
+  .nav-links a:hover{color:var(--color-ink)}
+  @media(max-width:900px){
+    .nav-inner{padding-block:14px}
+    .nav-links{gap:8px 20px}
+    .nav-links a{font-size:15px}
+    .wordmark{height:34px}
+  }
+  @media(max-width:640px){.nav{position:static}}
+  @media(max-width:420px){
+    .nav-links{gap:8px 16px}
+    .nav-links a{font-size:14px}
+    .wordmark{height:28px}
+  }
+
+  /* ── hero ────────────────────────────────────────────────────── */
+  .hero{
+    display:grid;grid-template-columns:minmax(0,1fr) 248px;gap:88px;align-items:center;
+    padding-block:clamp(56px,8vw,112px) clamp(56px,7vw,104px);
+  }
+  .hero .kicker{display:block;margin-bottom:26px}
+  .hero h1{margin-bottom:28px}
+  .hero .lede{max-width:560px;margin-bottom:38px}
+  .hero .cta-row{margin-bottom:18px}
+  .appicon{
+    width:248px;height:248px;border-radius:56px;
+    box-shadow:0 34px 80px rgba(61,2,48,.30);
+  }
+  .meta{font-family:var(--font-ui);font-size:14px;line-height:20px;color:var(--color-ink-muted)}
+  .meta b{color:var(--color-ink);font-weight:600}
+  .meta em{display:block}
+  @media(max-width:980px){
+    .hero{grid-template-columns:1fr;gap:40px;justify-items:start}
+    .hero .appicon{order:-1;width:132px;height:132px;border-radius:30px;box-shadow:0 18px 44px rgba(61,2,48,.28)}
+  }
+
+  /* ── gradient band ───────────────────────────────────────────── */
+  .band{position:relative;overflow:hidden;color:#fff;isolation:isolate}
+  .band{background:linear-gradient(150deg,#F646C4 0%,#C9168F 55%,#720A5A 100%)}
+  @supports (background:linear-gradient(in oklab,red,blue)){
+    .band{background:linear-gradient(in oklab 150deg,#F646C4 0%,#C9168F 55%,#720A5A 100%)}
+  }
+  .band::before,.band::after{content:"";position:absolute;left:0;width:100%;pointer-events:none;z-index:-1}
+  .band::before{
+    top:0;height:540px;
+    background:linear-gradient(180deg,rgba(255,255,255,.30) 0%,rgba(255,255,255,.04) 45%,rgba(255,255,255,0) 72%);
+  }
+  .band::after{
+    bottom:0;height:540px;
+    background:linear-gradient(0deg,rgba(61,2,48,.52) 0%,rgba(61,2,48,.10) 40%,rgba(61,2,48,0) 68%);
+  }
+  .band-inner{
+    display:grid;grid-template-columns:minmax(0,1fr) 480px;gap:72px;align-items:center;
+    padding-block:clamp(56px,7vw,88px);
+  }
+  .band-text{display:flex;flex-direction:column;gap:22px;max-width:520px}
+  .band-text h2{color:#fff}
+  .band-text p{font-family:var(--font-body);font-size:17px;line-height:28px;color:#fff}
+  .pull{
+    font-family:var(--font-display);font-style:italic;font-weight:400;
+    font-size:clamp(19px,1.7vw,20px);line-height:30px;color:#fff;padding-top:4px;
+  }
+  .note{
+    background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.40);
+    border-radius:var(--radius-lg);box-shadow:0 28px 64px rgba(61,2,48,.34);
+    padding:34px;display:flex;flex-direction:column;gap:18px;
+  }
+  .note-label{
+    font-family:var(--font-ui);font-size:12px;line-height:16px;font-weight:600;
+    letter-spacing:var(--tracking-caps);text-transform:uppercase;color:rgba(255,255,255,.88);
+  }
+  .note h3{font-size:24px;line-height:32px;color:#fff;font-weight:400}
+  .note p{font-family:var(--font-body);font-size:16px;line-height:24px;color:#fff}
+  .note .pull{font-size:16px;line-height:24px;padding-top:2px;color:rgba(255,255,255,.92)}
+  @media(max-width:1060px){
+    .band-inner{grid-template-columns:1fr;gap:40px}
+    .note{max-width:560px}
+  }
+
+  /* ── generic section ─────────────────────────────────────────── */
+  .section{padding-block:clamp(56px,7vw,96px)}
+  .section-head{display:flex;flex-direction:column;gap:14px;max-width:640px}
+  .stack{display:flex;flex-direction:column;gap:20px}
+
+  /* ── numbered rows ───────────────────────────────────────────── */
+  .rows{display:flex;flex-direction:column;border-top:1px solid var(--color-hairline);margin-top:56px}
+  .row{
+    display:grid;grid-template-columns:56px 290px minmax(0,1fr);gap:56px;align-items:start;
+    padding-block:34px;border-bottom:1px solid var(--color-hairline);
+  }
+  .row-num{
+    font-family:var(--font-mono);font-size:12px;line-height:16px;color:var(--color-brand);
+    padding-top:6px;letter-spacing:.02em;
+  }
+  .row-title{font-family:var(--font-display);font-size:24px;line-height:30px;font-weight:600;color:var(--color-ink)}
+  .row-body{font-family:var(--font-body);font-size:16px;line-height:26px;color:var(--color-ink-muted)}
+  @media(max-width:960px){
+    .row{grid-template-columns:44px minmax(0,1fr);gap:14px 22px}
+    .row-title,.row-body{grid-column:2}
+  }
+
+  /* ── demo frame ──────────────────────────────────────────────── */
+  .videoframe{
+    position:relative;margin-top:40px;max-width:940px;aspect-ratio:16/9;
+    border:1px solid var(--color-hairline);border-radius:18px;overflow:hidden;
+    background:var(--color-surface);box-shadow:0 18px 50px rgba(61,2,48,.07);
+  }
+  .videoframe video,.videoframe iframe{display:block;width:100%;height:100%;border:0}
+  .videoph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px}
+  .videoph .play{
+    width:74px;height:74px;border-radius:50%;background:var(--color-brand);color:#fff;
+    display:grid;place-items:center;font-size:24px;padding-left:5px;box-shadow:0 10px 26px rgba(201,22,143,.26);
+  }
+  .videoph .vlabel{font-family:var(--font-ui);font-size:13px;letter-spacing:.04em;color:var(--color-ink-muted)}
+
+  /* ── Studio Pro note ─────────────────────────────────────────── */
+  .pro-note{
+    border-top:1px solid var(--color-hairline);border-bottom:1px solid var(--color-hairline);
+    display:flex;flex-direction:column;gap:14px;padding-block:clamp(40px,4.5vw,56px);
+  }
+  .pro-status{font-family:var(--font-ui);font-size:15px;line-height:24px;color:var(--color-ink);margin-top:4px}
+  .pro-link{
+    font-family:var(--font-ui);font-size:15px;line-height:24px;color:var(--color-brand);
+    border-bottom:1px solid currentColor;align-self:flex-start;
+  }
+  .pro-link:hover{color:var(--color-brand-deep)}
+
+  /* ── closer ──────────────────────────────────────────────────── */
+  .closer{
+    padding-block:clamp(64px,8vw,104px);display:flex;flex-direction:column;
+    gap:30px;align-items:flex-start;
+  }
+  .closer .cta-row{align-items:center;gap:14px 22px}
+
+  /* ── footer ──────────────────────────────────────────────────── */
+  .footer{border-top:1px solid var(--color-hairline)}
+  .footer-inner{
+    display:flex;align-items:center;justify-content:space-between;gap:14px 48px;flex-wrap:wrap;
+    padding-block:34px 44px;font-family:var(--font-ui);font-size:14px;line-height:18px;color:var(--color-ink-muted);
+  }
+  .footer-links{display:flex;gap:12px 28px;flex-wrap:wrap}
+  .footer-inner a:hover{color:var(--color-ink)}
+
+  @media(prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .btn:hover{transform:none}
+  }
 </style>
-  <meta name="robots" content="noindex,nofollow"><!-- tester-phase: reverse at public launch -->
 </head>
 <body>
 
 <header class="nav">
-  <div class="wrap nav-inner">
-    <a class="logo" href="index.html"><img class="logo-word" src="assets/fuchsia-wordmark-gradient.svg" alt="Fuchsia"></a>
-    <nav class="nav-links">
-      <a href="studio.html">Fuchsia Studio</a>
+  <div class="lane nav-inner">
+    <a href="index.html" aria-label="Fuchsia — home"><img class="wordmark" src="assets/fuchsia-wordmark-gradient.svg" alt="Fuchsia"></a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="studio.html" aria-current="page">Fuchsia Studio</a>
       <a href="help.html">How it works</a>
       <a href="pro.html">Pro</a>
       <a href="support.html">Support</a>
@@ -127,138 +276,143 @@
   </div>
 </header>
 
-<section class="hero">
-  <div class="wrap">
-    <img class="studio-hero-logo" src="assets/fuchsia-studio-gradient.svg" alt="Fuchsia Studio">
-    <h1>Edit the story, not the waveform.</h1>
-    <p class="lede"><strong>Professional narrative-audio production for documentary and journalism.</strong> Fuchsia Studio lets you build the piece from the transcript of your tape — reading, searching, and selecting the words that matter — and shape them into a story. On your Mac.</p>
-    <div class="cta-row">
-      <!-- At launch: replace this span with <a class="btn" href="APP_STORE_URL"> or Apple's badge -->
-      <span class="btn btn-soon">Coming soon to the Mac App Store</span>
-      <a class="btn btn-ghost" href="#demo">See how it works &#8595;</a>
-    </div>
-    <div class="avail"><em>A real Mac app — native windows, native feel — built for macOS 26.</em></div>
-    <div class="price"><b>$129</b>, one-time · Requires macOS 26 (Apple silicon)</div>
-  </div>
-</section>
+<main>
 
-<section id="demo">
-  <div class="wrap">
-    <div class="kicker">See it in action</div>
+  <section class="lane hero">
+    <div>
+      <span class="kicker">Fuchsia Studio · for macOS</span>
+      <h1 class="h-hero">Edit the story,<br>not the waveform.</h1>
+      <p class="lede"><strong>Professional narrative-audio production for documentary and journalism.</strong> Fuchsia Studio lets you build the piece from the transcript of your tape — reading, searching, and selecting the words that matter — and shape them into a story. On your Mac.</p>
+      <div class="cta-row">
+        <span class="btn btn-soon">Coming soon to the Mac App Store</span>
+        <a class="btn btn-ghost" href="#demo">See how it works &#8595;</a>
+      </div>
+      <p class="meta">
+        <b>$129</b>, one-time · Requires macOS 26 (Apple silicon)
+        <em>A real Mac app — native windows, native feel — built for macOS 26.</em>
+      </p>
+    </div>
+    <img class="appicon" src="assets/fuchsia-appicon.svg" alt="" width="248" height="248">
+  </section>
+
+  <section class="band" id="honest">
+    <div class="lane band-inner">
+      <div class="band-text">
+        <span class="kicker kicker-on-brand">An honest collaborator</span>
+        <h2 class="h-lg">AI that never puts words in anyone's mouth.</h2>
+        <p>Meet the Dramaturg — a grounded collaborator that finds moments, proposes cuts, and answers "what is this section really about?" It works only from what's actually on your tape: it quotes verbatim, or it refuses. It never invents a line, never misattributes a speaker, and never changes your story without your say-so. It's opt-in, and it runs on your own AI provider and your own account.</p>
+        <p>If you've watched other tools automate the judgement out of the work, this one is built the other way up: the Dramaturg proposes, and you approve — or you don't.</p>
+        <p class="pull">You stay the author. The AI is the reach, never the authority.</p>
+      </div>
+      <div class="note">
+        <span class="note-label">Source protection, by default</span>
+        <h3>Your audio never leaves your Mac — in any configuration, whatever else you turn on.</h3>
+        <p>Importing, transcribing, separating speakers, searching, editing, assembling, finishing — the whole craft runs on your machine, no account required. Even the index behind search is built on your Mac; your tape never visits a cloud to become findable. And nothing derived from your tape — not a transcript, not an excerpt — goes anywhere until you connect an AI provider.</p>
+        <p class="pull">For sensitive material, that's not a feature. It's the whole point.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="lane section" id="network">
+    <span class="kicker">Your sources stay yours</span>
+    <div class="stack" style="margin-top:22px">
+      <p class="prose prose-quiet measure">Studio isn't sealed off from the network, though, and we'd rather name what it does than imply it does nothing. Two things reach out, and neither carries a word of your material: macOS fetches Apple's speech model if this Mac doesn't already have it, and the app asks the App Store what you've bought.</p>
+      <p class="prose prose-quiet measure">When you do connect the optional AI — at launch, Anthropic's models — it runs through <em>your own</em> key on <em>your own</em> account, and Studio sends only text, never your raw audio. It doesn't quietly sweep up your library: the first time answering would carry words off your Mac from a tape you haven't read, Studio asks you first — so nothing you meant to keep on your machine leaves without your say-so. Fuchsia's Dramaturg helps you understand your tape, find the right material, and structure your story — anti-slop AI, grounded in your tape, quoting what was actually said, or telling you when it can't.</p>
+    </div>
+  </section>
+
+  <section class="lane section" id="demo" style="padding-top:0">
+    <div class="section-head">
+      <span class="kicker">See it in action</span>
+    </div>
     <div class="videoframe">
-      <!-- ===== ADD THE VIDEO HERE — pick ONE option, then delete the .videoph block =====
-      OPTION A · self-hosted (drop assets/fuchsia-studio-demo.mp4 + a poster image):
-        <video controls playsinline preload="metadata" poster="assets/demo-poster.jpg">
-          <source src="assets/fuchsia-studio-demo.mp4" type="video/mp4" />
-        </video>
-      OPTION B · YouTube / Vimeo embed (replace VIDEO_ID):
-        <iframe src="https://www.youtube-nocookie.com/embed/VIDEO_ID" title="Fuchsia Studio demo"
-          allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen></iframe>
-      ============================================================================ -->
       <div class="videoph">
         <span class="play">&#9658;</span>
         <span class="vlabel">Product video — coming at launch</span>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section>
-  <div class="wrap">
-    <div class="kicker">Work from the transcript</div>
-    <h2 class="sec-h2">Your story is in what people actually said.</h2>
-    <p class="sec-sub">Bring in hours of interview and field tape and Studio transcribes it and separates the speakers automatically, all on your Mac. Read the transcript, select the words that matter, and your selection becomes a clip. No more scrubbing a waveform hunting for the line you half-remember.</p>
-    <p class="prose-2">Turn on the optional AI reads and Studio will propose who's speaking — the way a careful producer would. It proposes a name only when someone actually says it on tape, plays you that verbatim moment, and waits for you to confirm. Names you've typed yourself are never overwritten.</p>
-  </div>
-</section>
+  <section class="lane section" id="transcript" style="padding-top:0">
+    <div class="section-head" style="max-width:none">
+      <span class="kicker">Work from the transcript</span>
+      <h2 class="h-lg" style="max-width:22ch">Your story is in what people actually said.</h2>
+    </div>
+    <div class="stack" style="margin-top:22px">
+      <p class="prose prose-quiet measure">Bring in hours of interview and field tape and Studio transcribes it and separates the speakers automatically, all on your Mac. Read the transcript, select the words that matter, and your selection becomes a clip. No more scrubbing a waveform hunting for the line you half-remember.</p>
+      <p class="prose prose-quiet measure">Turn on the optional AI reads and Studio will propose who's speaking — the way a careful producer would. It proposes a name only when someone actually says it on tape, plays you that verbatim moment, and waits for you to confirm. Names you've typed yourself are never overwritten.</p>
+    </div>
+  </section>
 
-<section>
-  <div class="wrap">
-    <div class="kicker">Find the moment, then find its echoes</div>
-    <h2 class="sec-h2">The line you remember — and the ones you don't.</h2>
-    <p class="sec-sub">Type what you remember and Studio carries you across hours of tape in a keystroke — finding the words people said, and close paraphrases of them, so you don't need the exact phrase. Every result is a moment you can play, and each one tells you why it surfaced: whether it contains your words, or simply resembles them. And when you've found a moment that matters, select it — Studio suggests the related moments that echo it, even when they're worded differently. Your subject circles back to the same regret twenty minutes later, in a different vocabulary; now you can see it. All of this happens on your Mac — no key, no account, no network call.</p>
-    <p class="prose-2">And when you want the themes named and the threads drawn out, that's the optional AI reads — run on your own key, with every claim they make quoting the real tape.</p>
-  </div>
-</section>
+  <section class="lane section" id="search" style="padding-top:0">
+    <div class="section-head" style="max-width:none">
+      <span class="kicker">Find the moment, then find its echoes</span>
+      <h2 class="h-lg" style="max-width:22ch">The line you remember — and the ones you don't.</h2>
+    </div>
+    <div class="stack" style="margin-top:22px">
+      <p class="prose prose-quiet measure">Type what you remember and Studio carries you across hours of tape in a keystroke — finding the words people said, and close paraphrases of them, so you don't need the exact phrase. Every result is a moment you can play, and each one tells you why it surfaced: whether it contains your words, or simply resembles them. And when you've found a moment that matters, select it — Studio suggests the related moments that echo it, even when they're worded differently. Your subject circles back to the same regret twenty minutes later, in a different vocabulary; now you can see it. All of this happens on your Mac — no key, no account, no network call.</p>
+      <p class="prose prose-quiet measure">And when you want the themes named and the threads drawn out, that's the optional AI reads — run on your own key, with every claim they make quoting the real tape.</p>
+    </div>
+  </section>
 
-<section>
-  <div class="wrap">
-    <div class="kicker">The craft, end to end</div>
-    <h2 class="sec-h2">From raw tape to broadcast-ready audio.</h2>
-    <p class="sec-sub">Everything between reading the transcript and handing off the final file — on your Mac.</p>
-    <div class="features">
-      <div class="feat">
-        <h3>Shape it into a story</h3>
-        <p>Assemble your clips into a single running order and sculpt it, scene by scene. Studio keeps your whole piece in one clear shape, so you're always working on the story — not managing tracks. When a cut lands mid-word, it snaps clean, so you never lose a syllable.</p>
+  <section class="lane section" id="craft" style="padding-top:0">
+    <div class="section-head">
+      <span class="kicker">The craft, end to end</span>
+      <h2 class="h-lg">From raw tape to broadcast-ready audio.</h2>
+      <p class="lede">Everything between reading the transcript and handing off the final file — on your Mac.</p>
+    </div>
+    <div class="rows">
+      <div class="row">
+        <div class="row-num">01</div>
+        <h3 class="row-title">Shape it into a story</h3>
+        <p class="row-body">Assemble your clips into a single running order and sculpt it, scene by scene. Studio keeps your whole piece in one clear shape, so you're always working on the story — not managing tracks. When a cut lands mid-word, it snaps clean, so you never lose a syllable.</p>
       </div>
-      <div class="feat">
-        <h3>Read it every way you need</h3>
-        <p>One piece, three ways to read it. <em>Script view</em> reads the whole story as one authored document. <em>Tape view</em> lays the source out as a typographic page — every voice and take, with the speakers named, and verbatim find with &#8984;F. <em>Reading view</em> is where the optional AI reads land, every claim one click from its audio.</p>
+      <div class="row">
+        <div class="row-num">02</div>
+        <h3 class="row-title">Read it every way you need</h3>
+        <p class="row-body">One piece, three ways to read it. <em>Script view</em> reads the whole story as one authored document. <em>Tape view</em> lays the source out as a typographic page — every voice and take, with the speakers named, and verbatim find with <kbd>&#8984;F</kbd>. <em>Reading view</em> is where the optional AI reads land, every claim one click from its audio.</p>
       </div>
-      <div class="feat">
-        <h3>Repair without invention</h3>
-        <p>Some tape arrives wounded. <em>De-hum</em> notches out mains hum and its harmonics — 50 or 60 Hz — and <em>De-clip</em> rebuilds the peaks a clipped recording lost. Neither invents audio that was never recorded: they restore what the waveform itself implies, and they can make distorted tape broadcast-ready.</p>
+      <div class="row">
+        <div class="row-num">03</div>
+        <h3 class="row-title">Repair without invention</h3>
+        <p class="row-body">Some tape arrives wounded. <em>De-hum</em> notches out mains hum and its harmonics — 50 or 60 Hz — and <em>De-clip</em> rebuilds the peaks a clipped recording lost. Neither invents audio that was never recorded: they restore what the waveform itself implies, and they can make distorted tape broadcast-ready.</p>
       </div>
-      <div class="feat">
-        <h3>Finish it, then hand it off</h3>
-        <p>Bring your piece to broadcast loudness with a finishing stage built for the spoken word, then export it your way — WAV, AIFF, AAC, Apple Lossless or FLAC, at 44.1, 48 or 96 kHz. Or hand the whole story to your DAW: a session for Logic, Ableton Live or Adobe Audition, every clip nicely labelled and in place, your authored air intact — the raw audio, cut straight from your original tape, ready to mix. Bring it all in at any sample rate: a source already at the rate you're exporting to passes through untouched — byte for byte; anything else is converted with studio-grade resampling.</p>
+      <div class="row">
+        <div class="row-num">04</div>
+        <h3 class="row-title">Finish it, then hand it off</h3>
+        <p class="row-body">Bring your piece to broadcast loudness with a finishing stage built for the spoken word, then export it your way — WAV, AIFF, AAC, Apple Lossless or FLAC, at 44.1, 48 or 96 kHz. Or hand the whole story to your DAW: a session for Logic, Ableton Live or Adobe Audition, every clip nicely labelled and in place, your authored air intact — the raw audio, cut straight from your original tape, ready to mix. Bring it all in at any sample rate: a source already at the rate you're exporting to passes through untouched — byte for byte; anything else is converted with studio-grade resampling.</p>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section>
-  <div class="wrap">
-    <div class="kicker">An honest collaborator</div>
-    <h2 class="sec-h2">AI that never puts words in anyone's mouth.</h2>
-    <p class="sec-sub">Meet the Dramaturg — a grounded collaborator that finds moments, proposes cuts, and answers "what is this section really about?" It works only from what's actually on your tape: it quotes verbatim, or it refuses. It never invents a line, never misattributes a speaker, and never changes your story without your say-so. It's opt-in, and it runs on your own AI provider and your own account.</p>
-    <p class="prose-2">If you've watched other tools automate the judgement out of the work, this one is built the other way up: the Dramaturg proposes, and you approve — or you don't. You stay the author. The AI is the reach, never the authority.</p>
+  <div class="lane">
+    <section class="pro-note" id="pro">
+      <span class="kicker">Studio Pro</span>
+      <h2 class="h-md">A studio you can program.</h2>
+      <p class="row-body measure">Everything in Studio, plus a control surface for professionals: drive the same studio from your own AI app, or straight from the command line — scriptable, batchable, headless. Render a finished, loudness-targeted file without an app window open.</p>
+      <p class="pro-status">Studio Pro isn't available to buy today, and we haven't published a price or a date.</p>
+      <a class="pro-link" href="pro.html">Learn about Studio Pro &#8594;</a>
+    </section>
   </div>
-</section>
 
-<section class="who">
-  <div class="wrap">
-    <div class="kicker">Your sources stay yours</div>
-    <h2 class="sec-h2">Source protection, by default.</h2>
-    <p class="sec-sub">Your audio never leaves your Mac — in any configuration, whatever else you turn on. Importing, transcribing, separating speakers, searching, editing, assembling, finishing — the whole craft runs on your machine, no account required. Even the index behind search is built on your Mac; your tape never visits a cloud to become findable. And nothing derived from your tape — not a transcript, not an excerpt — goes anywhere until you connect an AI provider.</p>
-    <p class="prose-2">Studio isn't sealed off from the network, though, and we'd rather name what it does than imply it does nothing. Two things reach out, and neither carries a word of your material: macOS fetches Apple's speech model if this Mac doesn't already have it, and the app asks the App Store what you've bought.</p>
-    <p class="prose-2">When you do connect the optional AI — at launch, Anthropic's models — it runs through <em>your own</em> key on <em>your own</em> account, and Studio sends only text, never your raw audio. It doesn't quietly sweep up your library: the first time answering would carry words off your Mac from a tape you haven't read, Studio asks you first — so nothing you meant to keep on your machine leaves without your say-so. Fuchsia's Dramaturg helps you understand your tape, find the right material, and structure your story — anti-slop AI, grounded in your tape, quoting what was actually said, or telling you when it can't.</p>
-    <blockquote>For sensitive material, that's not a feature. It's the whole point.</blockquote>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <div class="kicker">Studio Pro</div>
-    <h2 class="sec-h2">A studio you can program.</h2>
-    <p class="sec-sub">Everything in Studio, plus a control surface for professionals: drive the same studio from your own AI app, or straight from the command line — scriptable, batchable, headless. Render a finished, loudness-targeted file without an app window open. And every automated change is attributed, so you always know which hands did what.</p>
-    <div class="sec-cta">
-      <a class="btn btn-ghost" href="pro.html">Learn about Studio Pro &#8594;</a>
-    </div>
-  </div>
-</section>
-
-<section class="closer">
-  <div class="wrap">
-    <h2>Craft transcripts into stories.</h2>
-    <div class="sec-cta">
+  <section class="lane closer">
+    <h2 class="h-xl">Craft transcripts into stories.</h2>
+    <div class="cta-row">
       <span class="btn btn-soon">Coming soon to the Mac App Store</span>
-      <a class="btn btn-ghost" href="pro.html">Studio Pro &#8594;</a>
+      <span class="meta"><b>$129</b>, one-time · Requires macOS 26 (Apple silicon)</span>
     </div>
-    <div class="price"><b>$129</b>, one-time · Requires macOS 26 (Apple silicon)</div>
-  </div>
-</section>
+  </section>
 
-<footer>
-  <div class="wrap foot-inner">
-    <a class="logo" href="index.html"><img class="logo-word" src="assets/fuchsia-wordmark-gradient.svg" alt="Fuchsia"></a>
-    <div class="foot-links">
+</main>
+
+<footer class="footer">
+  <div class="lane footer-inner">
+    <span>© 2026 Fuchsia, LLC</span>
+    <div class="footer-links">
       <a href="support.html">Support</a>
       <a href="privacy.html">Privacy</a>
       <a href="mailto:support@fuchsiaprojects.com">Contact</a>
     </div>
-    <span>© 2026 Fuchsia, LLC</span>
   </div>
 </footer>
 
