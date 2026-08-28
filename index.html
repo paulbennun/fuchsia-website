@@ -196,6 +196,28 @@
   .partners-list{display:flex;align-items:center;gap:10px 20px;flex-wrap:wrap;list-style:none}
   .partners-list li{font-family:var(--font-display);font-size:16px;line-height:20px;font-weight:500;color:var(--color-ink-muted)}
 
+  /* Availability note under a product block — same treatment as .partners-label. */
+  .availability{
+    font-family:var(--font-ui);font-size:12px;line-height:16px;font-weight:500;
+    letter-spacing:var(--tracking-caps);text-transform:uppercase;color:var(--color-ink-muted);
+    padding-top:10px;
+  }
+
+  /* ── latest / updates ────────────────────────────────────────── */
+  .update-list{list-style:none;display:flex;flex-direction:column;border-top:1px solid var(--color-hairline)}
+  .update{
+    display:grid;grid-template-columns:150px minmax(0,1fr);gap:12px 40px;align-items:baseline;
+    padding-block:24px;border-bottom:1px solid var(--color-hairline);
+  }
+  .update-date{
+    font-family:var(--font-ui);font-size:12px;line-height:16px;font-weight:500;
+    letter-spacing:var(--tracking-caps);text-transform:uppercase;color:var(--color-ink-faint);
+  }
+  .update-body{font-family:var(--font-body);font-size:17px;line-height:28px;color:var(--color-ink);max-width:680px}
+  .update-body a{color:var(--color-brand);text-decoration:underline;text-underline-offset:3px}
+  .update-body a:hover{color:var(--color-brand-deep)}
+  @media(max-width:720px){.update{grid-template-columns:1fr;gap:6px}}
+
   /* ── track record ────────────────────────────────────────────── */
   .sunk{background:var(--color-surface-sunk)}
   .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:24px}
@@ -312,6 +334,18 @@
     </div>
   </section>
 
+  <section class="lane split reveal" id="studio" style="border-top:1px solid var(--color-hairline);padding-block:clamp(56px,7vw,88px) clamp(64px,8vw,96px)">
+    <div class="split-label">
+      <span class="kicker">Our first product</span>
+      <h2 class="h-md">Fuchsia Studio</h2>
+    </div>
+    <div class="split-body">
+      <p class="prose">A professional macOS studio for narrative audio. Documentary, journalism and podcast producers build the piece from the transcript of their tape — reading it, searching it, selecting the words that matter — and shape those into a story. The craft runs on the producer's own Mac, and their audio never leaves it.</p>
+      <p class="prose prose-quiet">The AI is optional, and it runs on the producer's own account. It is built the other way up from the tools that automate the judgement out of the work: it quotes the tape verbatim or it refuses, it never puts words in anyone's mouth, and it proposes rather than decides. You stay the author. The AI is the reach, never the authority.</p>
+      <p class="availability">Coming to the Mac App Store</p>
+    </div>
+  </section>
+
   <section class="sunk" id="proof">
     <div class="lane" style="padding-block:clamp(56px,6.5vw,80px) clamp(64px,7vw,88px)">
       <div class="section-head reveal" style="max-width:720px;gap:12px;margin-bottom:44px">
@@ -337,6 +371,18 @@
       <p class="prose prose-quiet">He has been a C-level executive at Los Angeles' KCRW and at British immersive studio Factory 42, making work for Meta, Disney and others. He is currently with USC's Entertainment Technology Center, building the future of storytelling for the Hollywood studios, and is an assessor for the UK government's innovation agency.</p>
       <p class="prose prose-quiet">As CCO, his work has won multiple BAFTAs and Cannes Lions, and even reached 96% on Metacritic.</p>
     </div>
+  </section>
+
+  <section class="lane section reveal" id="latest" style="border-top:1px solid var(--color-hairline);padding-block:clamp(56px,7vw,80px)">
+    <div class="section-head" style="margin-bottom:30px">
+      <span class="kicker">Latest</span>
+    </div>
+    <ul class="update-list">
+      <li class="update">
+        <time class="update-date" datetime="2026-08-21">21 August 2026</time>
+        <p class="update-body">Fuchsia Studio, our first product, is coming to the Mac App Store — a professional macOS studio for narrative audio.</p>
+      </li>
+    </ul>
   </section>
 
   <section class="lane closer" id="contact">
