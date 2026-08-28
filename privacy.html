@@ -131,7 +131,7 @@
   <p class="lead">This policy explains how Fuchsia Studio ("the app", "we", "us") handles your information. Fuchsia Studio is a macOS application for documentary and podcast producers, published by Fuchsia, LLC.</p>
 
   <h2>1. Our approach: privacy by design</h2>
-  <p>Fuchsia Studio works with intimate material — people's interviews, memories, and voices. We treat that material as something to be protected, not harvested. Wherever a feature can run on your device, it does. The app's privacy boundaries are enforced by how it is built, not just promised in this document.</p>
+  <p>Fuchsia Studio works with intimate material — people's interviews, memories, and voices. We treat that material as something to be protected, not harvested. Wherever a feature can run on your device, it does. The app's privacy boundaries are enforced by design, in code.</p>
 
   <h2>2. Information the app accesses</h2>
   <p>Fuchsia Studio works with files and recordings that <strong>you</strong> choose and that stay under your control. Specifically:</p>
@@ -147,7 +147,7 @@
 
   <h3 id="ai">Optional AI features</h3>
   <p><strong>No AI service is contacted until you configure one.</strong> Studio's optional AI features — the tape "reads", the speaker-name suggestions, and the Thread assistant — run through <strong>Anthropic's Claude models, using your own Anthropic API key and your own Anthropic account.</strong> When they run, <strong>text derived from your tape is sent to Anthropic — never your audio</strong>, and the request goes directly from your Mac to Anthropic under your own agreement with them. <strong>Fuchsia does not receive, process, store, or have access to that text or your API key.</strong></p>
-  <p><strong>Once a key is saved, importing a tape starts a reading of it by default</strong>, which sends that tape's transcript to Anthropic. You can decline that for any import, in the Import Tape sheet, and the app asks you before the first time a tape's text would leave.</p>
+  <p>Once a key is saved, importing a tape starts a reading of it by default which sends that tape's transcript to Anthropic unless you decline in the Import Tape dialog. If you decline, Studio will <strong>always</strong> ask for your consent the first time something would send material derived from that tape off-device.</p>
   <p>"Text derived from your tape" covers more than a single excerpt, and the app's built-in Help sets it out route by route under <em>What gets sent</em>. In summary: reading a tape sends its whole transcript; reading a show sends the stored readings of tapes already read, including their verbatim quotations; <em>Suggest names</em> sends the transcripts of every tape in your library in which an unnamed voice speaks; and a message to the Thread can carry speaker names and short quotations from the clips in the story you have open. A reading also leaves behind a short, model-written list of themes and questions for that tape's story, which travels with later readings in the same story.</p>
   <p><strong>The one control that guarantees nothing derived from your tape leaves this Mac is not configuring an Anthropic key.</strong> With no key, none of the above can happen. Declining the automatic read of an import is a real choice about that import; it is not a bar on everything else.</p>
 
@@ -155,13 +155,13 @@
   <p>Fuchsia Studio does not require you to create an account. We do not use advertising, and we do not include third-party analytics or tracking SDKs. We do not build profiles of you or sell data — we don't have it to sell.</p>
 
   <h2 id="network">3. When the app uses the network</h2>
-  <p>Almost everything Fuchsia Studio does happens on your Mac and needs no connection: importing, transcribing, separating speakers, building the index behind search, searching, editing, assembling and finishing. Below are the times the app does reach the network. We describe them as <strong>the routes we can name and that you can act on — not as a promise that there are no others.</strong></p>
+  <p>Almost everything Fuchsia Studio does happens on your Mac and needs no connection: importing, transcribing, separating speakers, building the index behind search, searching, editing, assembling and finishing. Below are <strong>the only times the app does reach the network as far as we are aware.</strong></p>
 
   <h3>The optional AI features</h3>
   <p>This is the only one that carries material derived from your work, and it happens only when you have configured an Anthropic API key. It is set out in full under <a href="#ai">Optional AI features</a> above.</p>
 
   <h3>Apple's speech model</h3>
-  <p>Transcription runs on your Mac using Apple's on-device speech engine — but <strong>the model it uses is supplied and installed by macOS</strong>, not shipped by us, so if your Mac does not already have it, macOS downloads it. The app asks for it shortly after launch; when it is already installed, no request is made. <strong>This is a download, not a send: no audio and no transcript goes anywhere.</strong> Until the model is present, transcription cannot run, and the app says so rather than failing quietly; importing, playing and editing work as normal meanwhile.</p>
+  <p>Transcription runs on your Mac using Apple's on-device speech engine, which uses a model supplied and installed by Apple. If your Mac does not already have it, macOS downloads it when you launch Studio for the first time. When it is installed, no further request is made. This is a one-way download: no audio and no transcript goes anywhere. Until the model is present, transcription won&rsquo;t work. Studio will tell you. Importing, playing and editing will work as normal.</p>
 
   <h3>Your trial, your purchase, and your licence</h3>
   <p>Fuchsia Studio's free trial and its one-time unlock are both handled by Apple through the App Store, so the app asks the App Store what you are entitled to — shortly after launch, and again when you start a trial, buy, or use <em>Restore Purchases</em>. <strong>Nothing about your recordings, transcripts, or work is sent, and none of it reaches us.</strong> If the app cannot get an answer, it assumes in your favour and carries on. See <a href="#purchases">Purchases</a>.</p>
@@ -170,7 +170,7 @@
   <p>When you paste an Anthropic API key into Settings, the app sends one minimal request to Anthropic to check that the key works, so it can tell you straight away rather than failing later. That request carries the key you just entered and <strong>nothing derived from your tape</strong>.</p>
 
   <h3>Links the app opens for you</h3>
-  <p>Some menu items and buttons open a page in your browser — our website, or the Claude Console where you manage your key — or a pre-addressed message in your mail client. These are ordinary links: your browser or mail client makes the request, and an email is sent only when you send it.</p>
+  <p>Some menu items and buttons open a page in your browser &mdash; our website, or the Claude Console where you manage your key &mdash; or a pre-addressed message in your mail client. Studio has no built-in web client and will never send an email without your confirmation.</p>
 
   <h2>4. How information is used</h2>
   <p>Information is used only to provide the app's features to you: transcribing your audio, making it searchable, helping you assemble stories, and — if you choose — providing AI assistance. <strong>We do not use your content to train models, and we could not: we never receive it.</strong> We do not use it for advertising.</p>
