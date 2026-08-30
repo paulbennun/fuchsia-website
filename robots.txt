@@ -1,13 +1,11 @@
-# The whole site is intentionally excluded from search engines.
-# This is deliberate and still wanted. Do not reverse it on its own.
+# PUBLIC. The site is indexable — reversed at launch, 2026-08-31, per
+# fuchsia-studio#1480 and docs/product/ship-sequence.md.
 #
-# The reversal is a launch act with a precondition, and it is recorded in the
-# fuchsia-studio repo: docs/product/ship-sequence.md, section "After the
-# archive". THAT document is the instruction, not this comment.
-# Tester-phase decision: fuchsia-studio#591. Tracked now by fuchsia-studio#1480.
+# ⚠️ The <meta name="robots" content="noindex,nofollow"> tags came off the same six
+# pages in the same change. Both halves moved together, which is what the previous
+# version of this comment required. 404.html KEEPS its noindex deliberately: an
+# error page should never be indexed, and that is not a leftover.
 #
-# Note: this file alone does not hide the site. Every page also carries
-# <meta name="robots" content="noindex,nofollow">, which is what actually keeps
-# a page out of the index. Both come off together, or neither has.
+# Tester-phase history: fuchsia-studio#591 (the site described an unreleased build).
 User-agent: *
-Disallow: /
+Allow: /
