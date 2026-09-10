@@ -462,7 +462,7 @@
         <details class="faq">
           <summary>Which AI provider can I connect?</summary>
           <div class="faq-a">
-            <p>One: Claude. The reads and the Thread run on Anthropic&rsquo;s Claude models, on your own API key and your own account, and they only ever receive text — never your audio. One thing to know before you start, because it catches people out: the key is an <strong>Anthropic Console</strong> key, billed pay-per-token on a Console account. A Claude Pro or Max subscription is not API access and can&rsquo;t be used here. There&rsquo;s no local-model or self-hosted path in v1.0: the reads are a cloud workload by design, which is part of why they&rsquo;re strictly opt-in.</p>
+            <p>One: Claude. The reads and the Thread run on Anthropic&rsquo;s Claude models, on your own API key and your own account, and they only ever receive text — never your audio. One thing to know before you start, because it catches people out: the key is an <strong>Anthropic Console</strong> key, billed pay-per-token on a Console account. A Claude Pro or Max subscription is not API access and can&rsquo;t be used here. There&rsquo;s no local-model or self-hosted path in this release: the reads are a cloud workload by design, which is part of why they&rsquo;re strictly opt-in.</p>
           </div>
         </details>
         <details class="faq">
@@ -560,6 +560,18 @@
           <summary>Can I round-trip a project back into Studio from another tool?</summary>
           <div class="faq-a">
             <p>No — export is one-way out: the finished audio, a session for Ableton Live or Adobe Audition, or a Final Cut Pro XML that Logic imports — every clip in place and named, your authored air intact, cut from your original tape. Nothing imports back in, and it doesn't need to: the story stays fully editable on your Mac, so when the piece changes you re-export rather than round-tripping.</p>
+          </div>
+        </details>
+        <details class="faq">
+          <summary>Can I give my story chapters?</summary>
+          <div class="faq-a">
+            <p>Yes. Name a chapter in Assembly (&#8984;3) as you build the running order, rename it as the shape changes, and leave any chapter out of the chapter list when it isn&rsquo;t one for listeners. Export to <strong>AAC</strong> or <strong>Apple Lossless</strong> (.m4a) and the names travel inside the file as a chapter track. Whatever format you choose, Studio also offers the chapter timestamps when the export finishes &mdash; as text you can paste into a show description. A chapter that holds no audio is left out.</p>
+          </div>
+        </details>
+        <details class="faq">
+          <summary>Can I export captions or a subtitle file?</summary>
+          <div class="faq-a">
+            <p>Yes &mdash; <em>File &#9656; Export Captions&hellip;</em> writes a caption file for your finished story, as <strong>WebVTT</strong> (.vtt) or <strong>SubRip</strong> (.srt). It carries the words of the finished piece at the finished piece&rsquo;s own times: the cues are read from the same layout the render used, so there&rsquo;s no second pass to drift from it. WebVTT can carry the speaker&rsquo;s name alongside the words; SubRip has no speaker construct, so there it&rsquo;s the words alone.</p>
           </div>
         </details>
       </div>
