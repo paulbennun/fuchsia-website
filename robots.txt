@@ -1,10 +1,19 @@
-# PUBLIC. The site is indexable — reversed at launch, 2026-08-31, per
-# fuchsia-studio#1480 and docs/product/ship-sequence.md.
+# The crawl half of the launch flip: this file opens the site to search engines.
 #
-# ⚠️ The <meta name="robots" content="noindex,nofollow"> tags came off the same six
-# pages in the same change. Both halves moved together, which is what the previous
-# version of this comment required. 404.html KEEPS its noindex deliberately: an
-# error page should never be indexed, and that is not a leftover.
+# Landing it on `main` IS the flip. This comment therefore records no earlier event and
+# carries no flip date: the date is whatever `git log` says for this file, and a date
+# typed in by hand can only go stale or go wrong. It did — this line once read
+# "reversed at launch, 2026-08-31", naming a flip that had not happened.
+#
+# What occasioned it: Fuchsia Studio 1.1 went on sale on the Mac App Store on 2026-09-12.
+# The instruction is docs/product/ship-sequence.md in the fuchsia-studio repo, section
+# "After the archive", tracked by fuchsia-studio#1480 — THAT document, not this comment.
+# Paul gave the word on 2026-08-30; the merge is his act, not a lane's.
+#
+# ⚠️ The <meta name="robots" content="noindex,nofollow"> tags leave the same six pages in
+# this same change. Both halves move together, which is what the previous version of this
+# comment required. 404.html KEEPS its noindex deliberately: an error page should never be
+# indexed, and that is not a leftover.
 #
 # Tester-phase history: fuchsia-studio#591 (the site described an unreleased build).
 User-agent: *
