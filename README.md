@@ -55,4 +55,35 @@ Notes:
 - `publish.sh` refuses to publish the editor file by mistake, and you can still point
   it at a specific file: `./publish.sh ~/Downloads/index.html "message"`.
 
+## Adding an announcement
+
+The homepage carries a short **Latest** list — `index.html`, `<section id="latest">`. Dated
+announcements, each with an optional link out to a post hosted anywhere. It is edited by hand:
+no feed, no build step, nothing to keep in sync.
+
+**To add one**, paste a new `<li>` at the *top* of `<ul class="update-list">`:
+
+```html
+      <li class="update">
+        <time class="update-date" datetime="2026-09-04">4 September 2026</time>
+        <p class="update-body">One sentence, in plain English. <a href="https://…">Read the post &#8594;</a></p>
+      </li>
+```
+
+Drop the `<a>` for an announcement that has nowhere to point. The `datetime` attribute is the
+machine-readable date (`YYYY-MM-DD`); the text between the tags is what a reader sees, so write
+it however reads best.
+
+**Then delete the fourth row.** The list is capped at **three**, deliberately. The section is
+called *Latest*, and a list that only ever grows stops being that — an update log nobody prunes
+reads as abandoned, which is worse than not having one at all. Pruning is one line.
+
+⚠️ **Every row is a published claim.** Anything a row asserts about Fuchsia Studio is held to the
+same standard as the product pages: say what has shipped. If a row describes something that is
+still coming, say so in those words. Route new product claims through the copy grid before they
+go up, exactly as the other pages' copy is routed.
+
+If the list ever genuinely needs to be longer than three, lift the whole `<ul>` into its own
+`news.html` — the markup was written so that move needs no re-authoring, only a new page shell.
+
 © 2026 Fuchsia, LLC. All rights reserved.
